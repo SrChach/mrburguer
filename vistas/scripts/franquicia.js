@@ -10,16 +10,8 @@ function init(){
 }
 
 function limpiar(){
-	$("#idsucursal").val("");
-	$("#nombre").val("");
 	$("#idFranquicia").val("");
-	$("#movil").val("");
-	$("#estado").val("");
-	$("#delegacion").val("");
-	$("#colonia").val("");
-	$("#calle").val("");
-	$("#numExt").val("");
-	$("#numInt").val("");
+	$("#nombre").val("");
 }
 
 function mostrarform(flag){
@@ -50,7 +42,7 @@ function listar(){
 			'pdf'
 		],
 		"ajax": {
-			url: '../ajax/sucursal.php?op=list',
+			url: '../ajax/franquicia.php?op=list',
 			type: "get",
 			dataType: "json",
 			error: function(e){
@@ -70,7 +62,7 @@ function saveEdit(e){
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/sucursal.php?op=saveEdit",
+		url: "../ajax/franquicia.php?op=saveEdit",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -86,28 +78,20 @@ function saveEdit(e){
 	limpiar();
 }
 
-function showOne(idsucursal){
-	$.post("../ajax/sucursal.php?op=show",{idsucursal : idsucursal}, function(data, status){
+function showOne(idFranquicia){
+	$.post("../ajax/franquicia.php?op=show",{idFranquicia : idFranquicia}, function(data, status){
 		data = JSON.parse(data);
 		mostrarform(true);
-		$("#idsucursal").val(data.idsucursal);
-		$("#nombre").val(data.nombre);
 		$("#idFranquicia").val(data.idFranquicia);
-		$("#movil").val(data.movil);/*Cambiar por checked...*/
-		$("#estado").val(data.estado);
-		$("#delegacion").val(data.delegacion);
-		$("#colonia").val(data.colonia);
-		$("#calle").val(data.calle);
-		$("#numExt").val(data.numExt);
-		$("#numInt").val(data.numInt);
+		$("#nombre").val(data.nombre);
 	});
 
 }
 
-function unactivate(idsucursal){
-	bootbox.confirm("¿Desea desactivar la sucursal?", function(result){
+function unactivate(idFranquicia){
+	bootbox.confirm("¿Desea desactivar la franquicia?", function(result){
 		if(result){
-			$.post("../ajax/sucursal.php?op=unactivate",{idsucursal : idsucursal}, function(e){
+			$.post("../ajax/franquicia.php?op=unactivate",{idFranquicia : idFranquicia}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -115,10 +99,10 @@ function unactivate(idsucursal){
 	});
 }
 
-function activate(idsucursal){
-	bootbox.confirm("¿Desea activar la sucursal?", function(result){
+function activate(idFranquicia){
+	bootbox.confirm("¿Desea activar la franquicia?", function(result){
 		if(result){
-			$.post("../ajax/sucursal.php?op=activate",{idsucursal : idsucursal}, function(e){
+			$.post("../ajax/franquicia.php?op=activate",{idFranquicia : idFranquicia}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -127,3 +111,5 @@ function activate(idsucursal){
 }
 
 init();
+
+

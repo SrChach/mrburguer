@@ -1,3 +1,7 @@
+Al final, si es posible, añadir tabla FRANQUICIA y que se conecte a Sucursal[retirar campo franquicia de SUCURSAL y añadir id de la nueva tabla]
+
+El input que requiera varias cosas tendrá un SELECT{se maneja desde AJAX :3}
+
 
 NOTAS PROYECTO
 

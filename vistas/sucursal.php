@@ -50,20 +50,20 @@
 										<div class="panel-body" style="height: 400px;" id="formularioregistros">
 												<form name="formulario" id="formulario" method="POST">
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Nombre:</label>
+														<label>Nombre(*)</label>
 														<input type="hidden" name="idsucursal" id="idsucursal"/>
 														<input class="form-control" type="text" name="nombre" id="nombre" maxlength="45" placeholder="Nombre" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Franquicia a la que pertenece:</label>
-														<input class="form-control" type="text" name="franquicia" id="franquicia" maxlength="45" placeholder="Inserte franquicia" required/>
+														<label>Franquicia a la que pertenece(*)</label>
+														<input class="form-control" type="text" name="idFranquicia" id="idFranquicia" maxlength="45" placeholder="Inserte idFranquicia" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Tipo de sucursal(1=Movil|0=Fija):</label>
+														<label>Tipo de sucursal[1=Movil|0=Fija](*)</label>
 														<input class="form-control" type="number" name="movil" id="movil" min="0" max="1" value="0" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Estado donde se ubica:</label>
+														<label>Estado donde se ubica(*)</label>
 														<input class="form-control" type="text" name="estado" id="estado" maxlength="45" placeholder="Inserte Estado" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -71,15 +71,15 @@
 														<input class="form-control" type="text" name="delegacion" id="delegacion" maxlength="45" placeholder="Inserte delegacion"/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Colonia:</label>
+														<label>Colonia(*)</label>
 														<input class="form-control" type="text" name="colonia" id="colonia" maxlength="45" placeholder="Inserte colonia" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Calle:</label>
+														<label>Calle(*)</label>
 														<input class="form-control" type="text" name="calle" id="calle" maxlength="45" placeholder="Inserte calle" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Número Exterior:</label>
+														<label>Número Exterior(*)</label>
 														<input class="form-control" type="text" name="numExt" id="numExt" maxlength="15" placeholder="Inserte Número Exterior" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">

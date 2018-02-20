@@ -8,14 +8,14 @@ Class Sucursal{
 
 	}
 
-	public function insertar($nombre, $franquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
-		$sql = "INSERT INTO sucursal (nombre, franquicia, movil, estado, delegacion, colonia, calle, numExt, numInt, isActive) VALUES 
-		('$nombre', '$franquicia', '$movil', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt', '1')";
+	public function insertar($nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
+		$sql = "INSERT INTO sucursal (nombre, idFranquicia, movil, estado, delegacion, colonia, calle, numExt, numInt, isActive) VALUES 
+		('$nombre', '$idFranquicia', '$movil', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt', '1')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idsucursal, $nombre, $franquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
-		$sql = "UPDATE sucursal SET nombre='$nombre', franquicia='$franquicia', movil='$movil', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idsucursal='$idsucursal'";
+	public function editar($idsucursal, $nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
+		$sql = "UPDATE sucursal SET nombre='$nombre', idFranquicia='$idFranquicia', movil='$movil', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idsucursal='$idsucursal'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -34,8 +34,8 @@ Class Sucursal{
 		return consultarFila($sql);
 	}
 
-	public function listar(){
-		$sql = "SELECT * FROM sucursal";
+	public function listar(){/*Modificar, ten en cuenta el idFranquicia*/
+		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.movil, sucursal.estado, sucursal.delegacion, sucursal.colonia, sucursal.calle, sucursal.numExt, sucursal.numInt, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
 		return ejecutarConsulta($sql);
 	}
 

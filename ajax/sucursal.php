@@ -5,7 +5,7 @@ $sucursal = new Sucursal();
 
 $idsucursal = isset($_POST["idsucursal"])? limpiarcadena($_POST["idsucursal"]) : "";
 $nombre = isset($_POST["nombre"])? limpiarcadena($_POST["nombre"]) : "";
-$franquicia = isset($_POST["franquicia"])? limpiarcadena($_POST["franquicia"]) : "";
+$idFranquicia = isset($_POST["idFranquicia"])? limpiarcadena($_POST["idFranquicia"]) : "";
 $movil = isset($_POST["movil"])? limpiarcadena($_POST["movil"]) : "";
 $estado = isset($_POST["estado"])? limpiarcadena($_POST["estado"]) : "";
 $delegacion = isset($_POST["delegacion"])? limpiarcadena($_POST["delegacion"]) : "";
@@ -17,10 +17,10 @@ $numInt = isset($_POST["numInt"])? limpiarcadena($_POST["numInt"]) : "";
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idsucursal)){
-			$rspta = $sucursal->insertar($nombre, $franquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
+			$rspta = $sucursal->insertar($nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
 			echo $rspta ? "Sucursal guardada" : "Sucursal no se pudo guardar";
 		} else {
-			$rspta = $sucursal->editar($idsucursal, $nombre, $franquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
+			$rspta = $sucursal->editar($idsucursal, $nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
 			echo $rspta ? "Sucursal editada" : "Sucursal no se pudo editar";
 		}
 		break;
@@ -41,11 +41,11 @@ switch ($_GET["op"]){
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = Array(
-
+				/*$reg->idsucursal*/
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idsucursal.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idsucursal.')"><i class="fa fa-check"></i></button>',
 				"1" => '<a href="menu.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Modificar Menú</button></a>',
 				"2" => $reg->nombre,
-				"3" => $reg->franquicia,
+				"3" => $reg->franquicia,/*Modify*/
 				"4" => ($reg->movil == 0)? 'Fija' : 'Móvil',
 				"5" => $reg->estado,
 				"6" => $reg->delegacion,
