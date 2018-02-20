@@ -27,6 +27,8 @@ DONE:
 modelos[Cliente.php, Evento.php, Insumo.php, Proveedor.php]
 ajax[cliente.php, evento.php, insumo.php, proveedor.php]
 
+vistas/scripts[evento.js, insumo.js]
+
 Por checar:cliente, proveedor
 
 
