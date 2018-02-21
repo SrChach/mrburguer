@@ -44,7 +44,7 @@ Class PES{
 
 	public function gname($idSucursal){
 		$sql = "SELECT nombre as nom FROM sucursal WHERE idSucursal='$idSucursal'";
-		return ejecutarConsulta($sql);
+		return consultarFila($sql);
 	}
 
 

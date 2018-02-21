@@ -58,8 +58,10 @@ switch ($_GET["op"]){
 		}
 		break;
 	case 'gname':
-		$rspta = $pes->gname($idSucursal);
-		echo json_encode($rspta);
+		if(isset($_GET["SUC"])){
+			$rspta = $pes->gname($_GET["SUC"]);
+			echo json_encode($rspta);
+		}
 		break;
 
 }

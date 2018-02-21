@@ -3,6 +3,11 @@ var tabla;
 function init(){
 	var param = getParameterByName('SUC');
 	listar(param);
+
+	$.post("../ajax/pes.php?op=gname&SUC="+param, function(r){
+		data = JSON.parse(r);
+		$("#nombresucursal").html(data.nom);
+	});
 }
 
 function getParameterByName(name) {

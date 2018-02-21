@@ -64,7 +64,7 @@ switch ($_GET["op"]){
 			"aaData" => $data
 		);
 		echo json_encode($results);
-		break;
+		break;	
 	case 'selectFranquicia':
 		require_once "../modelos/Franquicia.php";
 		$franquicia = new Franquicia();

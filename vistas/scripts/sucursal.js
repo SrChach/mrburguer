@@ -101,6 +101,7 @@ function showOne(idsucursal){
 		$("#idFranquicia").val(data.idFranquicia);
 		$("#idFranquicia").selectpicker('refresh');
 		$("#movil").val(data.movil);/*Cambiar por checked...*/
+		$("#movil").selectpicker('refresh');
 		$("#estado").val(data.estado);
 		$("#delegacion").val(data.delegacion);
 		$("#colonia").val(data.colonia);

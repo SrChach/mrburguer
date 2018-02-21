@@ -34,7 +34,7 @@ Class Sucursal{
 		return consultarFila($sql);
 	}
 
-	public function listar(){/*Modificar, ten en cuenta el idFranquicia*/
+	public function listar(){
 		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.movil, sucursal.estado, sucursal.delegacion, sucursal.colonia, sucursal.calle, sucursal.numExt, sucursal.numInt, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
 		return ejecutarConsulta($sql);
 	}

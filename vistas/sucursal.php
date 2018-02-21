@@ -47,7 +47,7 @@
 													</tfoot>
 												</table>
 										</div>
-										<div class="panel-body" style="height: 400px;" id="formularioregistros">
+										<div class="panel-body" id="formularioregistros">
 												<form name="formulario" id="formulario" method="POST">
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Nombre(*)</label>
@@ -56,13 +56,18 @@
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Franquicia a la que pertenece(*)</label>
-														<select name="idFranquicia" id="idFranquicia" class="form-control selectpicker" data-live-search="true" required>
-															
-														</select>
+														<select name="idFranquicia" id="idFranquicia" class="form-control selectpicker" data-live-search="true" required></select>
 													</div>
-													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<!-- <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Tipo de sucursal[1=Movil|0=Fija](*)</label>
 														<input class="form-control" type="number" name="movil" id="movil" min="0" max="1" value="0" required/>
+													</div> -->
+													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+														<label>Tipo de sucursal(*)</label>
+														<select class="form-control selectpicker" name="movil" id="movil" required>
+															<option value="0">Fija</option>
+															<option value="1">Movil</option>
+														</select>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Estado donde se ubica(*)</label>
