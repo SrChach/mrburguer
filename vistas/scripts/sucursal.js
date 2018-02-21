@@ -7,6 +7,12 @@ function init(){
 	$("#formulario").on("submit", function(e){
 		saveEdit(e);
 	});
+
+	//Cargamos los items al select franquicia
+	$.post("../ajax/sucursal.php?op=selectFranquicia", function(r){
+		$("#idFranquicia").html(r);
+		$("#idFranquicia").selectpicker('refresh');
+	});
 }
 
 function limpiar(){
@@ -93,6 +99,7 @@ function showOne(idsucursal){
 		$("#idsucursal").val(data.idsucursal);
 		$("#nombre").val(data.nombre);
 		$("#idFranquicia").val(data.idFranquicia);
+		$("#idFranquicia").selectpicker('refresh');
 		$("#movil").val(data.movil);/*Cambiar por checked...*/
 		$("#estado").val(data.estado);
 		$("#delegacion").val(data.delegacion);

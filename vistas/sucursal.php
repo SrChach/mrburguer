@@ -56,7 +56,9 @@
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Franquicia a la que pertenece(*)</label>
-														<input class="form-control" type="text" name="idFranquicia" id="idFranquicia" maxlength="45" placeholder="Inserte idFranquicia" required/>
+														<select name="idFranquicia" id="idFranquicia" class="form-control selectpicker" data-live-search="true" required>
+															
+														</select>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Tipo de sucursal[1=Movil|0=Fija](*)</label>
@@ -88,7 +90,7 @@
 													</div>
 													<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 														<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
-														<button type="button" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+														<button type="button" class="btn btn-danger" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
 													</div>
 												</form>
 										</div>

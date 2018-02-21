@@ -65,6 +65,14 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case 'selectFranquicia':
+		require_once "../modelos/Franquicia.php";
+		$franquicia = new Franquicia();
+		$rspta = $franquicia->select();
+		while($reg = $rspta->fetch_object()){
+			echo '<option value='.$reg->idFranquicia.'>'. $reg->nombre.'</option>';
+		}
+		break;
 
 }
 

@@ -38,6 +38,11 @@ Class Franquicia{
 		return ejecutarConsulta($sql);
 	}
 
+	public function select(){
+		$sql = "SELECT * FROM franquicia WHERE isActive=1";
+		return ejecutarConsulta($sql);
+	}
+
 }
 
 ?>
