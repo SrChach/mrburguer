@@ -20,7 +20,6 @@ $colonia = isset($_POST["colonia"])? limpiarCadena($_POST["colonia"]) : "";
 $calle = isset($_POST["calle"])? limpiarCadena($_POST["calle"]) : "";
 $numExt = isset($_POST["numExt"])? limpiarCadena($_POST["numExt"]) : "";
 $numInt = isset($_POST["numInt"])? limpiarCadena($_POST["numInt"]) : "";
-$isActive = isset($_POST["isActive"])? limpiarCadena($_POST["isActive"]) : "";
 
 switch ($_GET["op"]){
 	case 'saveEdit':
