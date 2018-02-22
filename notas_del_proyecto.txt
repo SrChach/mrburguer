@@ -30,8 +30,8 @@ TO-DO:
 DONE:
 modelos[Cliente.php, Evento.php, Insumo.php, Proveedor.php]
 ajax[cliente.php, evento.php, insumo.php, proveedor.php]
-
-vistas/scripts[evento.js, insumo.js]
+vistas[proveedor.php, evento.php, --insumo.php, --cliente.php]
+vistas/scripts[evento.js, insumo.js, proveedor.js]
 
 Por checar:cliente, proveedor
 

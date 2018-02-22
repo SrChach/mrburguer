@@ -13,7 +13,6 @@ function limpiar(){
 	$("#idproducto").val("");
 	$("#nombre").val("");
 	$("#precioActual").val("");
-	/*Estas sentencias no borran el elemento, VACIAN EL CONTENIDO*/
 }
 
 function mostrarform(flag){
@@ -22,9 +21,11 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
+		$("#btnagregar").hide();
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
+		$("#btnagregar").show();
 	}
 }
 
@@ -58,7 +59,6 @@ function listar(){
 }
 
 function saveEdit(e){
-	/*Desactiva la acción por defecto del Submit*/
 	e.preventDefault();
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);

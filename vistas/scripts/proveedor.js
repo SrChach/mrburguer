@@ -12,7 +12,7 @@ function init(){
 function limpiar(){
 	$("#idproveedor").val("");
 	$("#nombreEmpresa").val("");
-	$("#correoEletronico").val("");
+	$("#correoElectronico").val("");
 	$("#telefono").val("");
 	$("#estado").val("");
 	$("#delegacion").val("");
@@ -20,7 +20,6 @@ function limpiar(){
 	$("#calle").val("");
 	$("#numExt").val("");
 	$("#numInt").val("");
-	/*Estas sentencias no borran el elemento, VACIAN EL CONTENIDO*/
 }
 
 function mostrarform(flag){
@@ -92,7 +91,7 @@ function showOne(idproveedor){
 		data = JSON.parse(data);
 		mostrarform(true);
 		$("#nombreEmpresa").val(data.nombreEmpresa);
-		$("#correoEletronico").val(data.correoEletronico);
+		$("#correoElectronico").val(data.correoElectronico);
 		$("#telefono").val(data.telefono);
 		$("#estado").val(data.estado);
 		$("#delegacion").val(data.delegacion);

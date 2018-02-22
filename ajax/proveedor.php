@@ -43,7 +43,7 @@ switch ($_GET["op"]){
 			$data[] = array(
 				"0" => $reg->idproveedor,
 				"1" => $reg->nombreEmpresa,
-				"2" => $reg->correoElectronio,
+				"2" => $reg->correoElectronico,
 				"3" => $reg->telefono,
 				"4" => $reg->estado,
 				"5" => $reg->delegacion,
