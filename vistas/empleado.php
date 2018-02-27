@@ -12,17 +12,17 @@
 							<div class="col-md-12">
 									<div class="box">
 										<div class="box-header with-border">
-													<h1 class="box-title">Sucursales <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
+													<h1 class="box-title"><span id="titulo"></span> <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
 										<div class="panel-body table-responsive" id="listadoregistros">
 												<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 													<thead>
 														<th>idEmpleado</th>
 														<th>Sucursal</th>
-														<th>Username</th>
-														<th>Password</th>
 														<th>Nombre</th>
 														<th>Apellido Paterno</th>
 														<th>Apellido Materno</th>
+														<th>Username</th>
+														<th>Password</th>
 														<th>fecha Ingreso</th>
 														<th>Telefono</th>
 														<th>Correo</th>
@@ -40,11 +40,11 @@
 													<tfoot>
 														<th>idEmpleado</th>
 														<th>Sucursal</th>
-														<th>Username</th>
-														<th>Password</th>
 														<th>Nombre</th>
 														<th>Apellido Paterno</th>
 														<th>Apellido Materno</th>
+														<th>Username</th>
+														<th>Password</th>
 														<th>fecha Ingreso</th>
 														<th>Telefono</th>
 														<th>Correo</th>

@@ -4,7 +4,6 @@ require_once "../modelos/Producto.php";
 $producto = new Producto();
 
 $idproducto = isset($_POST["idproducto"])? limpiarCadena($_POST["idproducto"]) : "";
-
 $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $precioActual = isset($_POST["precioActual"])? limpiarCadena($_POST["precioActual"]) : "";
 

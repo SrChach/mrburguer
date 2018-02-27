@@ -10,7 +10,7 @@ function init(){
 }
 
 function limpiar(){
-	$("#idFranquicia").val("");
+	$("#idPermiso").val("");
 	$("#nombre").val("");
 }
 
@@ -20,13 +20,9 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-		$("#titulo").html("Añadir nueva franquicia:");
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnagregar").show();
-		$("#titulo").html("Franquicias");
 	}
 }
 
@@ -46,7 +42,7 @@ function listar(){
 			'pdf'
 		],
 		"ajax": {
-			url: '../ajax/franquicia.php?op=list',
+			url: '../ajax/permiso.php?op=list',
 			type: "get",
 			dataType: "json",
 			error: function(e){
@@ -66,7 +62,7 @@ function saveEdit(e){
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/franquicia.php?op=saveEdit",
+		url: "../ajax/permiso.php?op=saveEdit",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -82,37 +78,6 @@ function saveEdit(e){
 	limpiar();
 }
 
-function showOne(idFranquicia){
-	$.post("../ajax/franquicia.php?op=show",{idFranquicia : idFranquicia}, function(data, status){
-		data = JSON.parse(data);
-		mostrarform(true);
-		$("#idFranquicia").val(data.idFranquicia);
-		$("#nombre").val(data.nombre);
-	});
-
-}
-
-function unactivate(idFranquicia){
-	bootbox.confirm("¿Desea desactivar la franquicia?", function(result){
-		if(result){
-			$.post("../ajax/franquicia.php?op=unactivate",{idFranquicia : idFranquicia}, function(e){
-				bootbox.alert(e);
-				tabla.ajax.reload();
-			});
-		}
-	});
-}
-
-function activate(idFranquicia){
-	bootbox.confirm("¿Desea activar la franquicia?", function(result){
-		if(result){
-			$.post("../ajax/franquicia.php?op=activate",{idFranquicia : idFranquicia}, function(e){
-				bootbox.alert(e);
-				tabla.ajax.reload();
-			});
-		}
-	});
-}
 
 init();
 

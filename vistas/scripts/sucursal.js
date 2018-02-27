@@ -34,10 +34,12 @@ function mostrarform(flag){
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
+		$("#titulo").html("Registrar Sucursal:");
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnagregar").show();
+		$("#titulo").html("Sucursales");
 	}
 }
 

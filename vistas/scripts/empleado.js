@@ -40,11 +40,13 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
+		$("#titulo").html("Registrar empleado:");
 		$("#btnagregar").hide();
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnagregar").show();
+		$("#titulo").html("Empleados");
 	}
 }
 
