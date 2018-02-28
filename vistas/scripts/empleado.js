@@ -12,6 +12,12 @@ function init(){
 		$("#idSucursal").html(r);
 		$("#idSucursal").selectpicker('refresh');
 	});
+
+	$("#mostrarimagen").hide();
+
+	$.post("../ajax/empleado.php?op=listPermiso&uid=", function(r){
+		$("#permisos").html(r);
+	});
 }
 
 function limpiar(){
@@ -23,6 +29,9 @@ function limpiar(){
 	$("#apellidoPaterno").val("");
 	$("#apellidoMaterno").val("");
 	$("#fechaIngreso").val("");
+	$("#mostrarimagen").attr("src", "");
+	$("#imagenactual").val("");
+	$("#imagen").val("");
 	$("#telefono").val("");
 	$("#correoElectronico").val("");
 	$("#puesto").val("");
@@ -123,8 +132,13 @@ function showOne(idEmpleado){
 		$("#calle").val(data.calle);
 		$("#numExt").val(data.numExt);
 		$("#numInt").val(data.numInt);
+		$("#mostrarimagen").show();
+		$("#mostrarimagen").attr("src", "../files/empleados/"+data.imagen);
+		$("#imagenactual").val(data.imagen);
 	});
-
+	$.post("../ajax/empleado.php?op=listPermiso&uid="+idEmpleado, function(r){
+		$("#permisos").html(r);
+	});
 }
 
 function unactivate(idEmpleado){

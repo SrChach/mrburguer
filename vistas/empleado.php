@@ -21,8 +21,6 @@
 														<th>Nombre</th>
 														<th>Apellido Paterno</th>
 														<th>Apellido Materno</th>
-														<th>Username</th>
-														<th>Password</th>
 														<th>fecha Ingreso</th>
 														<th>Telefono</th>
 														<th>Correo</th>
@@ -33,6 +31,7 @@
 														<th>Calle</th>
 														<th>Num. Exterior</th>
 														<th>Num. Interior</th>
+														<th>Foto Perfil</th>
 														<th>isActive</th>
 													</thead>
 													<tbody>
@@ -43,8 +42,6 @@
 														<th>Nombre</th>
 														<th>Apellido Paterno</th>
 														<th>Apellido Materno</th>
-														<th>Username</th>
-														<th>Password</th>
 														<th>fecha Ingreso</th>
 														<th>Telefono</th>
 														<th>Correo</th>
@@ -55,6 +52,7 @@
 														<th>Calle</th>
 														<th>Num. Exterior</th>
 														<th>Num. Interior</th>
+														<th>Foto Perfil</th>
 														<th>isActive</th>
 													</tfoot>
 												</table>
@@ -84,7 +82,7 @@
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Password(*)</label>
-														<input class="form-control" type="text" name="password" id="password" maxlength="25" placeholder="Contraseña" required/>
+														<input class="form-control" type="text" name="password" id="password" maxlength="64" placeholder="Contraseña" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Fecha de ingreso(*)</label>
@@ -125,6 +123,18 @@
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Numero Interior:</label>
 														<input class="form-control" type="text" name="numInt" id="numInt" maxlength="15" placeholder="Numero Interior"/>
+													</div>
+													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+														<label>Imagen:</label>
+														<input class="form-control" type="file" name="imagen" id="imagen"/>
+														<input type="hidden" name="imagenactual" id="imagenactual"/>
+														<img src="" width="150px" id="mostrarimagen"/>
+													</div>
+													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+														<label>Permisos:</label>
+														<ul style="list-style: none;" id="permisos">
+															
+														</ul>
 													</div>
 													<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 														<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
