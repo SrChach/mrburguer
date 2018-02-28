@@ -11,6 +11,7 @@ $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $apellidoPaterno = isset($_POST["apellidoPaterno"])? limpiarCadena($_POST["apellidoPaterno"]) : "";
 $apellidoMaterno = isset($_POST["apellidoMaterno"])? limpiarCadena($_POST["apellidoMaterno"]) : "";
 $fechaIngreso = isset($_POST["fechaIngreso"])? limpiarCadena($_POST["fechaIngreso"]) : "";
+$imagen = isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]) : "";
 $telefono = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]) : "";
 $correoElectronico = isset($_POST["correoElectronico"])? limpiarCadena($_POST["correoElectronico"]) : "";
 $puesto = isset($_POST["puesto"])? limpiarCadena($_POST["puesto"]) : "";
@@ -23,11 +24,22 @@ $numInt = isset($_POST["numInt"])? limpiarCadena($_POST["numInt"]) : "";
 
 switch ($_GET["op"]){
 	case 'saveEdit':
-		if(empty($idEmpleado)){
-			$rspta = $empleado->insertar($idSucursal, $username, $password, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
-			echo $rspta ? "empleado guardado" : "empleado no se pudo guardar";
+		if(!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+			$imagen = $_POST["imagenactual"];
 		} else {
-			$rspta = $empleado->editar($idEmpleado, $idSucursal, $username, $password, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt);
+			$ext = explode(".", $_FILES["imagen"]["name"]);
+			if(($_FILES['imagen']['type'] == "image/jpg") || ($_FILES['imagen']['type'] == "image/jpeg") || ($_FILES['imagen']['type'] == "image/png")){
+				$imagen = round(microtime(true)) . '.' . end($ext);
+				move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/empleados/" . $imagen);
+			}
+		}
+		$hashpass = hash("SHA256", $password);	
+
+		if(empty($idEmpleado)){
+			$rspta = $empleado->insertar($idSucursal, $username, $hashpass, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $_POST["permiso"]);
+			echo $rspta ? "empleado guardado" : "no se pudieron registrar todos los datos del empleado";
+		} else {
+			$rspta = $empleado->editar($idEmpleado, $idSucursal, $username, $hashpass, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $_POST["permiso"]);
 			echo $rspta ? "empleado editado" : "empleado no se pudo editar";
 		}
 		break;
@@ -41,7 +53,7 @@ switch ($_GET["op"]){
 		break;
 	case 'delete':
 		$rspta = $empleado->eliminar($idEmpleado);
-		echo $rspta ? "empleado eliminado" : "empleado no se pudo eliminar";
+		echo $rspta ? "empleado eliminado" : "No se puede eliminar debido a que tiene registros asignados. Pruebe desactivándolo";
 		break;
 	case 'show':
 		$rspta = $empleado->mostrar($idEmpleado);
@@ -58,19 +70,18 @@ switch ($_GET["op"]){
 				"2" => $reg->nombre,
 				"3" => $reg->apellidoPaterno,
 				"4" => $reg->apellidoMaterno,
-				"5" => $reg->username,
-				"6" => $reg->password,
-				"7" => $reg->fechaIngreso,
-				"8" => $reg->telefono,
-				"9" => $reg->correoElectronico,
-				"10" => $reg->puesto,
-				"11" => $reg->estado,
-				"12" => $reg->delegacion,
-				"13" => $reg->colonia,
-				"14" => $reg->calle,
-				"15" => $reg->numExt,
-				"16" => $reg->numInt,
-				"17" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				"5" => $reg->fechaIngreso,
+				"6" => $reg->telefono,
+				"7" => $reg->correoElectronico,
+				"8" => $reg->puesto,
+				"9" => $reg->estado,
+				"10" => $reg->delegacion,
+				"11" => $reg->colonia,
+				"12" => $reg->calle,
+				"13" => $reg->numExt,
+				"14" => $reg->numInt,
+				"15" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
+				"16" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
 			);
 		}
 		$results = array(
@@ -87,6 +98,25 @@ switch ($_GET["op"]){
 		$rspta = $sucursal->select();
 		while($reg = $rspta->fetch_object()){
 			echo '<option value='.$reg->idSucursal.'>'. $reg->nombre.' - '. $reg->franquicia .'</option>';
+		}
+		break;
+	case 'listPermiso':
+		require_once "../modelos/Permiso.php";
+		$permiso = new Permiso();
+		$rspta = $permiso->listar();
+
+		//Obtenemos los permisos asignados al usuario
+		$id = $_GET["uid"];
+		$marcados = $empleado->listarMarcados($id);
+		$permisosAsignados = array();
+
+		while($temp = $marcados->fetch_object()){
+			array_push($permisosAsignados, $temp->idPermiso);
+		}
+
+		while($reg = $rspta->fetch_object()){
+			$attr = in_array($reg->idPermiso, $permisosAsignados) ? "checked" : ""; 
+			echo '<li><input type="checkbox" '.$attr.' name="permiso[]" value="'.$reg->idPermiso.'"/>'.$reg->nombre.'</li>';
 		}
 		break;
 }
