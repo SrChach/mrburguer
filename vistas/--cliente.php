@@ -70,14 +70,6 @@
 														<input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Fecha de Registro:</label>
-														<input class="form-control" type="date" name="fechaRegistro" id="fechaRegistro" required/>
-													</div>
-													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Nivel:</label>
-														<input class="form-control" type="number" name="nivel" id="nivel" />
-													</div>
-													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Cuenta de Facebook:</label>
 														<input class="form-control" type="text" name="cuentaFB" id="cuentaFB" maxlength="45" placeholder="Inserte cuenta de Facebook" />
 													</div>

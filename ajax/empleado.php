@@ -119,6 +119,24 @@ switch ($_GET["op"]){
 			echo '<li><input type="checkbox" '.$attr.' name="permiso[]" value="'.$reg->idPermiso.'"/>'.$reg->nombre.'</li>';
 		}
 		break;
+	case 'access':
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$hashpass = hash("SHA256", $password);
+
+		$rspta = $empleado->verificar($username, $hashpass);
+		$oa = $rspta->fetch_object();
+
+		if(isset($oa)){
+			$_SESSION["idEmpleado"]=$oa->idEmpleado;
+			$_SESSION["username"]=$oa->username;
+			$_SESSION["nombre"]=$oa->nombre;
+			$_SESSION["imagen"]=$oa->imagen;
+		}
+
+		echo json_encode($oa);
+
+		break;	
 }
 
 ?>

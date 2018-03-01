@@ -76,6 +76,11 @@ Class Empleado{
 		return ejecutarConsulta($sql);
 	}
 
+	public function verificar($username, $password){
+		$sql = "SELECT idEmpleado, username, nombre, imagen FROM empleado WHERE (username = '$username') AND (password = '$password') AND isActive = '1'";
+		return ejecutarConsulta($sql);
+	}
+
 }
 
 ?>

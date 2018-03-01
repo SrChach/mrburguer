@@ -1,7 +1,5 @@
-Al final, si es posible, añadir tabla FRANQUICIA y que se conecte a Sucursal[retirar campo franquicia de SUCURSAL y añadir id de la nueva tabla]
-
-El input que requiera varias cosas tendrá un SELECT{se maneja desde AJAX :3}
-
+Cambios a cliente y insumo. Añadir al proyecto.
+Controlar el TIMESTAMP de evento
 
 NOTAS PROYECTO
 
@@ -20,7 +18,7 @@ vistas/scripts[producto.js, sucursal.js, menu.js]
 	Yair ft Sara
 
 TO-DO:
-sucursal.php -> Convertir el input franquicia en una lista desplegable con las opciones: {OkPollo, MrBurguer, MrArepa, SrTamal}. Convertir input "Movil" a radio buttons... type="radio". Hacer listado y listas desplegables para "estado"
+Hacer listado y listas desplegables para "estado"
 
 DONE:
 
