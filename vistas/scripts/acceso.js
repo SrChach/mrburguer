@@ -7,7 +7,7 @@ $("#frmAcceso").on('submit',function(e){
 		if(data == "null" || data==null){
 			bootbox.alert("Usuario y/o contraseña incorrectos")
 		} else {
-			$(location).attr("href", "empleado.php");
+			$(location).attr("href", "producto.php");
 		}
 	});
 });

@@ -18,8 +18,7 @@ switch ($_GET["op"]){
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
-				"0" => $reg->idPermiso,
-				"1" => $reg->nombre
+				"0" => $reg->nombre
 			);
 		}
 		$results = array(

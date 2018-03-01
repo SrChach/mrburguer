@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "../modelos/Empleado.php";
 
 $empleado = new Empleado();
@@ -129,7 +130,7 @@ switch ($_GET["op"]){
 
 		if(isset($oa)){
 			$_SESSION["idEmpleado"]=$oa->idEmpleado;
-			$_SESSION["username"]=$oa->username;
+			$_SESSION["username"] = $oa->username;
 			$_SESSION["nombre"]=$oa->nombre;
 			$_SESSION["imagen"]=$oa->imagen;
 		}
