@@ -51,13 +51,22 @@
 							<!-- User Account: style can be found in dropdown.less -->
 							<li class="dropdown user user-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<<<<<<< HEAD
 									<!-- quitar --><img src="../public/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
 									<!-- quitar --><span class="hidden-xs">Joaquin el Albañil :v</span>
+=======
+									<img src="../public/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<span class="hidden-xs">Mr.Burguer Master User</span>
+>>>>>>> problema solucionado
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
 									<li class="user-header">
+<<<<<<< HEAD
 										<!-- quitar --><img src="../public/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+=======
+										<img src="../public/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+>>>>>>> problema solucionado
 										<p>
 											MisterBurguer
 											<small>https://www.github.com/srchach</small>
