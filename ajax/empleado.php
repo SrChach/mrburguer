@@ -134,13 +134,7 @@ switch ($_GET["op"]){
 			$_SESSION["nombre"]=$oa->nombre;
 			$_SESSION["imagen"]=$oa->imagen;
 			
-			// $marcados = $empleado->listarMarcados($oa->idEmpleado);
-
-			// $permisosAsignados = array();
-			// while($temp = $permisosAsignados->fetch_object()){
-			// 	array_push($permisosAsignados, $temp->idPermiso);
-			// }
-
+	
 		}
 
 

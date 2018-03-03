@@ -4,7 +4,7 @@ $("#frmAcceso").on('submit',function(e){
 	password = $("#password").val();
 
 	$.post("../ajax/empleado.php?op=access", { username:username, password:password}, function(data){
-		if(data == "null" || data==null){
+		if(data == "null"){
 			bootbox.alert("Usuario y/o contraseña incorrectos")
 		} else {
 			$(location).attr("href", "producto.php");
