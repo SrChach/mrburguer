@@ -24,8 +24,8 @@ Class IES{
 	}
 
 	public function listar($idSucursal){
-		$sql = "SELECT insumo.nombre, insumo.marca, insumo.precioPromedio, IES.cantidad, IES.isActive, '$idSucursal' as idSucursal, IES.idInsumo, IES.idinsumoEnSucursal FROM insumo left join (SELECT * from insumoEnSucursal where idSucursal='$idSucursal') IES on insumo.idInsumo=IES.idInsumo where IES.isActive=1";
-		return ejecutarConsulta($sql);
+		$sql = "SELECT insumo.nombre, insumo.marca, insumo.precioPromedio, IES.cantidad, IES.isActive, '$idSucursal' as idSucursal, insumo.idInsumo, IES.idinsumoEnSucursal FROM insumo left join (SELECT * from insumoEnSucursal where idSucursal='$idSucursal') IES on insumo.idInsumo=IES.idInsumo";
+			return ejecutarConsulta($sql);
 	}
 
 	public function check($idSucursal){

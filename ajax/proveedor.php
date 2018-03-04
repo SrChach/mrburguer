@@ -51,14 +51,13 @@ switch ($_GET["op"]){
 				"7" => $reg->calle,
 				"8" => $reg->numExt,
 				"9" => $reg->numInt,
-				"10" => $reg->isActive
+				"10" => $reg->isActive?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
 			);
 		}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
 			"iTotalDisplayRecords" => count($data),
-			/*Total de registros a viualizar*/
 			"aaData" => $data
 		);
 		echo json_encode($results);

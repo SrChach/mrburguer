@@ -17,14 +17,6 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function nomCabecera(idSucursal){
-	/*$.post("../ajax/sucursal.php?op=gname",{idSucursal : idSucursal}, function(data, status){
-		alert(data);
-		//$("#box-title").val(data.nombre);
-	});*/
-	$("#box-title").val(idSucursal);
-}
-
 function listar(idSucursal){
 	tabla = $('#tbllistado').dataTable({
 		"aProcessing" : true,

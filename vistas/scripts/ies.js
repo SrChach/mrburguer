@@ -1,46 +1,23 @@
 var tabla;
 
 function init(){
-	mostrarform(false);
-	listar();
+	var param = getParameterByName('SUC');
+	listar(param);
 
-	$("#formulario").on("submit", function(e){
-		saveEdit(e);
-	});
-
-	$.post("../ajax/ies.php?op=selectInsumo", function(r){
-		$("#idInsumo").html(r);
-		$("#idInsumo").selectpicker('refresh');
+	$.post("../ajax/ies.php?op=gname&SUC="+param, function(r){
+		data = JSON.parse(r);
+		$("#nombresucursal").html("Sucursal - "+data.nombre);
 	});
 }
 
-function limpiar(){
-	$("#idinsumoEnSucural").val("");
-	$("#idInsumo").val("");
-	$("#idsucursal").val("");
-	$("#cantidad").val("");
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function mostrarform(flag){
-	limpiar();
-	if(flag){
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-	} else {
-		$("#listadoregistros").show();
-		$("#formularioregistros").hide();
-		$("#btnagregar").show();
-	}
-}
-
-function cancelarform(){
-	limpiar();
-	mostrarform(false);
-}
-
-function listar(){
+function listar(idSucursal){
 	tabla = $('#tbllistado').dataTable({
 		"aProcessing" : true,
 		"aServerSide": true,
@@ -51,7 +28,7 @@ function listar(){
 			'pdf'
 		],
 		"ajax": {
-			url: '../ajax/ies.php?op=list',
+			url: '../ajax/ies.php?op=list&SUC='+idSucursal,
 			type: "get",
 			dataType: "json",
 			error: function(e){
@@ -64,45 +41,10 @@ function listar(){
 	}).DataTable();
 }
 
-function saveEdit(e){
-	/*Desactiva la acción por defecto del Submit*/
-	e.preventDefault();
-	$("#btnGuardar").prop("disabled", true);
-	var formData = new FormData($("#formulario")[0]);
-
-	$.ajax({
-		url: "../ajax/ies.php?op=saveEdit",
-		type: "POST",
-		data: formData,
-		contentType: false,
-		processData: false,
-
-		success: function(datos){
-			bootbox.alert(datos);
-			mostrarform(false);
-			tabla.ajax.reload();
-		}
-
-	});
-	limpiar();
-}
-
-function showOne(idinsumoEnSucural){
-	$.post("../ajax/ies.php?op=show",{idinsumoEnSucural : idinsumoEnSucural}, function(data, status){
-		data = JSON.parse(data);
-		mostrarform(true);
-		$("#idinsumoEnSucural").val(data.idinsumoEnSucural);
-		$("#idInsumo").val(data.idInsumo);
-		$("#idsucursal").val(data.idsucursal);
-		$("#cantidad").val(data.cantidad);
-	});
-
-}
-
-function unactivate(idinsumoEnSucural){
-	bootbox.confirm("¿Desea desactivar el insumo?", function(result){
+function saveEdit(idInsumo, idSucursal){
+	bootbox.confirm("¿Desea registrar el insumo?", function(result){
 		if(result){
-			$.post("../ajax/insumo.php?op=unactivate",{idinsumoEnSucural : idinsumoEnSucural}, function(e){
+			$.post("../ajax/ies.php?op=saveEdit",{idInsumo : idInsumo, idSucursal : idSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -110,10 +52,21 @@ function unactivate(idinsumoEnSucural){
 	});
 }
 
-function activate(idinsumoEnSucural){
+function unactivate(idinsumoEnSucursal){
+	bootbox.confirm("¿Desea desactivar el insumo?", function(result){
+		if(result){
+			$.post("../ajax/ies.php?op=unactivate",{idinsumoEnSucursal : idinsumoEnSucursal}, function(e){
+				bootbox.alert(e);
+				tabla.ajax.reload();
+			});
+		}
+	});
+}
+
+function activate(idinsumoEnSucursal){
 	bootbox.confirm("¿Desea activar el insumo?", function(result){
 		if(result){
-			$.post("../ajax/ies.php?op=activate",{idinsumoEnSucural : idinsumoEnSucural}, function(e){
+			$.post("../ajax/ies.php?op=activate",{idinsumoEnSucursal : idinsumoEnSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});

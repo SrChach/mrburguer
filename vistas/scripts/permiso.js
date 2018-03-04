@@ -1,34 +1,7 @@
 var tabla;
 
 function init(){
-	mostrarform(false);
 	listar();
-
-	$("#formulario").on("submit", function(e){
-		saveEdit(e);
-	});
-}
-
-function limpiar(){
-	$("#idPermiso").val("");
-	$("#nombre").val("");
-}
-
-function mostrarform(flag){
-	limpiar();
-	if(flag){
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
-	} else {
-		$("#listadoregistros").show();
-		$("#formularioregistros").hide();
-	}
-}
-
-function cancelarform(){
-	limpiar();
-	mostrarform(false);
 }
 
 function listar(){
@@ -54,30 +27,6 @@ function listar(){
 		"order": [[ 0, "desc"]]
 	}).DataTable();
 }
-
-function saveEdit(e){
-	/*Desactiva la acción por defecto del Submit*/
-	e.preventDefault();
-	$("#btnGuardar").prop("disabled", true);
-	var formData = new FormData($("#formulario")[0]);
-
-	$.ajax({
-		url: "../ajax/permiso.php?op=saveEdit",
-		type: "POST",
-		data: formData,
-		contentType: false,
-		processData: false,
-
-		success: function(datos){
-			bootbox.alert(datos);
-			mostrarform(false);
-			tabla.ajax.reload();
-		}
-
-	});
-	limpiar();
-}
-
 
 init();
 

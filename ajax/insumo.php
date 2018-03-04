@@ -37,13 +37,13 @@ switch ($_GET["op"]){
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
-				"0" => $reg->idinsumo,
+				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idinsumo.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idinsumo.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idinsumo.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idinsumo.')"><i class="fa fa-check"></i></button>',
 				"1" => $reg->nombre,
 				"2" => $reg->marca,
 				"3" => $reg->existencias,
 				"4" => $reg->piezasContiene,
 				"5" => $reg->precioPromedio,
-				"6" => $reg->isActive
+				"6" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
 			);
 		}
 		$results = array(

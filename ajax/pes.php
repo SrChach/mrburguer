@@ -22,7 +22,7 @@ switch ($_GET["op"]){
 		break;
 	case 'list':
 		if(isset($_GET["SUC"])){
-			$xst = ($pes->check($_GET["SUC"]))->fetch_object();/*Comprueba si la sucursal es válida*/
+			$xst = ($pes->check($_GET["SUC"]))->fetch_object();
 			if($xst->exist==0){
 				echo "Sucursal inválida";
 				break;

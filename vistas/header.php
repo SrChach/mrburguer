@@ -94,116 +94,127 @@
 				<section class="sidebar">       
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
+						<ul class="sidebar-menu">
 						<li class="header"></li>
 						<li>
 							<a href="#">
-								<i class="fa fa-tasks"></i> <span>Escritorio</span>
+							 <!-- Botones -->
+							 <i class="fa fa-tasks"></i> <span>Escritorio</span>
 							</a>
-						</li>
+						</li>        
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-circle-o"></i>
-								<span>Almacén</span>
+								<i class="fa fa-truck"></i>
+								<span>Inventario Central</span>
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="articulo.php"><i class="fa fa-circle-o"></i> Artículos</a></li>
-								<li><a href="producto.php"><i class="fa fa-circle-o"></i> Productos</a></li>
+								<li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Proveedores</a></li>
+								<li><a href="compra.php"><i class="fa fa-circle-o"></i>*Compras</a></li>
+								<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
+								<li><a href="enviaInsumo.php"><i class="fa fa-circle-o"></i>*Enviar Insumos a Sucursal</a></li>
 							</ul>
 						</li>
+						<!-- Sucursal -->
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-circle-o"></i>
-								<span>Insumo</span>
+								<i class="fa fa-home"></i> <span>Sucursales</span>
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="transporteInsumo.php"><i class="fa fa-circle-o"></i> Transporte</a></li>
-								<li><a href="insumoComprado.php"><i class="fa fa-circle-o"></i> Insumo Comprado</a></li>
-								<li><a href="prodConsumeInsumo.php"><i class="fa fa-circle-o"></i> Insumos consumidos</a></li>
-								<li><a href="insumoEnSucursal.php"><i class="fa fa-circle-o"></i> Insumos en la sucursal</a></li>
+								<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
+								<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
+								<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>*Recibir insumos</a></li>
 							</ul>
 						</li>
+
+						<!-- Empleado -->
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-th"></i>
-								<span>Compras</span>
-								 <i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="insumoComprado.php"><i class="fa fa-beer"></i> Ingresos</a></li>
-								<li><a href="proveedor.php"><i class="fa fa-legal"></i> Proveedores</a></li>
-							</ul>
-						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-circle-o"></i>
-								<span>Interaccion</span>
+								<i class="fa fa-folder"></i> <span>Control de Empleados</span>
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="cliente.php"><i class="fa fa-circle-o"></i> Clientes</a></li>
-								<li><a href="evento.php"><i class="fa fa-circle-o"></i> Eventos</a></li>
+								<li><a href="empleado.php"><i class="fa fa-circle-o"></i>Empleados</a></li> 
+								<li><a href="permiso.php"><i class="fa fa-circle-o"></i>Permisos</a></li>
 							</ul>
 						</li>
-						<li>
-							<a href="sucursal.php">
-								<i class="fa fa-building-o"></i> <span>Sucursales</span>
+
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-male"></i> <span>Empleado</span>
+								<i class="fa fa-angle-left pull-right"></i>
 							</a>
+							<ul class="treeview-menu">
+								<li><a href="venta.php"><i class="fa fa-circle-o"></i>*Ventas</a></li>
+								<li><a href="cliente.php"><i class="fa fa-circle-o"></i>Cliente</a></li>
+								
+							</ul>
 						</li>
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-shopping-cart"></i>
+								<i class="fa fa-shopping-cart"></i> <span>Productos</span>
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="producto.php"><i class="fa fa-circle-o"></i>Productos</a></li>
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Insumos Consumidos</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-users"></i> <span>Social Media</span>
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="cliente.php"><i class="fa fa-circle-o"></i>*Consulta de clientes</a></li>
+								<li><a href="interaccion.php"><i class="fa fa-circle-o"></i>Interacciones</a></li>
+								<li><a href="evento.php"><i class="fa fa-circle-o"></i>Eventos</a></li>
+							</ul>
+						</li>
+							 <!-- Compras -->
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-cart-arrow-down"></i> <span>Consulta Compras</span>
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i> Registrar compras</a></li> 
+								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i> Modificar </a></li>
+								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>
+								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Consultar compras</a></li>               
+							</ul>
+						</li>
+						<!-- Insumo -->
+						
+						<!-- Venta -->
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-credit-card"></i>
 								<span>Ventas</span>
 								 <i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="venta.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
-								<li><a href="cliente.php"/><i class="fa fa-circle-o"></i> Clientes</a></li>
-								<li><a href="empleado.php"/><i class="fa fa-circle-o"></i> Empleado</a></li>
+								<li><a href="venta.php"><i class="fa fa-circle-o"></i>Consultar Ventas</a></li>
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Registar</a></li>         
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Modificar</a></li>
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>
 							</ul>
-						</li>                       
-						<li class="treeview">
+						</li>
+						
+						<!-- Evento -->
+							<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i> <span>Acceso</span>
+								<i class="fa fa-group"></i> <span>Evento</span>
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="usuario.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-								<li><a href="permiso.php"><i class="fa fa-circle-o"></i> Permisos</a></li>		
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Consulta de eventos</a></li>
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Registar</a></li>         
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Modificar</a></li>
+								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>                
 							</ul>
-						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-bar-chart"></i> <span>Consulta Compras</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i> Consulta Compras</a></li>                
-							</ul>
-						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-bar-chart"></i> <span>Consulta Ventas</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i> Consulta Ventas</a></li>                
-							</ul>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fa fa-plus-square"></i> <span>Ayuda</span>
-								<small class="label pull-right bg-red">PDF</small>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fa fa-info-circle"></i> <span>Acerca De...</span>
-								<small class="label pull-right bg-yellow">IT</small>
-							</a>
-						</li>
-												
+						</li>           
 					</ul>
 				</section>
 				<!-- /.sidebar -->
