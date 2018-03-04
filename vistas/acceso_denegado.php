@@ -5,7 +5,7 @@
 				<div class="col-md-12">
 					<div class="box">
 						<div class="box-header with-border">
-							<h1 class="box-title">No cuentas con permisos para acceder a este contenido</h1>
+							<h1 class="box-title"><br/>No cuentas con permisos para acceder a este contenido.<br/><br/></h1>
 							<div class="box-tools pull-right">
 							</div>
 						

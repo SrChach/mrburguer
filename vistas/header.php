@@ -1,3 +1,8 @@
+<?php 
+	if(strlen(session_id()) < 1){
+		session_start();
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,8 +15,7 @@
 		
 		<!-- Theme style -->
 		<link rel="stylesheet" href="../public/css/AdminLTE.min.css">
-		<!-- AdminLTE Skins. Choose a skin from the css/skins
-				 folder instead of downloading all of them to reduce the load. -->
+		<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 		<link rel="stylesheet" href="../public/css/_all-skins.min.css">
 		<!-- quitar --><link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
 		<!-- quitar --><link rel="shortcut icon" href="../public/img/favicon.ico">
@@ -51,13 +55,25 @@
 							<!-- User Account: style can be found in dropdown.less -->
 							<li class="dropdown user user-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<!-- quitar --><img src="../public/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-									<!-- quitar --><span class="hidden-xs">Joaquin el Albañil :v</span>
+									<?php
+										if($_SESSION['imagen']=="" || is_null($_SESSION['imagen'])){
+											echo '<img src="../files/empleados/standard_user.png" class="user-image" alt="User Image">';
+										} else {
+											echo '<img src="../files/empleados/'.$_SESSION['imagen'].'" class="user-image" alt="User Image">';
+										}
+									?>
+									<span class="hidden-xs"><?php echo $_SESSION['nombre'] . ' - ' . $_SESSION['username']; ?></span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
 									<li class="user-header">
-										<!-- quitar --><img src="../public/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+										<?php
+											if($_SESSION['imagen']=="" || is_null($_SESSION['imagen'])){
+												echo '<img src="../files/empleados/standard_user.png" class="img-circle" alt="User Image">';
+											} else {
+												echo '<img src="../files/empleados/'.$_SESSION['imagen'].'" class="img-circle" alt="User Image">';
+											}
+										?>
 										<p>
 											MisterBurguer
 											<small>https://www.github.com/srchach</small>
@@ -68,7 +84,7 @@
 									<li class="user-footer">
 										
 										<div class="pull-right">
-											<a href="#" class="btn btn-default btn-flat">Cerrar</a>
+											<a href="../ajax/empleado.php?op=exit" class="btn btn-default btn-flat">Salir</a>
 										</div>
 									</li>
 								</ul>
@@ -87,83 +103,116 @@
 					<ul class="sidebar-menu">
 						<ul class="sidebar-menu">
 						<li class="header"></li>
+						
 						<li>
 							<a href="#">
-							 <!-- Botones -->
-							 <i class="fa fa-tasks"></i> <span>Escritorio</span>
+								<i class="fa fa-tasks"></i> <span>Escritorio</span>
 							</a>
-						</li>        
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-truck"></i>
-								<span>Inventario Central</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Proveedores</a></li>
-								<li><a href="compra.php"><i class="fa fa-circle-o"></i>*Compras</a></li>
-								<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
-								<li><a href="enviaInsumo.php"><i class="fa fa-circle-o"></i>*Enviar Insumos a Sucursal</a></li>
-							</ul>
-						</li>
-						<!-- Sucursal -->
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-home"></i> <span>Sucursales</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
-								<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
-								<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>*Recibir insumos</a></li>
-							</ul>
-						</li>
+						</li>   
 
-						<!-- Empleado -->
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-folder"></i> <span>Control de Empleados</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="empleado.php"><i class="fa fa-circle-o"></i>Empleados</a></li> 
-								<li><a href="permiso.php"><i class="fa fa-circle-o"></i>Permisos</a></li>
-							</ul>
-						</li>
+						<?php
+							if($_SESSION['inventarioCentral']==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-truck"></i>
+											<span>Inventario Central</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Proveedores</a></li>
+											<li><a href="compra.php"><i class="fa fa-circle-o"></i>*Compras</a></li>
+											<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
+											<li><a href="enviaInsumo.php"><i class="fa fa-circle-o"></i>*Enviar Insumos a Sucursal</a></li>
+										</ul>
+									</li>';
+							}
+						?>
 
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-male"></i> <span>Empleado</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="venta.php"><i class="fa fa-circle-o"></i>*Ventas</a></li>
-								<li><a href="cliente.php"><i class="fa fa-circle-o"></i>Cliente</a></li>
-								
-							</ul>
-						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-shopping-cart"></i> <span>Productos</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="producto.php"><i class="fa fa-circle-o"></i>Productos</a></li>
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Insumos Consumidos</a></li>
-							</ul>
-						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-users"></i> <span>Social Media</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="cliente.php"><i class="fa fa-circle-o"></i>*Consulta de clientes</a></li>
-								<li><a href="interaccion.php"><i class="fa fa-circle-o"></i>Interacciones</a></li>
-								<li><a href="evento.php"><i class="fa fa-circle-o"></i>Eventos</a></li>
-							</ul>
-						</li>
-							 <!-- Compras -->
+						<?php
+							if($_SESSION["sucursales"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-home"></i> <span>Sucursales</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
+											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
+											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>*Recibir insumos</a></li>
+										</ul>
+									</li>
+								';
+							}
+						?>
+						
+						<?php
+							if($_SESSION["control"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-folder"></i> <span>Control de Empleados</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="empleado.php"><i class="fa fa-circle-o"></i>Empleados</a></li> 
+											<li><a href="permiso.php"><i class="fa fa-circle-o"></i>Permisos</a></li>
+										</ul>
+									</li>';
+							}
+						?>
+
+						<?php
+							if($_SESSION["empleado"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-male"></i> <span>Empleado</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="venta.php"><i class="fa fa-circle-o"></i>*Ventas</a></li>
+											<li><a href="cliente.php"><i class="fa fa-circle-o"></i>Cliente</a></li>
+										</ul>
+									</li>';
+							}
+						?>
+
+						<?php
+							if($_SESSION["productos"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-shopping-cart"></i> <span>Productos</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="producto.php"><i class="fa fa-circle-o"></i>Productos</a></li>
+											<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Insumos Consumidos</a></li>
+										</ul>
+									</li>';
+							}
+						?>
+
+						<?php
+							if($_SESSION["socialMedia"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-users"></i> <span>Social Media</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="cliente.php"><i class="fa fa-circle-o"></i>*Consulta de clientes</a></li>
+											<li><a href="interaccion.php"><i class="fa fa-circle-o"></i>Interacciones</a></li>
+											<li><a href="evento.php"><i class="fa fa-circle-o"></i>Eventos</a></li>
+										</ul>
+									</li>';
+							}
+						?>
+						
+						<!-- Compras -->
 						<li class="treeview">
 							<a href="#">
 								<i class="fa fa-cart-arrow-down"></i> <span>Consulta Compras</span>
@@ -176,7 +225,6 @@
 								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Consultar compras</a></li>               
 							</ul>
 						</li>
-						<!-- Insumo -->
 						
 						<!-- Venta -->
 						<li class="treeview">
@@ -190,20 +238,6 @@
 								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Registar</a></li>         
 								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Modificar</a></li>
 								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>
-							</ul>
-						</li>
-						
-						<!-- Evento -->
-							<li class="treeview">
-							<a href="#">
-								<i class="fa fa-group"></i> <span>Evento</span>
-								<i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Consulta de eventos</a></li>
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Registar</a></li>         
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Modificar</a></li>
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>                
 							</ul>
 						</li>           
 					</ul>
