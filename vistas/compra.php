@@ -44,7 +44,6 @@
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Compra(*)</label>
 														<input type="text" name="idcompra" id="idcompra"/>
-														<input class="form-control" type="text" name="nombre" id="nombre" maxlength="45" placeholder="Nombre" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Proveedor(*)</label>
@@ -53,32 +52,26 @@
 													
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Fecha(*)</label>
-														<input type="date" name="fecha" id="idcompra"/>
-														<input class="form-control" type="text" name="fecha" id="fecha" maxlength="45" placeholder="Fecha" required/>
+														<input class="form-control" type="date" name="fecha" id="fecha" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Nombre(*)</label>
-														<input type="text" name="nombre" id="nombre"/>
+														<label>Nombre de quien entrega(*)</label>
 														<input class="form-control" type="text" name="nombre" id="nombre" maxlength="45" placeholder="Nombre" required/>
 													</div>													
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Apellido Paterno(*)</label>
-														<input type="text" name="apellidoPaterno" id="apellidoPaterno"/>
 														<input class="form-control" type="text" name="apellidoPaterno" id="apellidoPaterno" maxlength="45" placeholder="Apellido Paterno" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														<label>Apellido Materno(*)</label>
-														<input type="text" name="apellidoMaterno" id="apellidoMaterno"/>
-														<input class="form-control" type="text" name="apellidoMaterno" id="apellidoMaterno" maxlength="45" placeholder="Apellido Materno" required/>
+														<label>Apellido Materno</label>
+														<input class="form-control" type="text" name="apellidoMaterno" id="apellidoMaterno" maxlength="45" placeholder="Apellido Materno"/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>Monto(*)</label>
-														<input type="number" name="monto" id="monto"/>
 														<input class="form-control" type="text" name="monto" id="monto" required/>
 													</div>
 													<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														<label>IVA(*)</label>
-														<input type="number" name="iva" id="iva"/>
 														<input class="form-control" type="number" name="iva" id="iva" required/>
 													</div>
 													<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

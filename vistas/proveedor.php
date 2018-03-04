@@ -6,6 +6,7 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
+		if($_SESSION['inventarioCentral']==1){
 ?>
 
 		<!-- Content Wrapper. Contains page content -->
@@ -110,6 +111,9 @@
 		</div><!-- /.content-wrapper -->
 
 <?php
+		} else {
+			require 'acceso_denegado.php';
+		}
 		require 'footer.php';
 ?>
 

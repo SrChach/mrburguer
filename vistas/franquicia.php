@@ -6,13 +6,11 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-
+		if($_SESSION['sucursales']==1){
 ?>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">				
-			<!-- Main content -->
-			<section class="content">
+			<div class="content-wrapper">				
+				<section class="content">
 					<div class="row">
 						<div class="col-md-12">
 								<div class="box">
@@ -21,8 +19,6 @@
 											<div class="box-tools pull-right">
 											</div>
 									</div>
-									<!-- /.box-header -->
-									<!-- centro -->
 									<div class="panel-body table-responsive" id="listadoregistros">
 											<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 												<thead>
@@ -55,11 +51,14 @@
 									<!--Fin centro -->
 								</div><!-- /.box -->
 						</div><!-- /.col -->
-				</div><!-- /.row -->
-			</section><!-- /.content -->
-		</div><!-- /.content-wrapper -->
+					</div><!-- /.row -->
+				</section><!-- /.content -->
+			</div><!-- /.content-wrapper -->
 
 <?php
+		} else {
+			require 'acceso_denegado.php';
+		}
 		require 'footer.php';
 ?>
 

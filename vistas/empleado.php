@@ -6,61 +6,59 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-
+		if($_SESSION['control']==1){
 ?>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Main content -->
-			<section class="content">
+			<div class="content-wrapper">
+				<section class="content">
 					<div class="row">
 						<div class="col-md-12">
-								<div class="box">
-									<div class="box-header with-border">
-												<h1 class="box-title"><span id="titulo"></span> <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
+							<div class="box">
+								<div class="box-header with-border">
+									<h1 class="box-title"><span id="titulo"></span> <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
 									<div class="panel-body table-responsive" id="listadoregistros">
-											<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
-												<thead>
-													<th>idEmpleado</th>
-													<th>Sucursal</th>
-													<th>Nombre</th>
-													<th>Apellido Paterno</th>
-													<th>Apellido Materno</th>
-													<th>fecha Ingreso</th>
-													<th>Telefono</th>
-													<th>Correo</th>
-													<th>Puesto</th>
-													<th>Estado</th>
-													<th>Delegación</th>
-													<th>Colonia</th>
-													<th>Calle</th>
-													<th>Num. Exterior</th>
-													<th>Num. Interior</th>
-													<th>Foto Perfil</th>
-													<th>isActive</th>
-												</thead>
-												<tbody>
-												</tbody>
-												<tfoot>
-													<th>idEmpleado</th>
-													<th>Sucursal</th>
-													<th>Nombre</th>
-													<th>Apellido Paterno</th>
-													<th>Apellido Materno</th>
-													<th>fecha Ingreso</th>
-													<th>Telefono</th>
-													<th>Correo</th>
-													<th>Puesto</th>
-													<th>Estado</th>
-													<th>Delegación</th>
-													<th>Colonia</th>
-													<th>Calle</th>
-													<th>Num. Exterior</th>
-													<th>Num. Interior</th>
-													<th>Foto Perfil</th>
-													<th>isActive</th>
-												</tfoot>
-											</table>
+										<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+											<thead>
+												<th>idEmpleado</th>
+												<th>Sucursal</th>
+												<th>Nombre</th>
+												<th>Apellido Paterno</th>
+												<th>Apellido Materno</th>
+												<th>fecha Ingreso</th>
+												<th>Telefono</th>
+												<th>Correo</th>
+												<th>Puesto</th>
+												<th>Estado</th>
+												<th>Delegación</th>
+												<th>Colonia</th>
+												<th>Calle</th>
+												<th>Num. Exterior</th>
+												<th>Num. Interior</th>
+												<th>Foto Perfil</th>
+												<th>isActive</th>
+											</thead>
+											<tbody>
+											</tbody>
+											<tfoot>
+												<th>idEmpleado</th>
+												<th>Sucursal</th>
+												<th>Nombre</th>
+												<th>Apellido Paterno</th>
+												<th>Apellido Materno</th>
+												<th>fecha Ingreso</th>
+												<th>Telefono</th>
+												<th>Correo</th>
+												<th>Puesto</th>
+												<th>Estado</th>
+												<th>Delegación</th>
+												<th>Colonia</th>
+												<th>Calle</th>
+												<th>Num. Exterior</th>
+												<th>Num. Interior</th>
+												<th>Foto Perfil</th>
+												<th>isActive</th>
+											</tfoot>
+										</table>
 									</div>
 									<div class="panel-body" id="formularioregistros">
 											<form name="formulario" id="formulario" method="POST">
@@ -147,19 +145,21 @@
 												</div>
 											</form>
 									</div>
-											<div class="box-tools pull-right">
-											</div>
+									<div class="box-tools pull-right">
+									</div>
 									<!-- centro -->
 									<!--Fin centro -->
-									</div>
-									<!-- /.box-header -->
-								</div><!-- /.box -->
+								</div>
+								<!-- /.box-header -->
+							</div><!-- /.box -->
 						</div><!-- /.col -->
-				</div><!-- /.row -->
-			</section><!-- /.content -->
-		</div><!-- /.content-wrapper -->
-
+					</div><!-- /.row -->
+				</section><!-- /.content -->
+			</div>
 <?php
+		} else {
+			require 'acceso_denegado.php';
+		}
 		require 'footer.php';
 ?>
 

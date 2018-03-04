@@ -137,7 +137,8 @@ function showOne(idEmpleado){
 		$("#imagenactual").val(data.imagen);
 	});
 	$.post("../ajax/empleado.php?op=listPermiso&uid="+idEmpleado, function(r){
-		$("#permisos").html(r);
+		// $("#permisos").html(r);
+		document.querySelector("#permisos").innerHTML = r;
 	});
 }
 

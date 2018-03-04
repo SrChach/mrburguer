@@ -4,6 +4,7 @@ require_once "../modelos/IES.php";
 $ies = new IES();
 
 $idinsumoEnSucursal = isset($_POST["idinsumoEnSucursal"])? limpiarCadena($_POST["idinsumoEnSucursal"]) : "";
+$idInsumo = isset($_POST["idInsumo"])? limpiarCadena($_POST["idInsumo"]) : "";
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
 $cantidad = isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]) : "";
 
@@ -18,11 +19,11 @@ switch ($_GET["op"]){
 		break;
 	case 'activate':
 		$rspta = $ies->activar($idinsumoEnSucursal);
-		echo $rspta ? "Insumo activado" : "Insumo desactivado";
+		echo $rspta ? "Insumo activado" : "No se pudo activar";
 		break;
 	case 'list':
 		if(isset($_GET["SUC"])){
-			$xst = ($ies->check($_GET["SUC"]))->fetch_object();/*Comprueba si la sucursal es válida*/
+			$xst = ($ies->check($_GET["SUC"]))->fetch_object();
 			if($xst->exist==0){
 				echo "Sucursal inválida";
 				break;
@@ -31,19 +32,20 @@ switch ($_GET["op"]){
 			$data = Array();
 			while($reg = $rspta->fetch_object()){
 				if(is_null($reg->idinsumoEnSucursal)){
-					$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idInsumo.','.$reg->idSucursal.')">Añadir insumo</button>';
+					$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idInsumo.','.$reg->idSucursal.')">Registrar en Sucursal</button>';
 				} else {
 					if($reg->isActive==1){
-						$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idinsumoEnSucursal.')">Quitar insumo</button>';
+						$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idinsumoEnSucursal.')">Desactivar</button>';
 					} else {
-						$temp = '<button class="btn btn-success" onclick="activate('.$reg->idinsumoEnSucursal.')">Añadir insumo</button>';
+						$temp = '<button class="btn btn-success" onclick="activate('.$reg->idinsumoEnSucursal.')">Añadir</button>';
 					}
 				}
+				
 				$data[] = array(
 					"0" => $reg->nombre,
 					"1" => $reg->marca,
 					"2" => $reg->precioPromedio,
-					"3" => $reg->cantidad,
+					"3" => $reg->cantidad? $reg->cantidad : 'No registrado aun',
 					"4" => $temp
 				);
 			}

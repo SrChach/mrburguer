@@ -29,8 +29,8 @@ Class Compra{
 		return ejecutarConsulta($sql);
 	}
 
-	public function select(){/**Modificar/
-		$sql = "SELECT sucursal.idSucursal, sucursal.nombre, franquicia.nombre as franquicia FROM sucursal join franquicia on sucursal.idFranquicia=franquicia.idFranquicia WHERE (sucursal.isActive=1) and (franquicia.isActive=1)";
+	public function select(){
+		$sql = "SELECT idProveedor  WHERE (sucursal.isActive=1) and (franquicia.isActive=1)";
 		return ejecutarConsulta($sql);
 	}
 

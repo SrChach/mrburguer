@@ -43,17 +43,18 @@ switch ($_GET["op"]){
 			$data[] = Array(
 				/*$reg->idsucursal*/
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idsucursal.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idsucursal.')"><i class="fa fa-check"></i></button>',
-				"1" => '<a href="menu.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Modificar Menú</button></a>',
-				"2" => $reg->nombre,
-				"3" => $reg->franquicia,/*Modify*/
-				"4" => ($reg->movil == 0)? 'Fija' : 'Móvil',
-				"5" => $reg->estado,
-				"6" => $reg->delegacion,
-				"7" => $reg->colonia,
-				"8" => $reg->calle,
-				"9" => $reg->numExt,
-				"10" => $reg->numInt,
-				"11" => ($reg->isActive)?'<span class="label bg-green">Activa<span>':'<span class="label bg-red">Desactivada<span>'
+				"1" => '<a href="menu.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Menú</button></a>',
+				"2" => '<a href="ies.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Inventario</button></a>',
+				"3" => $reg->nombre,
+				"4" => $reg->franquicia,/*Modify*/
+				"5" => ($reg->movil == 0)? 'Fija' : 'Móvil',
+				"6" => $reg->estado,
+				"7" => $reg->delegacion,
+				"8" => $reg->colonia,
+				"9" => $reg->calle,
+				"10" => $reg->numExt,
+				"11" => $reg->numInt,
+				"12" => ($reg->isActive)?'<span class="label bg-green">Activa<span>':'<span class="label bg-red">Desactivada<span>'
 			);
 		}
 		$results = array(
