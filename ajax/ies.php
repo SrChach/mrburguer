@@ -10,7 +10,7 @@ $cantidad = isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]) : "";
 
 switch ($_GET["op"]){
 	case 'saveEdit':
-		$rspta =  $ies->insertar($idInsumo, $idSucursal);
+		$rspta =  $ies->insertar($idInsumo, $idSucursal, $cantidad);
 		echo $rspta ? "Insumo registrado" : "No se pudo registrar el insumo";
 		break;
 	case 'unactivate':
@@ -30,10 +30,14 @@ switch ($_GET["op"]){
 			}
 			$rspta = $ies->listar($_GET["SUC"]);
 			$data = Array();
+			$i = 0;
 			while($reg = $rspta->fetch_object()){
+				$i++;
 				if(is_null($reg->idinsumoEnSucursal)){
-					$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idInsumo.','.$reg->idSucursal.')">Registrar en Sucursal</button>';
+					$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idInsumo.','.$reg->idSucursal.',c'.$i.')">Registrar en Sucursal</button>';
+					$campo = '<input type="number" min="0" max="999999999.99" class="form-control" placeholder="Inserte cantidad inicial" id="c'.$i.'" step=".01">';
 				} else {
+					$campo = '<input type="number" class="form-control" value="'.$reg->cantidad.'" step=".01" disabled>';
 					if($reg->isActive==1){
 						$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idinsumoEnSucursal.')">Desactivar</button>';
 					} else {
@@ -45,7 +49,7 @@ switch ($_GET["op"]){
 					"0" => $reg->nombre,
 					"1" => $reg->marca,
 					"2" => $reg->precioPromedio,
-					"3" => $reg->cantidad? $reg->cantidad : 'No registrado aun',
+					"3" => $campo,
 					"4" => $temp
 				);
 			}

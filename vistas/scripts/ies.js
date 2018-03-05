@@ -6,7 +6,7 @@ function init(){
 
 	$.post("../ajax/ies.php?op=gname&SUC="+param, function(r){
 		data = JSON.parse(r);
-		$("#nombresucursal").html("Sucursal - "+data.nombre);
+		$("#nombresucursal").html("Inventario - \""+data.nombre+"\"");
 	});
 }
 
@@ -41,15 +41,21 @@ function listar(idSucursal){
 	}).DataTable();
 }
 
-function saveEdit(idInsumo, idSucursal){
-	bootbox.confirm("¿Desea registrar el insumo?", function(result){
-		if(result){
-			$.post("../ajax/ies.php?op=saveEdit",{idInsumo : idInsumo, idSucursal : idSucursal}, function(e){
-				bootbox.alert(e);
-				tabla.ajax.reload();
-			});
-		}
-	});
+function saveEdit(idInsumo, idSucursal, selector){
+	//var selector = this.selector;
+	if($('#'+selector.id).val() == ""){
+		bootbox.alert("Antes de proceder, llena el campo \"Cantidad inicial\"");
+	} else {
+		cantidad = $('#'+selector.id).val();
+		bootbox.confirm("¿Desea registrar el insumo?", function(result){
+			if(result){
+				$.post("../ajax/ies.php?op=saveEdit",{idInsumo : idInsumo, idSucursal : idSucursal, cantidad : cantidad}, function(e){
+					bootbox.alert(e);
+					tabla.ajax.reload();
+				});
+			}
+		});
+	}
 }
 
 function unactivate(idinsumoEnSucursal){

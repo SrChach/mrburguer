@@ -8,8 +8,8 @@ Class IES{
 
 	}
 
-	public function insertar($idInsumo, $idSucursal){
-		$sql =  "INSERT INTO insumoEnSucursal (idInsumo, idSucursal, cantidad, isActive) VALUES ('$idInsumo','$idSucursal', '0','1')";
+	public function insertar($idInsumo, $idSucursal, $cantidad){
+		$sql =  "INSERT INTO insumoEnSucursal (idInsumo, idSucursal, cantidad, isActive) VALUES ('$idInsumo','$idSucursal', '$cantidad','1')";
 		return ejecutarConsulta($sql);
 	}
 

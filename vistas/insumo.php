@@ -15,15 +15,15 @@
 						<div class="col-md-12">
 							<div class="box">
 								<div class="box-header with-border">
-									<h1 class="box-title">Tabla <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
+									<h1 class="box-title">Inventario Central <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar insumo</button></h1>
 									<div class="panel-body table-responsive" id="listadoregistros">
 											<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 												<thead>
 													<th>idinsumo</th>
 													<th>Nombre</th>
 													<th>Marca del producto</th>
-													<th>Existencias</th>
-													<th>Piezas que contiene</th>
+													<th>Paquetes existentes</th>
+													<th>Piezas por paquete</th>
 													<th>Precio promedio</th>
 													<th>Status</th>
 												</thead>
@@ -33,8 +33,8 @@
 													<th>idinsumo</th>
 													<th>Nombre</th>
 													<th>Marca del producto</th>
-													<th>Existencias</th>
-													<th>Piezas que contiene</th>
+													<th>Paquetes existentes</th>
+													<th>Piezas por paquete</th>
 													<th>Precio promedio</th>
 													<th>Status</th>
 												</tfoot>
@@ -53,11 +53,11 @@
 													<input class="form-control" type="text" name="marca" id="marca" maxlength="45" placeholder="Inserte marca"/>
 												</div>
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-													<label>Existencias</label>
+													<label>Paquetes existentes</label>
 													<input class="form-control" type="number" name="existencias" id="existencias" min="0" max="999999999.99" value="0" step=".01" required/>
 												</div>
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-													<label>Piezas que contiene</label>
+													<label>Piezas por paquete</label>
 													<input class="form-control" type="number" name="piezasContiene" id="piezasContiene" required/>
 												</div> 
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
