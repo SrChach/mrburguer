@@ -19,7 +19,7 @@
 																	<th>Nombre</th>
 																	<th>Marca</th>
 																	<th>Precio Promedio</th>
-																	<th>Cantidad</th>
+																	<th>Cantidad (en piezas)</th>
 																	<th>Accion</th>
 																</thead>
 																<tbody>
@@ -28,7 +28,7 @@
 																	<th>Nombre</th>
 																	<th>Marca</th>
 																	<th>Precio Promedio</th>
-																	<th>Cantidad</th>
+																	<th>Cantidad (en piezas)</th>
 																	<th>Accion</th>
 																</tfoot>
 															</table>
