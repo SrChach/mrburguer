@@ -8,19 +8,31 @@ Class Compra{
 
 	}
 
-	public function insertar($idProveedor, $fecha, $nombre, $apellidoPaterno, $apellidoMaterno, $monto, $iva){
-		$sql = "INSERT INTO compra (idProveedor, fecha, nombre, apellidoPaterno, apellidoMaterno, monto, iva) VALUES 
-		('$idProveedor', '$fecha', '$nombre', '$apellidoPaterno', '$apellidoMaterno', '$monto', '$iva')";
-		return ejecutarConsulta($sql);
+	public function insertar($idProveedor, $nombre, $apellidoPaterno, $apellidoMaterno, $monto, $iva, $idInsumo, $precioUnitarioActual, $cantidad){
+		$sql = "INSERT INTO compra (idProveedor, fecha, nombre, apellidoPaterno, apellidoMaterno, monto, iva, status) VALUES 
+		('$idProveedor', current_timestamp, '$nombre', '$apellidoPaterno', '$apellidoMaterno', '$monto', '$iva', 'Aceptado')";
+		
+		$idNuevaCompra = ejecutarConsultaRetornarID($sql);
+
+		$elementoActual = 0;
+		$sinErrores = true;
+
+		while($elementoActual < count($idInsumo)){
+			$subconsulta = "INSERT INTO insumoComprado (idCompra, idInsumo, precioUnitarioActual, cantidad) VALUES ('$idNuevaCompra', '$idInsumo[$elementoActual]', '$precioUnitarioActual[$elementoActual]', '$cantidad[$elementoActual]')";
+			ejecutarConsulta($subconsulta) or $sinErrores = false;
+			$elementoActual++;
+		}
+
+		return $sinErrores;
 	}
 
-	public function editar($idCompra, $idProveedor, $fecha, $nombre, $apellidoPaterno, $apellidoMaterno, $monto, $iva, $numInt){
-		$sql = "UPDATE compra SET nombre='$nombre', idProveedor='$idProveedor', fecha='$fecha', nombre='$nombre', apellidoPaterno='$apellidoPaterno', apellidoMaterno='$apellidoMaterno', monto='$monto', iva='$iva' WHERE idCompra='$idCompra'";
+	public function devolver($idCompra){
+		$sql = "UPDATE compra SET status='Devuelto' where idCompra='$idCompra'";
 		return ejecutarConsulta($sql);
 	}
 
 	public function mostrar($idCompra){
-		$sql = "SELECT * FROM compra WHERE idCompra='$idCompra'";
+		$sql = "SELECT FROM compra C join proveedor P on proveedor.idproveedor=compra.idProveedor";
 		return consultarFila($sql);
 	}
 

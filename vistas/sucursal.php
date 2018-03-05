@@ -22,6 +22,7 @@
 												<th>Acciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 												<th>Menú</th>
 												<th>Nombre</th>
+												<th>Inventario</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
 												<th>Estado</th>
@@ -38,6 +39,7 @@
 												<th>Acciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 												<th>Menú</th>
 												<th>Nombre</th>
+												<th>Inventario</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
 												<th>Estado</th>
