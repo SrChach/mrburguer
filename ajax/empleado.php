@@ -125,7 +125,9 @@ switch ($_GET["op"]){
 		$hashpass = hash("SHA256", $password);
 
 		$rspta = $empleado->verificar($username, $hashpass); 
-		$oa = $rspta->fetch_object();
+		if($rspta != false){
+			$oa = $rspta->fetch_object();
+		}
 		if(isset($oa)){
 			$_SESSION["idEmpleado"]=$oa->idEmpleado;
 			$_SESSION["username"] = $oa->username;

@@ -10,8 +10,5 @@ $("#frmAcceso").on('submit',function(e){
 			alert(data);
 			$(location).attr("href", "producto.php");
 		}
-		<?php 
-			exit();
-		?>
 	});
 });

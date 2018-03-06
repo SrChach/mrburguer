@@ -8,7 +8,7 @@ $("#frmAcceso").on('submit',function(e){
 			alert("Usuario y/o contraseña incorrectos")
 		} else {
 			alert(data);
-			//$(location).attr("href", "producto.php");
+			$(location).attr("href", "producto.php");
 		}
 	});
 });
