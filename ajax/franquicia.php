@@ -49,6 +49,26 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case 'consultaFranquicia' :
+		$rspta = $franquicia->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				/* $reg->idFranquicia */
+				"0" => $reg->nombre,
+				"1" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+			);
+		}
+
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			/*Total de registros a viualizar*/
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

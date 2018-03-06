@@ -44,7 +44,26 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
-
+	case 'consultaInteraccion':
+		$rspta = $interaccion->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				
+				"0" => $reg->idCliente,
+				"1" => $reg->idEvento,
+				"2" => $reg->accionRealizada,
+				"3" => $reg->fechaHoraInteraccion
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

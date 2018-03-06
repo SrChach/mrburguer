@@ -62,6 +62,31 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case 'consultaProveedor' : 
+		$rspta = $proveedor->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				"0" => $reg->nombreEmpresa,
+				"1" => $reg->correoElectronico,
+				"2" => $reg->telefono,
+				"3" => $reg->estado,
+				"4" => $reg->delegacion,
+				"5" => $reg->colonia,
+				"6" => $reg->calle,
+				"7" => $reg->numExt,
+				"8" => $reg->numInt,
+				"9" => $reg->isActive?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 
 }

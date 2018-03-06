@@ -64,6 +64,34 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case 'consultaCliente':
+		$rspta = $cliente->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				"0" => $reg->nombre,
+				"1" => $reg->apellidoPaterno,
+				"2" => $reg->apellidoMaterno,
+				"3" => $reg->fechaNacimiento,
+				"4" => $reg->fechaRegistro,
+				"5" => $reg->nivel,
+				"6" => $reg->cuentaFB,
+				"7" => $reg->cuentaInstagram,
+				"8" => $reg->cuentaTwitter,
+				"9" => $reg->correoElectronico,
+				"10" => $reg->telefono,
+				"11" => $reg->isActive ?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+			);
+
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 
 }

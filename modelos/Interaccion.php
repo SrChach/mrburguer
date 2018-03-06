@@ -13,7 +13,7 @@ Class Interaccion{
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idinteraccion, $idCliente, $idCliente, $accionRealizada, $fechaHoraInteraccion, $fechaInicio, $fechaFin){
+	public function editar($idinteraccion, $idCliente, $idEvento, $accionRealizada, $fechaHoraInteraccion, $fechaInicio, $fechaFin){
 		$sql = "UPDATE interaccion SET idCliente='$idCliente', idCliente='$idCliente', accionRealizada='$accionRealizada', fechaHoraInteraccion='$fechaHoraInteraccion', fechaInicio='$fechaInicio', fechaFin='$fechaFin' WHERE idinteraccion='$idinteraccion'";
 		return ejecutarConsulta($sql);
 	}

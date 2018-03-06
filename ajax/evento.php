@@ -47,6 +47,29 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case 'consultaEvento' :
+		$rspta = $evento->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				"0" => $reg->idevento,
+				"1" => $reg->nombre,
+				"2" => $reg->tipo,
+				"3" => $reg->plataforma,
+				"4" => $reg->recompensa,
+				"5" => $reg->fechaInicio,
+				"6" => $reg->fechaFin
+			);
+		}
+
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 
 }

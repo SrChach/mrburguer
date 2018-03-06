@@ -57,7 +57,7 @@ Class Empleado{
 	}
 
 	public function eliminar($idEmpleado){
-		$sql = "DELETE FROM persona WHERE idEmpleado='$idEmpleado'";
+		$sql = "DELETE FROM empleado WHERE idEmpleado='$idEmpleado'";
 		return ejecutarConsulta($sql);
 	}
 

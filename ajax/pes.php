@@ -63,6 +63,36 @@ switch ($_GET["op"]){
 			echo json_encode($rspta);
 		}
 		break;
+	case 'consultaMenu':
+		if(isset($_GET["SUC"])){
+			$xst = ($pes->check($_GET["SUC"]))->fetch_object();
+			if($xst->exist==0){
+				echo "Sucursal inválida";
+				break;
+			}
+			$rspta = $pes->listar($_GET["SUC"]);
+			$data = Array();
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->precioActual,
+				);
+			}
+			$results = array(
+				"sEcho" => 1,
+				"iTotalRecords" => count($data),
+				"iTotalDisplayRecords" => count($data),
+				"aaData" => $data
+			);
+			
+			echo json_encode($results);
+		} else {
+			echo "No es posible listar, faltan parámetros";
+		}
+		break;
+
+
+
 
 }
 

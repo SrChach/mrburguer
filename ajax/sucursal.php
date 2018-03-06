@@ -74,6 +74,31 @@ switch ($_GET["op"]){
 			echo '<option value='.$reg->idFranquicia.'>'. $reg->nombre.'</option>';
 		}
 		break;
+	case 'consulta' :
+		$rspta = $sucursal->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = Array(
+				"0" => $reg->nombre,
+				"1" => $reg->franquicia,/*Modify*/
+				"2" => ($reg->movil == 0)? 'Fija' : 'Móvil',
+				"3" => $reg->estado,
+				"4" => $reg->delegacion,
+				"5" => $reg->colonia,
+				"6" => $reg->calle,
+				"7" => $reg->numExt,
+				"8" => $reg->numInt,
+				"9" => ($reg->isActive)?'<span class="label bg-green">Activa<span>':'<span class="label bg-red">Desactivada<span>'
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

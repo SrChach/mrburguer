@@ -32,7 +32,7 @@ Class Compra{
 	}
 
 	public function mostrar($idCompra){
-		$sql = "SELECT FROM compra C join proveedor P on proveedor.idproveedor=compra.idProveedor";
+		$sql = "SELECT C.idCompra, P.nombreEmpresa, C.fecha, C.nombre, C.apellidoPaterno, C.apellidoMaterno, C.monto, C.iva, C.status FROM compra C join proveedor P on proveedor.idproveedor=compra.idProveedor";
 		return consultarFila($sql);
 	}
 

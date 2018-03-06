@@ -51,6 +51,24 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
+	case'consultaProducto' :
+		$rspta = $producto->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				"0" => $reg->nombre,
+				"1" => $reg->precioActual,
+				"2" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

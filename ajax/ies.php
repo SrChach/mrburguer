@@ -71,6 +71,37 @@ switch ($_GET["op"]){
 			echo json_encode($rspta);
 		}
 		break;
-
+	case 'consultaIES':
+		if(isset($_GET["SUC"])){
+			$xst = ($ies->check($_GET["SUC"]))->fetch_object();
+			if($xst->exist==0){
+				echo "Sucursal inválida";
+				break;
+			}
+			$rspta = $ies->listar($_GET["SUC"]);
+			$data = Array();
+			$i = 0;
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->marca,
+					"2" => $reg->precioPromedio,
+					"3" => $cantidad ? $cantidad : "no registrado"
+				);
+				
+			}
+				
+			$results = array(
+				"sEcho" => 1,
+				"iTotalRecords" => count($data),
+				"iTotalDisplayRecords" => count($data),
+				"aaData" => $data
+			);
+			echo json_encode($results);
+				
+		} else {
+			echo "No es posible listar, faltan parámetros";
+		}
+		break;
 }
 ?>

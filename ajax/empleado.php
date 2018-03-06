@@ -150,9 +150,9 @@ switch ($_GET["op"]){
 
 		}
 
-
 		echo json_encode($oa);
 		break;
+
 	case 'exit':
 		/*Limpiamos las variables*/
 		session_unset();
@@ -160,6 +160,37 @@ switch ($_GET["op"]){
 		header("location: ../index.php");
 		break;
 
+	case 'consultaEmpleado':
+		$rspta = $empleado->listar();
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = Array(
+				"0" => $reg->sucursal,
+				"1" => $reg->nombre,
+				"2" => $reg->apellidoPaterno,
+				"3" => $reg->apellidoMaterno,
+				"4" => $reg->fechaIngreso,
+				"5" => $reg->telefono,
+				"6" => $reg->correoElectronico,
+				"7" => $reg->puesto,
+				"8" => $reg->estado,
+				"9" => $reg->delegacion,
+				"10" => $reg->colonia,
+				"11" => $reg->calle,
+				"12" => $reg->numExt,
+				"13" => $reg->numInt,
+				"14" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
+				"15" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;	
 }
 
 ?>
