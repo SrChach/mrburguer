@@ -9,8 +9,8 @@ $("#frmAcceso").on('submit',function(e){
 		} else {
 			$(location).attr("href", "producto.php");
 		}
-		<?php 
-			exit();
-		?>
 	});
+	<?php 
+		exit();
+	?>
 });
