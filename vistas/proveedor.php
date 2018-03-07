@@ -117,7 +117,8 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="scripts/proveedor.js"></script>
+		<script type="text/javascript" src="../public/js/proveedor.js"></script>
+		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
 
 <?php 
 	}

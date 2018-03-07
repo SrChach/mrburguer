@@ -7,25 +7,24 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>MrBurguer Ventas</title>
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<link rel="stylesheet" href="../public/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../public/css/font-awesome.css">
+		<link rel="stylesheet" href="../public/lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../public/lib/css/font-awesome.min.css">
 		
 		<!-- Theme style -->
-		<link rel="stylesheet" href="../public/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="../public/lib/css/AdminLTE.min.css">
 		<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-		<link rel="stylesheet" href="../public/css/_all-skins.min.css">
+		<link rel="stylesheet" href="../public/lib/css/_all-skins.min.css">
 		<!-- quitar --><link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
 		<!-- quitar --><link rel="shortcut icon" href="../public/img/favicon.ico">
 
 		<!-- DATATABLES -->
-		<link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">    
-		<link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
-		<link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="../public/lib/datatables/jquery.dataTables.min.css">    
+		<link href="../public/lib/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
+		<link href="../public/lib/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
-		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
+		<link rel="stylesheet" type="text/css" href="../public/lib/css/bootstrap-select.min.css">
 
 	</head>
 	<body class="hold-transition skin-blue-light sidebar-mini">
