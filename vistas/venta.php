@@ -70,7 +70,7 @@
 											</div>
 
 											<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-												<a data-toogle="modal" href="#vProductos">
+												<a data-toggle="modal" href="#myModal">
 													<button id="btnAgregarProducto" type="button" class="btn btn-primary"><span class="fa fa-plus">Agregar artículos</span></button>
 												</a>
 											</div>
@@ -116,6 +116,36 @@
 				</section><!-- /.content -->
 			</div><!-- /.content-wrapper -->
 
+			<!-- Ventana Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Seleccione un Producto</h4>
+						</div>
+						<div class="modal-body">
+							<table id="tblPES" class="table table-striped table-bordered table-condensed table-hover">
+								<thead>
+									<th>Opciones</th>
+									<th>Producto</th>
+									<th>Precio</th>
+								</thead>
+								<tbody></tbody>
+								<tfoot>
+									<th>Opciones</th>
+									<th>Producto</th>
+									<th>Precio</th>
+								</tfoot>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- fin ventana modal -->
 <?php
 		} else {
 			require 'acceso_denegado.php';

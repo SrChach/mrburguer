@@ -133,6 +133,7 @@ switch ($_GET["op"]){
 			$_SESSION["username"] = $oa->username;
 			$_SESSION["nombre"]=$oa->nombre;
 			$_SESSION["imagen"]=$oa->imagen;
+			$_SESSION["idSucursal"]=$oa->idSucursal;
 
 			$ptemp = $empleado->listarMarcados($oa->idEmpleado);
 			

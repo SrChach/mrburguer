@@ -14,6 +14,7 @@ $iva = isset($_POST["iva"])? limpiarCadena($_POST["iva"]) : "";
 $descuentoTotal = isset($_POST["descuentoTotal"])? limpiarCadena($_POST["descuentoTotal"]) : "";
 $status = isset($_POST["status"])? limpiarCadena($_POST["status"]) : "";
 $pagoTarjeta = isset($_POST["pagoTarjeta"])? limpiarCadena($_POST["pagoTarjeta"]) : "";
+$idSucursal = $_SESSION["idSucursal"];
 
 switch ($_GET["op"]){
 	case 'saveEdit':
@@ -55,31 +56,32 @@ switch ($_GET["op"]){
 		echo json_encode($results);
 		break;
 	case 'listPES':
-		if(isset($_GET["SUC"])){
-			$xst = ($pes->check($_GET["SUC"]))->fetch_object();
-			if($xst->exist==0){
-				echo "Sucursal inválida";
-				break;
-			}
-			$rspta = $pes->listar($_GET["SUC"]);
-			$data = Array();
-			while($reg = $rspta->fetch_object()){
-				$data[] = array(
-					"0" => $reg->nombre,
-					"1" => $reg->precioActual,
-				);
-			}
-			$results = array(
-				"sEcho" => 1,
-				"iTotalRecords" => count($data),
-				"iTotalDisplayRecords" => count($data),
-				"aaData" => $data
-			);
-			
-			echo json_encode($results);
-		} else {
-			echo "No es posible listar, faltan parámetros";
+		require_once "../modelos/PES.php";
+		$pes = new PES();
+		$xst = ($pes->check($idSucursal))->fetch_object();
+		if($xst->exist==0){
+			echo "Sucursal inválida";
+			break;
 		}
+		$rspta = $pes->listarPES($idSucursal);
+		$data = Array();
+		while($reg = $rspta->fetch_object()){
+			$data[] = array(
+				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
+				/*"1" => $reg->idproductoEnSucursal,*/
+				"1" => $reg->nombre,
+				"2" => $reg->precioActual,
+			);
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		
+		echo json_encode($results);
+		
 		break;
 
 

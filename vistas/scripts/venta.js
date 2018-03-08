@@ -7,6 +7,7 @@ function init(){
 	$("#formulario").on("submit", function(e){
 		saveEdit(e);
 	});
+	
 }
 
 function limpiar(){
@@ -27,7 +28,8 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
-		$("$btnAgregar").hide();
+		$("#btnAgregar").hide();
+		listarPES();
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
@@ -95,6 +97,26 @@ function giveBack(idventa){
 			});
 		}
 	});
+}
+
+function listarPES(){
+	tabla = $('#tblPES').dataTable({
+		"aProcessing" : true,
+		"aServerSide": true,
+		dom: 'Bfrtip',
+		buttons: [],
+		"ajax": {
+			url: '../ajax/venta.php?op=listPES',
+			type: "get",
+			dataType: "json",
+			error: function(e){
+				console.log(e.responseText);
+			}
+		},
+		"bDestroy": true,
+		"iDisplayLength": 5,
+		"order": [[ 0, "desc"]]
+	}).DataTable();
 }
 
 init();
