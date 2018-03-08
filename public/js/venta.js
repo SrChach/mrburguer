@@ -1,8 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idinsumo", "#nombre", "#marca", "#existencias", "#piezasContiene", "#precioPromedio"],
-		showOne: ["nombre", "marca", "existencias", "idinsumo", "piezasContiene", "precioPromedio"],
-		parametro: "idinsumo"
+		limpiar: ["#idventa", "#idCliente", "#idEmpleado", "#fecha", "#montoTotal", "#iva", "#descuentoTotal", "#status", "#pagoTarjeta"],
+		parametro: "idventa"
 	}
 
 	return {
@@ -12,7 +11,6 @@ const datos = (function(){
 	}
 })();
 
-
 iniciar();
 
 function mostrarform(flag){
@@ -21,12 +19,8 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-		$("#titulo").html("Añadir nuevo insumo:");
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnagregar").show();
-		$("#titulo").html("Insumos");
 	}
 }

@@ -49,7 +49,7 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="scripts/menu.js"></script>
+		<script type="text/javascript" src="../public/js/menu.js"></script>
 
 
 <?php 

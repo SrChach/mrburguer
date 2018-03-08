@@ -1,3 +1,19 @@
+const datos = (function(){
+	const elementos = {
+		limpiar: ["#idproveedor", "#nombreEmpresa", "#correoElectronico", "#telefono", "#estado", "#delegacion", "#colonia", "#calle", "#numExt", "#numInt"],
+		showOne: ["nombreEmpresa", "correoElectronico", "telefono", "estado", "delegacion", "colonia", "calle", "numExt", "numInt", "idproveedor"],
+		parametro: "idproveedor"
+	}
+
+	return {
+		getElementos(funcion){
+			return elementos[funcion];
+		}	
+	}
+})();
+
+iniciar();
+
 function mostrarform(flag){
 	limpiar();
 	if(flag){

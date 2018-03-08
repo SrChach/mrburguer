@@ -1,3 +1,19 @@
+const datos = (function(){
+	const elementos = {
+		limpiar: ["#idFranquicia", "#nombre"],
+		showOne: ["idFranquicia", "nombre"],
+		parametro: "idFranquicia"
+	}
+
+	return {
+		getElementos(funcion){
+			return elementos[funcion];
+		}	
+	}
+})();
+
+iniciar();
+
 function mostrarform(flag){
 	limpiar();
 	if(flag){

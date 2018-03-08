@@ -163,8 +163,9 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="../public/js/empleado.js"></script>
+		
 		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>		
+		<script type="text/javascript" src="../public/js/empleado.js"></script>
 
 <?php 
 	}

@@ -42,7 +42,6 @@ function listar(idSucursal){
 }
 
 function saveEdit(idInsumo, idSucursal, selector){
-	//var selector = this.selector;
 	if($('#'+selector.id).val() == ""){
 		bootbox.alert("Antes de proceder, llena el campo \"Cantidad inicial\"");
 	} else {

@@ -117,8 +117,8 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="../public/js/cliente.js"></script>
 		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
+		<script type="text/javascript" src="../public/js/cliente.js"></script>
 
 <?php 
 	}
