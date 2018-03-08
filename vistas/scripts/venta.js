@@ -11,15 +11,14 @@ function init(){
 
 function limpiar(){
 	$("#idventa").val("");
-	$("#idCliente").val("");
-	$("#idEmpleado").val("");
+	$("#nombreEmpleado").val("");
+	$("#nombreCliente").val("");
 	$("#fecha").val("");
 	$("#montoTotal").val("");
 	$("#iva").val("");
-	$("#descuentoTotal").val("");
+	$("#descuentoActual").val("");
 	$("#status").val("");
 	$("#pagoTarjeta").val("");
-	/*Estas sentencias no borran el elemento, VACIAN EL CONTENIDO*/
 }
 
 function mostrarform(flag){
@@ -28,9 +27,11 @@ function mostrarform(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
+		$("$btnAgregar").hide();
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
+		$("#btnAgregar").show();
 	}
 }
 
@@ -64,7 +65,6 @@ function listar(){
 }
 
 function saveEdit(e){
-	/*Desactiva la acción por defecto del Submit*/
 	e.preventDefault();
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
@@ -84,6 +84,17 @@ function saveEdit(e){
 
 	});
 	limpiar();
+}
+
+function giveBack(idventa){
+	bootbox.confirm("Está seguro de devolver la venta?", function(result){
+		if(result){
+			$.post("../ajax/venta.php?op=giveBack", {idventa : idventa}, function(e){
+				bootbox.alert(e);
+				tabla.ajax.reload();
+			});
+		}
+	});
 }
 
 init();

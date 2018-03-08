@@ -8,9 +8,9 @@ Class Compra{
 
 	}
 
-	public function insertar($idProveedor, $nombre, $apellidoPaterno, $apellidoMaterno, $monto, $iva, $idInsumo, $precioUnitarioActual, $cantidad){
-		$sql = "INSERT INTO compra (idProveedor, fecha, nombre, apellidoPaterno, apellidoMaterno, monto, iva, status) VALUES 
-		('$idProveedor', current_timestamp, '$nombre', '$apellidoPaterno', '$apellidoMaterno', '$monto', '$iva', 'Aceptado')";
+	public function insertar($idProveedor, $idEmpleado, $nombre, $apellidoPaterno, $apellidoMaterno, $monto, $iva, $idInsumo, $precioUnitarioActual, $cantidad){
+		$sql = "INSERT INTO compra (idProveedor, idEmpleado, fecha, nombre, apellidoPaterno, apellidoMaterno, monto, iva, status) VALUES 
+		('$idProveedor', '$idEmpleado', current_timestamp, '$nombre', '$apellidoPaterno', '$apellidoMaterno', '$monto', '$iva', 'Aceptado')";
 		
 		$idNuevaCompra = ejecutarConsultaRetornarID($sql);
 
@@ -32,17 +32,12 @@ Class Compra{
 	}
 
 	public function mostrar($idCompra){
-		$sql = "SELECT C.idCompra, P.nombreEmpresa, C.fecha, C.nombre, C.apellidoPaterno, C.apellidoMaterno, C.monto, C.iva, C.status FROM compra C join proveedor P on proveedor.idproveedor=compra.idProveedor";
+		$sql = "SELECT C.idCompra, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', C.fecha, P.nombreEmpresa, concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreProveedor', C.monto, C.iva, C.status FROM compra C join proveedor P on P.idproveedor=C.idProveedor join empleado E on E.idEmpleado=C.idEmpleado WHERE C.idCompra='$idCompra'";
 		return consultarFila($sql);
 	}
 
 	public function listar(){
-		$sql = "SELECT compra.idCompra, proveedor.nombreEmpresa as 'empresa', compra.fecha, compra.nombre, compra.apellidoPaterno, compra.apellidoMaterno, compra.monto, compra.iva FROM proveedor JOIN compra ON proveedor.idProveedor=compra.idProveedor";
-		return ejecutarConsulta($sql);
-	}
-
-	public function select(){
-		$sql = "SELECT idProveedor  WHERE (sucursal.isActive=1) and (franquicia.isActive=1)";
+		$sql = "SELECT C.idCompra, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', C.fecha, P.nombreEmpresa, concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreProveedor', C.monto, C.iva, C.status FROM compra C join proveedor P on P.idproveedor=C.idProveedor join empleado E on E.idEmpleado=C.idEmpleado";
 		return ejecutarConsulta($sql);
 	}
 

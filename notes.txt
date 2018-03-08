@@ -1,2 +1,17 @@
 Compra/select mal
 Modificar Compra/insumoComprado. una sola vista
+
+Añadido campo idEmpleado a Compra
+
+Cambiar contraseña a usuario, permitido. Campo extra en contra
+
+
+
+
+
+Cambios a subir: 
+MODELOS:
+	Compra.php
+
+AJAX:
+	Compra.php
