@@ -7,7 +7,6 @@ $("#frmAcceso").on('submit',function(e){
 		if(data == "null" || data == null || data ==""){
 			alert("Usuario y/o contraseña incorrectos");
 		} else {
-			alert(data);
 			$(location).attr("href", "producto.php");
 		}
 	});

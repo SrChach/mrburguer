@@ -19,7 +19,8 @@ $idSucursal = $_SESSION["idSucursal"];
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idventa)){
-			$rspta = $venta->insertar($idCliente, $idEmpleado, $montoTotal, $iva, $pagoTarjeta, $_POST["idProductoEnSucursal"], $_POST["cantidad"]);
+
+			$rspta = $venta->insertar($idCliente, $idEmpleado, $pagoTarjeta, $_POST["idProductoEnSucursal"], $_POST["cantidad"]);
 			echo $rspta ? "Venta guardada" : "No se pudieron registrar todos los datos de la venta";
 		} 
 		break;
@@ -67,10 +68,10 @@ switch ($_GET["op"]){
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
-				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
+				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\', precio'.$reg->idproductoEnSucursal.')"><span class="fa fa-plus"></span></button>',
 				/*"1" => $reg->idproductoEnSucursal,*/
 				"1" => $reg->nombre,
-				"2" => $reg->precioActual,
+				"2" => '<span id="precio'.$reg->idproductoEnSucursal.'">'.$reg->precioActual.'</span>',
 			);
 		}
 		$results = array(

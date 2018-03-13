@@ -81,7 +81,7 @@ function saveEdit(e){
 		success: function(datos){
 			bootbox.alert(datos);
 			mostrarform(false);
-			tabla.ajax.reload();
+			listar();
 		}
 
 	});
@@ -117,6 +117,75 @@ function listarPES(){
 		"iDisplayLength": 5,
 		"order": [[ 0, "desc"]]
 	}).DataTable();
+}
+
+var iva = 16;
+var i = 0;
+var productos = 0;
+
+$("#guardar").hide();
+
+function agregarProducto(idProductoEnSucursal, producto, idPrecio){
+	var cantidad = 1;
+	var precioUnitario = $('#'+idPrecio.id).text(); 
+	var subtotal = precioUnitario * cantidad;
+	if(idProductoEnSucursal != ""){
+		var fila='<tr class="filas" id="fila'+i+'">'+
+			'<td><button type="button" class="btn btn-danger" onclick="eliminarProducto('+i+')">X</button></td>'+
+			'<td><input type="hidden" name="idProductoEnSucursal[]" value="'+idProductoEnSucursal+'">'+producto+'</td>'+
+			'<td><input type="number" min="0" name="cantidad[]" onchange="modificarSubtotales()" value="'+cantidad+'"></td>'+
+			'<td><input type="hidden" name="pu[]" value="'+precioUnitario+'">'+precioUnitario+'</td>'+
+			'<td><span name="subtotal[]" id="subtotal'+i+'">'+subtotal+'</span></td>'+
+			'<td><button type="button" onclick="modificarSubtotales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
+		'</tr>';
+		i++;
+		productos++;
+		$("#productos").append(fila);
+		modificarSubtotales();
+	} else {
+		alert("Error al ingresar el producto");
+	}
+}
+
+/*function agregarProducto(idProductoEnSucursal, nombre, idPrecio){
+	var precio = 0;
+	precio = $('#'+idPrecio.id).text();
+	var p1 = precio * 2;
+	alert(nombre + " " +precio+ " " + p1);
+}*/
+
+function modificarSubtotales(){
+	var cnt = document.getElementsByName("cantidad[]");
+	var prc = document.getElementsByName("pu[]");
+	var stt = document.getElementsByName("subtotal[]");
+	var acum = 0;
+
+	for(var j = 0; j<cnt.length; j++){
+		var C = cnt[j];
+		var P = prc[j];
+		var S = stt[j];
+		S.text = C.value * P.value;
+		$('#'+S.id).text(S.text);
+		//alert('subtotal'+S.id);
+		acum+=S.text;
+	}
+	$("#total").text("$ "+acum);
+	evaluar();
+}
+
+function evaluar(){
+	if(productos>0){
+		$("#guardar").show();
+	} else {
+		$("#guardar").hide();
+		i=0;
+	}
+}
+
+function eliminarProducto(idFila){
+	$("#fila"+idFila).remove();
+	productos--;
+	modificarSubtotales();
 }
 
 init();

@@ -8,23 +8,43 @@ Class Venta{
 
 	}
 
-	public function insertar($idCliente, $idEmpleado, $montoTotal, $iva, $pagoTarjeta, $idProductoEnSucursal, $cantidad){
+	public function insertar($idCliente, $idEmpleado, $pagoTarjeta, $idProductoEnSucursal, $cantidad){
 		$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
-		('$idCliente', '$idEmpleado', current_timestamp, '$montoTotal', '$iva', '0', 'Entregado', '$pagoTarjeta')";
+		('$idCliente', '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
 		
 		$idNuevaVenta = ejecutarConsultaRetornarID($sql);
-
 		$elementoActual = 0;
 		$sinErrores = true;
+		$montoTotal = 0;
+		$impuesto = 0;
 
 		while($elementoActual < count($idProductoEnSucursal)){
-			$subconsulta = "INSERT INTO productoVendido (idventa, idProductoEnSucursal, precioVendido, cantidad) VALUES ('$idNuevaVenta', '$idProductoEnSucursal[$elementoActual]', '$precioVendido[$elementoActual]', '$cantidad[$elementoActual]', 'Entregado')";
+			$obtenPrecioActual = "SELECT P.nombre, P.precioActual FROM (SELECT idProducto FROM productoEnSucursal WHERE idProductoEnSucursal='$idProductoEnSucursal[$elementoActual]') as PES join producto P on PES.idProducto = P.idProducto";
+			($naw = consultarFila($obtenPrecioActual)['precioActual']) or $sinErrores = false;
+
+			$subconsulta = "INSERT INTO productoVendido (idventa, idProductoEnSucursal, precioVendido, cantidad, status) VALUES ('$idNuevaVenta', '$idProductoEnSucursal[$elementoActual]', '$naw', '$cantidad[$elementoActual]', 'Entregado')";
 			ejecutarConsulta($subconsulta) or $sinErrores = false;
+			$pa = $naw * $cantidad[$elementoActual];
+			$montoTotal+=$pa;
+			$impuesto+=($pa*4)/29;
 			$elementoActual++;
 		}
 
+		$actualizarMonto = "UPDATE venta SET montoTotal='$montoTotal', iva='$impuesto' where idventa='$idNuevaVenta'";
+		ejecutarConsulta($actualizarMonto) or $sinErrores = false;
+
 		return $sinErrores;
+		
+		/*$pdts = " ";
+		while($elementoActual < count($idProductoEnSucursal)){
+			$subconsulta = "SELECT P.nombre, P.precioActual FROM (SELECT idProducto FROM productoEnSucursal WHERE idProductoEnSucursal='$idProductoEnSucursal[$elementoActual]') as PES join producto P on PES.idProducto = P.idProducto";
+			$naw = consultarFila($subconsulta);
+			$pdts = $naw['nombre']." ".$naw['precioActual']."<br>".$pdts;
+			$elementoActual++;
+		}
+		return $pdts;*/
 	}
+
 
 	public function devolver($idventa){
 		$sql = "UPDATE venta SET status='Devuelto' where idventa='$idventa'";

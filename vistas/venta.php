@@ -64,11 +64,6 @@
 												</select>
 											</div>
 
-											<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6">
-												<label>IVA:</label>
-												<input class="form-control" type="number" name="idCliente" id="idCliente" required/>
-											</div>
-
 											<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 												<a data-toggle="modal" href="#myModal">
 													<button id="btnAgregarProducto" type="button" class="btn btn-primary"><span class="fa fa-plus">Agregar artículos</span></button>
@@ -76,20 +71,22 @@
 											</div>
 
 											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<table id="detalles" class="table table-stripped table-bordered table-condensed table-hover">
+												<table id="productos" class="table table-stripped table-bordered table-condensed table-hover">
 													<thead style="background-color: #A9D0F5">
 														<th>Opciones</th>
 														<th>Producto</th>
 														<th>Cantidad</th>
 														<th>Precio Unitario</th>
 														<th>Subtotal</th>
+														<th>refrescar</th>
 													</thead>
 													<tfoot>
 														<th>TOTAL</th>
 														<th></th>
 														<th></th>
 														<th></th>
-														<th><h4 id="total">$ 0.00</h4><input type="hidden" name="montoTotal"></th>
+														<th></th>
+														<th><h4 id="total">$ 0.00</h4></th>
 													</tfoot>
 													<tbody>
 														
