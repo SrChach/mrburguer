@@ -1,4 +1,6 @@
 var tabla;
+var i = 0;
+var productos = 0;
 
 function init(){
 	mostrarform(false);
@@ -11,15 +13,13 @@ function init(){
 }
 
 function limpiar(){
-	$("#idventa").val("");
-	$("#nombreEmpleado").val("");
-	$("#nombreCliente").val("");
-	$("#fecha").val("");
-	$("#montoTotal").val("");
-	$("#iva").val("");
-	$("#descuentoActual").val("");
-	$("#status").val("");
+	$("#idCliente").val("");
 	$("#pagoTarjeta").val("");
+	$("#pagoTarjeta").selectpicker('refresh');
+	$("#total").text("$ 0.00");
+	$(".filas").remove();
+	i=0;
+	productos=0;
 }
 
 function mostrarform(flag){
@@ -27,13 +27,15 @@ function mostrarform(flag){
 	if(flag){
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
+		$("#btnGuardar").hide();
 		$("#btnAgregar").hide();
+		$("#cabecera").text("Efectuar venta:");
 		listarPES();
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnAgregar").show();
+		$("#cabecera").text("Ventas realizadas");
 	}
 }
 
@@ -68,7 +70,7 @@ function listar(){
 
 function saveEdit(e){
 	e.preventDefault();
-	$("#btnGuardar").prop("disabled", true);
+	//$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
@@ -93,7 +95,7 @@ function giveBack(idventa){
 		if(result){
 			$.post("../ajax/venta.php?op=giveBack", {idventa : idventa}, function(e){
 				bootbox.alert(e);
-				tabla.ajax.reload();
+				listar();
 			});
 		}
 	});
@@ -118,12 +120,6 @@ function listarPES(){
 		"order": [[ 0, "desc"]]
 	}).DataTable();
 }
-
-var iva = 16;
-var i = 0;
-var productos = 0;
-
-$("#guardar").hide();
 
 function agregarProducto(idProductoEnSucursal, producto, idPrecio){
 	var cantidad = 1;
@@ -166,7 +162,6 @@ function modificarSubtotales(){
 		var S = stt[j];
 		S.text = C.value * P.value;
 		$('#'+S.id).text(S.text);
-		//alert('subtotal'+S.id);
 		acum+=S.text;
 	}
 	$("#total").text("$ "+acum);
@@ -175,9 +170,9 @@ function modificarSubtotales(){
 
 function evaluar(){
 	if(productos>0){
-		$("#guardar").show();
+		$("#btnGuardar").show();
 	} else {
-		$("#guardar").hide();
+		$("#btnGuardar").hide();
 		i=0;
 	}
 }

@@ -32,12 +32,19 @@ switch ($_GET["op"]){
 		$rspta = $venta->mostrar($idventa);
 		echo json_encode($rspta);
 		break;
+/*	case 'listElement':
+		$id = $_GET["vt"];
+		$rspta = $venta->listarProductos($id);
+		while($reg = $rspta->fetch_object()){
+
+		}
+		break;*/
 	case 'list':
 		$rspta = $venta->listar();
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
-				"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-pencil"></i></button>' ,
+				"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>' ,
 				"1" => $reg->fecha,
 				"2" => $reg->nombreEmpleado,
 				"3" => $reg->nombreCliente,
@@ -69,7 +76,6 @@ switch ($_GET["op"]){
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
 				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\', precio'.$reg->idproductoEnSucursal.')"><span class="fa fa-plus"></span></button>',
-				/*"1" => $reg->idproductoEnSucursal,*/
 				"1" => $reg->nombre,
 				"2" => '<span id="precio'.$reg->idproductoEnSucursal.'">'.$reg->precioActual.'</span>',
 			);

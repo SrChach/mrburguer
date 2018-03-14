@@ -1,8 +1,8 @@
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Version</b> 0.0.1
         </div>
-        <strong>Nuestros Githubs: <a href="https://github.com/srchach">Ignacio Martinez</a>, <a href="">Sarai</a>, <a href="">Yair</a></strong>
+        <strong>Desarrolladores: <a href="https://github.com/srchach">Ignacio Martinez</a>, <a href="https://github.com/andreandyp">André Pozos</a></strong>
     </footer>    
     <!-- jQuery -->
     <script src="../public/js/jquery-3.1.1.min.js"></script>
