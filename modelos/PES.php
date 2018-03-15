@@ -48,7 +48,7 @@ Class PES{
 	}
 
 	public function listarPES($idSucursal){
-		$sql = "SELECT PROD.nombre, PROD.precioActual, PES.idproductoEnSucursal FROM producto PROD join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where (PROD.isActive=1) and (PES.isActive=1)";
+		$sql = "SELECT PROD.nombre, PROD.precioActual, PROD.imagen, PES.idproductoEnSucursal FROM producto PROD join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where (PROD.isActive=1) and (PES.isActive=1)";
 		return ejecutarConsulta($sql);
 	}
 

@@ -32,13 +32,38 @@ switch ($_GET["op"]){
 		$rspta = $venta->mostrar($idventa);
 		echo json_encode($rspta);
 		break;
-/*	case 'listElement':
+	case 'listElement':
 		$id = $_GET["vt"];
+		$tmp = 0;
 		$rspta = $venta->listarProductos($id);
+		echo '	<thead style=\'background-color: #A9D0F5\'>
+					<th>Opciones</th>
+					<th>Producto</th>
+					<th>Cantidad</th>
+					<th>Precio Unitario</th>
+					<th>Subtotal</th>
+					<th></th>
+				</thead>';
 		while($reg = $rspta->fetch_object()){
-
+			echo '<tr class=\'filas\'>
+			<td></td>
+			<td>'.$reg->nombre.'</td>
+			<td>'.$reg->cantidad.'</td>
+			<td>'.$reg->precioVendido.'</td>
+			<td>'.($reg->cantidad * $reg->precioVendido).'</td>
+			<td></td>
+			</tr>';
+			$tmp += ($reg->cantidad * $reg->precioVendido);
 		}
-		break;*/
+		echo '	<tfoot>
+					<th>TOTAL</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th><h4 id=\'total\'>$ '.$tmp.'</h4></th>
+				</tfoot>';
+		break;
 	case 'list':
 		$rspta = $venta->listar();
 		$data = Array();
@@ -47,7 +72,7 @@ switch ($_GET["op"]){
 				"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>' ,
 				"1" => $reg->fecha,
 				"2" => $reg->nombreEmpleado,
-				"3" => $reg->nombreCliente,
+				"3" => ($reg->nombreCliente)? $reg->nombreCliente : '-',
 				"4" => $reg->montoTotal,
 				"5" => $reg->descuentoActual,
 				"6" => $reg->iva,
@@ -77,7 +102,8 @@ switch ($_GET["op"]){
 			$data[] = array(
 				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\', precio'.$reg->idproductoEnSucursal.')"><span class="fa fa-plus"></span></button>',
 				"1" => $reg->nombre,
-				"2" => '<span id="precio'.$reg->idproductoEnSucursal.'">'.$reg->precioActual.'</span>',
+				"2" => "<img src='../files/productos/".$reg->imagen."' height='70px' width='70px'/>",
+				"3" => '<span id="precio'.$reg->idproductoEnSucursal.'">'.$reg->precioActual.'</span>'
 			);
 		}
 		$results = array(

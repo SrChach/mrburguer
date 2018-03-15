@@ -29,6 +29,7 @@ function mostrarform(flag){
 		$("#formularioregistros").show();
 		$("#btnGuardar").hide();
 		$("#btnAgregar").hide();
+		$("#btnAgregarProducto").show();
 		$("#cabecera").text("Efectuar venta:");
 		listarPES();
 	} else {
@@ -70,7 +71,6 @@ function listar(){
 
 function saveEdit(e){
 	e.preventDefault();
-	//$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
@@ -99,6 +99,28 @@ function giveBack(idventa){
 			});
 		}
 	});
+}
+
+function showOne(idventa){
+	$.post("../ajax/venta.php?op=show",{idventa : idventa}, function(data, status){
+		if(data==null){
+			bootbox.alert("Falló la petición");
+		} else {	
+			data = JSON.parse(data);
+			mostrarform(true);
+			$("#idCliente").val(data.idCliente);
+			$("#pagoTarjeta").val(data.pagoTarjeta);
+			$("#pagoTarjeta").selectpicker('refresh');
+			$("#btnGuardar").hide();
+			$("#btnAgregarProducto").hide();
+		}
+	});
+
+	$.post("../ajax/venta.php?op=listElement&vt="+idventa, function(r){
+		//$("#productos").html(r);
+		document.getElementById("productos").innerHTML = r;
+	});
+
 }
 
 function listarPES(){

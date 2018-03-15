@@ -8,13 +8,13 @@ Class Producto{
 
 	}
 
-	public function insertar($nombre, $precioActual){
-		$sql =  "INSERT INTO producto (nombre, precioActual, isActive) VALUES ('$nombre','$precioActual','1')";
+	public function insertar($nombre, $precioActual, $imagen){
+		$sql =  "INSERT INTO producto (nombre, precioActual, imagen, isActive) VALUES ('$nombre','$precioActual', '$imagen','1')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idproducto, $nombre, $precioActual){
-		$sql = "UPDATE producto SET nombre='$nombre', precioActual='$precioActual' WHERE idproducto='$idproducto'";
+	public function editar($idproducto, $nombre, $precioActual, $imagen){
+		$sql = "UPDATE producto SET nombre='$nombre', precioActual='$precioActual', imagen='$imagen' WHERE idproducto='$idproducto'";
 		return ejecutarConsulta($sql);
 	}
 

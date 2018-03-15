@@ -9,8 +9,13 @@ Class Venta{
 	}
 
 	public function insertar($idCliente, $idEmpleado, $pagoTarjeta, $idProductoEnSucursal, $cantidad){
-		$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
-		('$idCliente', '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
+		if($idCliente != ""){
+			$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
+			($idCliente, '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
+		} else  {
+			$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
+			(null, '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
+		}
 		
 		$idNuevaVenta = ejecutarConsultaRetornarID($sql);
 		$elementoActual = 0;
@@ -49,8 +54,13 @@ Class Venta{
 		return ejecutarConsulta($sql);
 	}
 
-	public function mostrar($idventa){
+	/*public function mostrar($idventa){
 		$sql = "SELECT V.idventa, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente WHERE V.idventa='$idventa'";
+		return consultarFila($sql);
+	}*/
+
+	public function mostrar($idventa){
+		$sql = "SELECT idCliente, pagoTarjeta FROM venta WHERE idventa='$idventa'";
 		return consultarFila($sql);
 	}
 
@@ -60,7 +70,7 @@ Class Venta{
 	}
 
 	public function listar(){
-		$sql = "SELECT V.idventa, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente";
+		$sql = "SELECT V.idventa, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente ORDER BY V.idventa desc";
 		return ejecutarConsulta($sql);
 	}
 

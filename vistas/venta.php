@@ -53,7 +53,7 @@
 											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-6">
 												<label>id del Cliente:</label>
 												<input type="hidden" name="idventa" id="idventa"/>
-												<input class="form-control" type="number" name="idCliente" id="idCliente" required />
+												<input class="form-control" type="number" name="idCliente" id="idCliente" />
 											</div>
 
 											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-6">
@@ -78,7 +78,7 @@
 														<th>Cantidad</th>
 														<th>Precio Unitario</th>
 														<th>Subtotal</th>
-														<th>refrescar</th>
+														<th></th>
 													</thead>
 													<tfoot>
 														<th>TOTAL</th>
@@ -94,7 +94,7 @@
 												</table>
 											</div>
 
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="guardar">
+											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 												<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 												<button type="button" class="btn btn-danger" id="btnCancelar" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
 											</div>
@@ -126,12 +126,14 @@
 								<thead>
 									<th>Opciones</th>
 									<th>Producto</th>
+									<th>Imagen</th>
 									<th>Precio</th>
 								</thead>
 								<tbody></tbody>
 								<tfoot>
 									<th>Opciones</th>
 									<th>Producto</th>
+									<th>Imagen</th>
 									<th>Precio</th>
 								</tfoot>
 							</table>

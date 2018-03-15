@@ -29,6 +29,7 @@
 											<th>Acciones</th>
 											<th>Nombre</th>
 											<th>Precio de Venta</th>
+											<th>Imagen</th>
 											<th>Status</th>
 										</thead>
 										<tbody>
@@ -37,6 +38,7 @@
 											<th>Acciones</th>
 											<th>Nombre</th>
 											<th>Precio de Venta</th>
+											<th>Imagen</th>
 											<th>Status</th>
 										</tfoot>
 									</table>
@@ -51,6 +53,12 @@
 										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 											<label>Precio Actual(*)</label>
 											<input class="form-control" type="number" name="precioActual" id="precioActual" min="0" max="999999999.99" value="0" step=".01" placeholder="inserte precio" required/>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<label>Imagen:</label>
+											<input class="form-control" type="file" name="imagen" id="imagen"/>
+											<input type="hidden" name="imagenactual" id="imagenactual"/>
+											<img src="" width="150px" id="mostrarimagen"/>
 										</div>
 										<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>

@@ -13,6 +13,9 @@ function limpiar(){
 	$("#idproducto").val("");
 	$("#nombre").val("");
 	$("#precioActual").val("");
+	$("#mostrarimagen").attr("src", "");
+	$("#imagenactual").val("");
+	$("#imagen").val("");
 }
 
 function mostrarform(flag){
@@ -89,6 +92,9 @@ function showOne(idproducto){
 		$("#nombre").val(data.nombre);
 		$("#precioActual").val(data.precioActual);
 		$("#idproducto").val(data.idproducto);
+		$("#mostrarimagen").show();
+		$("#mostrarimagen").attr("src", "../files/productos/"+data.imagen);
+		$("#imagenactual").val(data.imagen);
 	});
 
 }

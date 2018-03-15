@@ -168,11 +168,11 @@
 								echo '
 									<li class="treeview">
 										<a href="#">
-											<i class="fa fa-male"></i> <span>Empleado</span>
+											<i class="fa fa-credit-card"></i> <span>Ventas</span>
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
-											<li><a href="venta.php"><i class="fa fa-circle-o"></i>*Ventas</a></li>
+											<li><a href="venta.php"><i class="fa fa-circle-o"></i>Ventas</a></li>
 											<li><a href="cliente.php"><i class="fa fa-circle-o"></i>Cliente</a></li>
 										</ul>
 									</li>';
@@ -212,34 +212,21 @@
 							}
 						?>
 						
-						<!-- Compras -->
+						<!--
 						<li class="treeview">
 							<a href="#">
 								<i class="fa fa-cart-arrow-down"></i> <span>Consulta Compras</span>
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i> Registrar compras</a></li> 
+								<li><a href="consultacompras.php"><i class="fa fa-male"></i> Registrar compras</a></li> 
 								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i> Modificar </a></li>
 								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>
 								<li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Consultar compras</a></li>               
 							</ul>
 						</li>
-						
-						<!-- Venta -->
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-credit-card"></i>
-								<span>Ventas</span>
-								 <i class="fa fa-angle-left pull-right"></i>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="venta.php"><i class="fa fa-circle-o"></i>Consultar Ventas</a></li>
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Registar</a></li>         
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Modificar</a></li>
-								<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Activar/Desactivar o Eliminar</a></li>
-							</ul>
-						</li>           
+						-->
+						          
 					</ul>
 				</section>
 				<!-- /.sidebar -->

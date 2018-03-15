@@ -25,22 +25,100 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mrburguer`.`franquicia`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mrburguer`.`franquicia` (
+  `idFranquicia` INT NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(45) NOT NULL ,
+  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`idFranquicia`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mrburguer`.`sucursal`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mrburguer`.`sucursal` (
+  `idsucursal` INT NOT NULL AUTO_INCREMENT ,
+  `idFranquicia` INT NOT NULL ,
+  `nombre` VARCHAR(45) NOT NULL ,
+  `movil` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `estado` VARCHAR(45) NOT NULL ,
+  `delegacion` VARCHAR(45) NULL ,
+  `colonia` VARCHAR(45) NOT NULL ,
+  `calle` VARCHAR(45) NOT NULL ,
+  `numExt` VARCHAR(15) NOT NULL ,
+  `numInt` VARCHAR(15) NULL ,
+  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`idsucursal`) ,
+  INDEX `fk_sucursal_franquicia_idx` (`idFranquicia` ASC) ,
+  CONSTRAINT `fk_sucursal_franquicia`
+    FOREIGN KEY (`idFranquicia` )
+    REFERENCES `mrburguer`.`franquicia` (`idFranquicia` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mrburguer`.`empleado`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mrburguer`.`empleado` (
+  `idEmpleado` INT NOT NULL AUTO_INCREMENT ,
+  `idSucursal` INT NOT NULL ,
+  `username` VARCHAR(25) NOT NULL ,
+  `password` VARCHAR(64) NOT NULL ,
+  `nombre` VARCHAR(45) NOT NULL ,
+  `apellidoPaterno` VARCHAR(20) NOT NULL ,
+  `apellidoMaterno` VARCHAR(20) NULL ,
+  `fechaIngreso` DATE NOT NULL ,
+  `imagen` VARCHAR(50) NULL ,
+  `telefono` VARCHAR(20) NULL ,
+  `correoElectronico` VARCHAR(45) NULL ,
+  `puesto` VARCHAR(20) NOT NULL ,
+  `estado` VARCHAR(45) NOT NULL ,
+  `delegacion` VARCHAR(45) NOT NULL ,
+  `colonia` VARCHAR(45) NULL ,
+  `calle` VARCHAR(45) NOT NULL ,
+  `numExt` VARCHAR(15) NOT NULL ,
+  `numInt` VARCHAR(15) NULL ,
+  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`idEmpleado`) ,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
+  INDEX `fk_empleado_sucursal_idx` (`idSucursal` ASC) ,
+  CONSTRAINT `fk_empleado_sucursal`
+    FOREIGN KEY (`idSucursal` )
+    REFERENCES `mrburguer`.`sucursal` (`idsucursal` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mrburguer`.`compra`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mrburguer`.`compra` (
   `idcompra` INT NOT NULL AUTO_INCREMENT ,
   `idProveedor` INT NOT NULL ,
+  `idEmpleado` INT NOT NULL ,
   `fecha` DATETIME NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
   `apellidoPaterno` VARCHAR(20) NOT NULL ,
   `apellidoMaterno` VARCHAR(20) NULL ,
   `monto` DECIMAL(11,2) NULL ,
   `iva` DECIMAL(4,2) NULL ,
+  `status` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idcompra`) ,
   INDEX `fk_compra_proveedor_idx` (`idProveedor` ASC) ,
+  INDEX `fk_compra_empleado_idx` (`idEmpleado` ASC) ,
   CONSTRAINT `fk_compra_proveedor`
     FOREIGN KEY (`idProveedor` )
     REFERENCES `mrburguer`.`proveedor` (`idproveedor` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_compra_empleado`
+    FOREIGN KEY (`idEmpleado` )
+    REFERENCES `mrburguer`.`empleado` (`idEmpleado` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -81,42 +159,6 @@ CREATE  TABLE IF NOT EXISTS `mrburguer`.`insumoComprado` (
   CONSTRAINT `fk_insumoComprado_compra`
     FOREIGN KEY (`idCompra` )
     REFERENCES `mrburguer`.`compra` (`idcompra` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mrburguer`.`franquicia`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mrburguer`.`franquicia` (
-  `idFranquicia` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NOT NULL ,
-  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (`idFranquicia`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mrburguer`.`sucursal`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mrburguer`.`sucursal` (
-  `idsucursal` INT NOT NULL AUTO_INCREMENT ,
-  `idFranquicia` INT NOT NULL ,
-  `nombre` VARCHAR(45) NOT NULL ,
-  `movil` TINYINT(1) NOT NULL DEFAULT 0 ,
-  `estado` VARCHAR(45) NOT NULL ,
-  `delegacion` VARCHAR(45) NULL ,
-  `colonia` VARCHAR(45) NOT NULL ,
-  `calle` VARCHAR(45) NOT NULL ,
-  `numExt` VARCHAR(15) NOT NULL ,
-  `numInt` VARCHAR(15) NULL ,
-  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (`idsucursal`) ,
-  INDEX `fk_sucursal_franquicia_idx` (`idFranquicia` ASC) ,
-  CONSTRAINT `fk_sucursal_franquicia`
-    FOREIGN KEY (`idFranquicia` )
-    REFERENCES `mrburguer`.`franquicia` (`idFranquicia` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -177,40 +219,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mrburguer`.`empleado`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mrburguer`.`empleado` (
-  `idEmpleado` INT NOT NULL AUTO_INCREMENT ,
-  `idSucursal` INT NOT NULL ,
-  `username` VARCHAR(25) NOT NULL ,
-  `password` VARCHAR(64) NOT NULL ,
-  `nombre` VARCHAR(45) NOT NULL ,
-  `apellidoPaterno` VARCHAR(20) NOT NULL ,
-  `apellidoMaterno` VARCHAR(20) NULL ,
-  `fechaIngreso` DATE NOT NULL ,
-  `imagen` VARCHAR(50) NULL ,
-  `telefono` VARCHAR(20) NULL ,
-  `correoElectronico` VARCHAR(45) NULL ,
-  `puesto` VARCHAR(20) NOT NULL ,
-  `estado` VARCHAR(45) NOT NULL ,
-  `delegacion` VARCHAR(45) NOT NULL ,
-  `colonia` VARCHAR(45) NULL ,
-  `calle` VARCHAR(45) NOT NULL ,
-  `numExt` VARCHAR(15) NOT NULL ,
-  `numInt` VARCHAR(15) NULL ,
-  `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (`idEmpleado`) ,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
-  INDEX `fk_empleado_sucursal_idx` (`idSucursal` ASC) ,
-  CONSTRAINT `fk_empleado_sucursal`
-    FOREIGN KEY (`idSucursal` )
-    REFERENCES `mrburguer`.`sucursal` (`idsucursal` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mrburguer`.`cliente`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mrburguer`.`cliente` (
@@ -236,7 +244,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mrburguer`.`venta` (
   `idventa` INT NOT NULL AUTO_INCREMENT ,
-  `idCliente` INT NOT NULL ,
+  `idCliente` INT NULL ,
   `idEmpleado` INT NOT NULL ,
   `fecha` DATETIME NOT NULL ,
   `montoTotal` DECIMAL(11,2) NULL ,
@@ -268,6 +276,7 @@ CREATE  TABLE IF NOT EXISTS `mrburguer`.`producto` (
   `nombre` VARCHAR(45) NOT NULL ,
   `precioActual` DECIMAL(11,2) NOT NULL ,
   `isActive` TINYINT(1) NOT NULL DEFAULT 1 ,
+  `imagen` VARCHAR(50) NULL ,
   PRIMARY KEY (`idproducto`) ,
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
@@ -444,6 +453,8 @@ CREATE  TABLE IF NOT EXISTS `mrburguer`.`empleadoPermiso` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+USE `mrburguer` ;
+
 INSERT INTO permiso (idpermiso, nombre) VALUES 
   ('1', 'main'),
   ('2', 'Inventario Central'), 
@@ -470,9 +481,6 @@ INSERT INTO empleadoPermiso (idEmpleado, idPermiso) VALUES
   ("1", "5"),
   ("1", "6"),
   ("1", "7");
-
-USE `mrburguer` ;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
