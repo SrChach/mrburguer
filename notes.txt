@@ -5,13 +5,7 @@ Añadido campo idEmpleado a Compra
 
 Cambiar contraseña a usuario, permitido. Campo extra en contra
 
-
-
-
-
-Cambios a subir: 
-MODELOS:
-	Compra.php
-
-AJAX:
-	Compra.php
+CONFLICT (content): Merge conflict in vistas/venta.php
+CONFLICT (modify/delete): vistas/scripts/venta.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/venta.js left in tree.
+CONFLICT (modify/delete): vistas/scripts/producto.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/producto.js left in tree.
+CONFLICT (modify/delete): vistas/scripts/acceso.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/acceso.js left in tree.

@@ -51,4 +51,4 @@
 	require 'footer.php';
 ?>
 
-<script type="text/javascript" src="scripts/ies.js"></script>
+<script type="text/javascript" src="../public/js/ies.js"></script>

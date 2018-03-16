@@ -152,9 +152,10 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="scripts/venta.js"></script>
-
 <?php 
 	}
 	ob_end_flush();
 ?>
+
+<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
+<script type="text/javascript" src="../public/js/venta.js"></script>
