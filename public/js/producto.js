@@ -8,7 +8,7 @@ const datos = (function(){
 	return {
 		getElementos(funcion){
 			return elementos[funcion];
-		}	
+		}
 	}
 })();
 

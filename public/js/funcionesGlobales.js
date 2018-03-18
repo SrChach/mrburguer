@@ -26,11 +26,20 @@ function iniciar(){
 function limpiar(){
 	datos.getElementos("limpiar").forEach(e => $(e).val(""));
 
-	if(vista === "empleado"){
-		return $("#imagenactual").attr("src", "");
-	}
-	if(vista === "producto"){
-		return $("#mostrarimagen").attr("src", "");
+	switch(vista){
+		case "empleado":
+			$("#imagenactual").attr("src", "");
+			break;
+		case "producto":
+			$("#mostrarimagen").attr("src", "");
+			break;
+		case "limpiar":
+			$("#pagoTarjeta").selectpicker('refresh');
+			$("#total").text("$ 0.00");
+			$(".filas").remove();
+			i=0;
+			productos=0;
+			break;
 	}
 }
 
@@ -41,10 +50,11 @@ function cancelarform(){
 
 //Asigna los valores enviados por las llamadas a AJAX y los pone en cada uno de los input
 function showOne(id){
-	var nombreParam = datos.getElementos("parametro");
+	var paramAJAX = {};
+	paramAJAX[datos.getElementos("parametro")] = id;
 	$.post(
 		"../ajax/"+vista+".php?op=show",
-		{nombreParam: id}, 
+		paramAJAX,
 		function(data, status){
 			data = JSON.parse(data);
 			mostrarform(true);
@@ -62,6 +72,9 @@ function showOne(id){
 			break;
 		case "sucursal":
 			showOneSucursal();
+			break;
+		case "venta":
+			showOneVenta(id);
 			break;
 	}
 }
@@ -91,12 +104,13 @@ function listar(){
 }
 
 function unactivate(id){
-	var nombreParam = datos.getElementos("parametro");
+	var paramAJAX = {};
+	paramAJAX[datos.getElementos("parametro")] = id;
 	bootbox.confirm("¿Desea desactivar el "+vista+"?", function(result){
 		if(result){
 			$.post(
 				"../ajax/"+vista+".php?op=unactivate",
-				{nombreParam: id},
+				paramAJAX,
 				function(e){
 					bootbox.alert(e);
 					tabla.ajax.reload();
@@ -106,12 +120,13 @@ function unactivate(id){
 }
 
 function activate(id){
-	var nombreParam = datos.getElementos("parametro");
+	var paramAJAX = {};
+	paramAJAX[datos.getElementos("parametro")] = id;
 	bootbox.confirm("¿Desea activar el "+vista+"?", function(result){
 		if(result){
 			$.post(
 				"../ajax/producto.php?op=activate",
-				{nombreParam: id},
+				paramAJAX,
 				function(e){
 					bootbox.alert(e);
 					tabla.ajax.reload();
@@ -135,6 +150,9 @@ function saveEdit(e){
 		success: function(datos){
 			bootbox.alert(datos);
 			mostrarform(false);
+			if(vista === "venta"){
+				return listar();
+			}
 			tabla.ajax.reload();
 		}
 
