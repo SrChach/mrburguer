@@ -61,7 +61,7 @@
 											echo '<img src="../files/empleados/'.$_SESSION['imagen'].'" class="user-image" alt="User Image">';
 										}
 									?>
-									<span class="hidden-xs"><?php echo $_SESSION['nombre'] . ' - ' . $_SESSION['username']; ?></span>
+									<span class="hidden-xs"><?php echo $_SESSION['nomPila'] . ' - ' . $_SESSION['username']; ?></span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->

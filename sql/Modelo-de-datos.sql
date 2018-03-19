@@ -84,4 +84,24 @@ create table ProductoVendido(
 insert into franquicia(idFranquicia, nombre, isActive) VALUES("1","Control", "1");
 insert into sucursal (idSucursal, nombre, isMobile, idFranquicia) VALUES(1, "Control", 0, 1);
 insert into empleado (idEmpleado, userName, password, nomPila, apPaterno, apMaterno, fechaIngreso, imagen, isActive, idSucursal)
-values (1, "administrador", "98b29fd504669eae1fa7028de99d7d34a1dca7ac8ff6b46d87641203ca7cde3a", "César Quintero", "César", "César Quintero", current_date, "", 1, 1);
+values (1, "administrador", "98b29fd504669eae1fa7028de99d7d34a1dca7ac8ff6b46d87641203ca7cde3a", "César", "Quintero", "García", current_date, "", 1, 1);
+
+
+INSERT INTO permiso (idpermiso, nombre) VALUES 
+  ('1', 'main'),
+  ('2', 'Inventario Central'), 
+  ('3', 'Sucursales'), 
+  ('4', 'Control de Empleados'), 
+  ('5', 'Empleado'), 
+  ('6', 'Productos'), 
+  ('7', 'Social Media');
+  
+  
+INSERT INTO empleadoPermiso (idEmpleado, idPermiso) VALUES
+  (1, "1"),
+  (1, "2"),
+  (1, "3"),
+  (1, "4"),
+  (1, "5"),
+  (1, "6"),
+  (1, "7");

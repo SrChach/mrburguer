@@ -8,8 +8,8 @@ Class Empleado{
 
 	}
 
-	public function insertar($idSucursal, $username, $password, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $permisos){
-		$sql =  "INSERT INTO empleado (idSucursal, username, password, nombre, apellidoPaterno, apellidoMaterno, fechaIngreso, imagen, telefono, correoElectronico, puesto, estado, delegacion, colonia, calle, numExt, numInt, isActive) VALUES ('$idSucursal', '$username', '$password', '$nombre', '$apellidoPaterno', '$apellidoMaterno', '$fechaIngreso', '$imagen', '$telefono', '$correoElectronico', '$puesto', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt','1')";
+	public function insertar($idSucursal, $userName, $password, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $permisos){
+		$sql =  "INSERT INTO empleado (idSucursal, userName, password, nomPila, apPaterno, apMaterno, fechaIngreso, imagen, isActive) VALUES ('$idSucursal', '$userName', '$password', '$nomPila', '$apPaterno', '$apMaterno', '$fechaIngreso', '$imagen', '1')";
 		
 		$idNuevoEmpleado = ejecutarConsultaRetornarID($sql);
 		$numPermisos = 0;
@@ -25,8 +25,8 @@ Class Empleado{
 
 	}
 
-	public function editar($idEmpleado, $idSucursal, $username, $password, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $permisos){
-		$sql = "UPDATE empleado SET idSucursal='$idSucursal', username='$username', password='$password', nombre='$nombre', apellidoPaterno='$apellidoPaterno', apellidoMaterno='$apellidoMaterno', fechaIngreso='$fechaIngreso', imagen='$imagen', telefono='$telefono', correoElectronico='$correoElectronico', puesto='$puesto', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idEmpleado='$idEmpleado'";
+	public function editar($idEmpleado, $idSucursal, $userName, $password, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $permisos){
+		$sql = "UPDATE empleado SET idSucursal='$idSucursal', userName='$userName', password='$password', nomPila='$nomPila', apPaterno='$apPaterno', apMaterno='$apMaterno', fechaIngreso='$fechaIngreso', imagen='$imagen' WHERE idEmpleado='$idEmpleado'";
 		ejecutarConsulta($sql);
 		
 		//Eliminamos todos los permisos para volverlos a registrar
@@ -67,7 +67,7 @@ Class Empleado{
 	}
 
 	public function listar(){
-		$sql = "SELECT MP.idEmpleado, SUC.nombre as sucursal, MP.username, MP.password, MP.nombre, MP.apellidoPaterno, MP.apellidoMaterno, MP.fechaIngreso, MP.imagen, MP.telefono, MP.correoElectronico, MP.puesto, MP.estado, MP.delegacion, MP.colonia, MP.calle, MP.numExt, MP.numInt, MP.isActive FROM empleado MP join sucursal SUC on MP.idSucursal=SUC.idSucursal";
+		$sql = "SELECT MP.idEmpleado, SUC.nombre as sucursal, MP.userName, MP.nomPila, MP.apPaterno, MP.apMaterno, MP.fechaIngreso, MP.imagen, MP.isActive FROM empleado MP join sucursal SUC on MP.idSucursal=SUC.idSucursal";
 		return ejecutarConsulta($sql);
 	}
 
@@ -77,7 +77,7 @@ Class Empleado{
 	}
 
 	public function verificar($username, $password){
-		$sql = "SELECT idEmpleado, username, nombre, imagen, idSucursal FROM empleado WHERE (username = '$username') AND (password = '$password') AND isActive = '1'";
+		$sql = "SELECT idEmpleado, userName, nomPila, apPaterno, apMaterno, fechaIngreso, imagen, idSucursal FROM empleado WHERE (userName = '$username') AND (password = '$password') AND isActive = '1'";
 		return ejecutarConsulta($sql);
 	}
 

@@ -1,0 +1,14 @@
+img{
+	width: 120px;
+	height: 120px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#iniciar{
+	background-color: #FF8C00;
+	color: white;
+}
+.input-group-addon{
+	background-color: #FF8C00;
+	color: white;
+}

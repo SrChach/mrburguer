@@ -29,8 +29,3 @@ function mostrarform(flag){
 		$("#titulo").html("Productos manejados");
 	}
 }
-
-function showOneProducto(imagen){
-	$("#mostrarimagen").show();
-	$("#mostrarimagen").attr("src", "../files/productos/"+imagen);
-}

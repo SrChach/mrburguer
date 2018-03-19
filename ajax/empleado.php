@@ -6,22 +6,13 @@ $empleado = new Empleado();
 
 $idEmpleado = isset($_POST["idEmpleado"])? limpiarCadena($_POST["idEmpleado"]) : "";
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
-$username = isset($_POST["username"])? limpiarCadena($_POST["username"]) : "";
+$userName = isset($_POST["userName"])? limpiarCadena($_POST["userName"]) : "";
 $password = isset($_POST["password"])? limpiarCadena($_POST["password"]) : "";
-$nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
-$apellidoPaterno = isset($_POST["apellidoPaterno"])? limpiarCadena($_POST["apellidoPaterno"]) : "";
-$apellidoMaterno = isset($_POST["apellidoMaterno"])? limpiarCadena($_POST["apellidoMaterno"]) : "";
+$nomPila = isset($_POST["nomPila"])? limpiarCadena($_POST["nomPila"]) : "";
+$apPaterno = isset($_POST["apPaterno"])? limpiarCadena($_POST["apPaterno"]) : "";
+$apMaterno = isset($_POST["apMaterno"])? limpiarCadena($_POST["apMaterno"]) : "";
 $fechaIngreso = isset($_POST["fechaIngreso"])? limpiarCadena($_POST["fechaIngreso"]) : "";
 $imagen = isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]) : "";
-$telefono = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]) : "";
-$correoElectronico = isset($_POST["correoElectronico"])? limpiarCadena($_POST["correoElectronico"]) : "";
-$puesto = isset($_POST["puesto"])? limpiarCadena($_POST["puesto"]) : "";
-$estado = isset($_POST["estado"])? limpiarCadena($_POST["estado"]) : "";
-$delegacion = isset($_POST["delegacion"])? limpiarCadena($_POST["delegacion"]) : "";
-$colonia = isset($_POST["colonia"])? limpiarCadena($_POST["colonia"]) : "";
-$calle = isset($_POST["calle"])? limpiarCadena($_POST["calle"]) : "";
-$numExt = isset($_POST["numExt"])? limpiarCadena($_POST["numExt"]) : "";
-$numInt = isset($_POST["numInt"])? limpiarCadena($_POST["numInt"]) : "";
 
 switch ($_GET["op"]){
 	case 'saveEdit':
@@ -37,10 +28,10 @@ switch ($_GET["op"]){
 		$hashpass = hash("SHA256", $password);	
 
 		if(empty($idEmpleado)){
-			$rspta = $empleado->insertar($idSucursal, $username, $hashpass, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $_POST["permiso"]);
+			$rspta = $empleado->insertar($idSucursal, $userName, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
 			echo $rspta ? "empleado guardado" : "no se pudieron registrar todos los datos del empleado";
 		} else {
-			$rspta = $empleado->editar($idEmpleado, $idSucursal, $username, $hashpass, $nombre, $apellidoPaterno, $apellidoMaterno, $fechaIngreso, $imagen, $telefono, $correoElectronico, $puesto, $estado, $delegacion, $colonia, $calle, $numExt, $numInt, $_POST["permiso"]);
+			$rspta = $empleado->editar($idEmpleado, $idSucursal, $userName, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
 			echo $rspta ? "empleado editado" : "empleado no se pudo editar";
 		}
 		break;
@@ -66,22 +57,14 @@ switch ($_GET["op"]){
 		while($reg = $rspta->fetch_object()){
 			$data[] = Array(
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idEmpleado.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idEmpleado.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->sucursal,
-				"2" => $reg->nombre,
-				"3" => $reg->apellidoPaterno,
-				"4" => $reg->apellidoMaterno,
+				"1" => $reg->userName,
+				"2" => $reg->nomPila,
+				"3" => $reg->apPaterno,
+				"4" => $reg->apMaterno,
 				"5" => $reg->fechaIngreso,
-				"6" => $reg->telefono,
-				"7" => $reg->correoElectronico,
-				"8" => $reg->puesto,
-				"9" => $reg->estado,
-				"10" => $reg->delegacion,
-				"11" => $reg->colonia,
-				"12" => $reg->calle,
-				"13" => $reg->numExt,
-				"14" => $reg->numInt,
-				"15" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
-				"16" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				"6" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
+				"7" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>',
+				"8" => $reg->sucursal
 			);
 		}
 		$results = array(
@@ -130,8 +113,8 @@ switch ($_GET["op"]){
 		}
 		if(isset($oa)){
 			$_SESSION["idEmpleado"]=$oa->idEmpleado;
-			$_SESSION["username"] = $oa->username;
-			$_SESSION["nombre"]=$oa->nombre;
+			$_SESSION["username"] = $oa->userName;
+			$_SESSION["nomPila"]=$oa->nomPila;
 			$_SESSION["imagen"]=$oa->imagen;
 			$_SESSION["idSucursal"]=$oa->idSucursal;
 

@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idEmpleado", "#idSucursal", "#username", "#password", "#nombre", "#apellidoPaterno", "#apellidoMaterno", "#fechaIngreso", "#mostrarimagen", "#imagen", "#telefono", "#correoElectronico", "#puesto", "#estado", "#delegacion", "#colonia", "#calle", "#numExt", "#numInt"],
-		showOne: ["idEmpleado", "idSucursal", "username", "password", "nombre", "apellidoPaterno", "apellidoMaterno", "fechaIngreso", "telefono", "correoElectronico", "puesto", "estado", "delegacion", "colonia", "calle", "numExt", "numInt"],
+		limpiar: ["#idEmpleado", "#idSucursal", "#userName", "#password", "#nomPila", "#apPaterno", "#apMaterno", "#fechaIngreso", "#mostrarimagen", "#imagen", "#estado"],
+		showOne: ["idEmpleado", "idSucursal", "userName", "nomPila", "apPaterno", "apMaterno", "fechaIngreso", "estado"],
 		parametro: "idEmpleado"
 	}
 
@@ -19,10 +19,6 @@ $.post("../ajax/empleado.php?op=selectSucursal", function(r){
 });
 
 $("#mostrarimagen").hide();
-
-$.post("../ajax/empleado.php?op=listPermiso&uid=", function(r){
-	$("#permisos").html(r);
-});
 
 function mostrarform(flag){
 	limpiar();
@@ -51,10 +47,9 @@ function borrar(idEmpleado){
 	});
 }
 
-function showOneEmpleado(){
+function showOneEmpleado(idEmpleado){
 	$("#idSucursal").selectpicker("refresh");
 	$("#mostrarimagen").show();
-	$("#mostrarimagen").attr("src", "../files/empleados/"+data.imagen);
 
 	$.post("../ajax/empleado.php?op=listPermiso&uid="+idEmpleado, function(r){
 		$("#permisos").html(r);

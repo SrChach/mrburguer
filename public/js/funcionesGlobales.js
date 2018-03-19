@@ -1,18 +1,7 @@
 "use strict";
 
 var tabla = null;
-
-/*
-e => $(e).val()
-
-es lo mismo que 
-
-function(e){
-	$(e).val()
-}
-*/
-
-const vista = (window.location.href).match(/\w+(?=\.php)/);
+const vista = (window.location.href).match(/\w+(?=\.php)/)[0];
 
 function iniciar(){
 	mostrarform(false);
@@ -60,7 +49,11 @@ function showOne(id){
 			mostrarform(true);
 			$("#imagenactual").val(data.imagen);
 			if(vista === "producto"){
-				showOneProducto(data.imagen);
+				$("#mostrarimagen").show();
+				$("#mostrarimagen").attr("src", "../files/productos/"+imagen);
+			}
+			if(vista === "empleado"){
+				$("#mostrarimagen").attr("src", "../files/empleados/"+data.imagen);
 			}
 			datos.getElementos("showOne").forEach(e => $("#"+e).val(data[e]));
 	});
@@ -68,7 +61,7 @@ function showOne(id){
 	//Casos particulares
 	switch(vista){
 		case "empleado":
-			showOneEmpleado();
+			showOneEmpleado(id);
 			break;
 		case "sucursal":
 			showOneSucursal();
@@ -125,7 +118,7 @@ function activate(id){
 	bootbox.confirm("¿Desea activar el "+vista+"?", function(result){
 		if(result){
 			$.post(
-				"../ajax/producto.php?op=activate",
+				"../ajax/"+vista+".php?op=activate",
 				paramAJAX,
 				function(e){
 					bootbox.alert(e);
