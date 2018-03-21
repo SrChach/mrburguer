@@ -18,6 +18,7 @@ function limpiar(){
 	switch(vista){
 		case "empleado":
 			$("#imagenactual").attr("src", "");
+			$("#mostrarimagen").attr("src", "");
 			break;
 		case "producto":
 			$("#mostrarimagen").attr("src", "");
