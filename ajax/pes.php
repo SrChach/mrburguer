@@ -29,22 +29,23 @@ switch ($_GET["op"]){
 			}
 			$rspta = $pes->listar($_GET["SUC"]);
 			$data = Array();
-			while($reg = $rspta->fetch_object()){
-				if(is_null($reg->idproductoEnSucursal)){
-					$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idProducto.','.$reg->idSucursal.')">Añadir al menú</button>';
-				} else {
-					if($reg->isActive==1){
-						$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idproductoEnSucursal.')">Quitar del menú</button>';
+			if($rspta != false)
+				while($reg = $rspta->fetch_object()){
+					if(is_null($reg->idproductoEnSucursal)){
+						$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idProducto.','.$reg->idSucursal.')">Añadir al menú</button>';
 					} else {
-						$temp = '<button class="btn btn-success" onclick="activate('.$reg->idproductoEnSucursal.')">Añadir al menú</button>';
+						if($reg->isActive==1){
+							$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idproductoEnSucursal.')">Quitar del menú</button>';
+						} else {
+							$temp = '<button class="btn btn-success" onclick="activate('.$reg->idproductoEnSucursal.')">Añadir al menú</button>';
+						}
 					}
+					$data[] = array(
+						"0" => $reg->nombre,
+						"1" => $reg->precioActual,
+						"2" => $temp
+					);
 				}
-				$data[] = array(
-					"0" => $reg->nombre,
-					"1" => $reg->precioActual,
-					"2" => $temp
-				);
-			}
 			$results = array(
 				"sEcho" => 1,
 				"iTotalRecords" => count($data),

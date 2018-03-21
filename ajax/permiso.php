@@ -16,11 +16,12 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $permiso->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				"0" => $reg->nombre
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

@@ -60,7 +60,7 @@
 														</div>
 														<div class="form-group">
 															<label for="apMaterno">Apellido materno</label>
-															<input class="form-control" type="text" name="apMaterno" id="apMaterno" maxlength="20" required/>
+															<input class="form-control" type="text" name="apMaterno" id="apMaterno" maxlength="20"/>
 														</div>
 														<div class="form-group">
 															<label for="username">Nombre de usuario</label>

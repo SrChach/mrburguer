@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "../modelos/Compra.php";
 
 $compra = new compra();
@@ -32,23 +33,23 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $compra->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = Array(
-				"0" => $reg->idcompra,
-				"2" => $reg->empresa,
-				"3" => $reg->fecha,
-				"4" => $reg->nombre,
-				"5" => $reg->apellidoPaterno,
-				"6" => $reg->apellidoMaterno,
-				"7" => $reg->monto,
-				"8" => $reg->iva
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = Array(
+					"0" => $reg->idcompra,
+					"2" => $reg->empresa,
+					"3" => $reg->fecha,
+					"4" => $reg->nombre,
+					"5" => $reg->apellidoPaterno,
+					"6" => $reg->apellidoMaterno,
+					"7" => $reg->monto,
+					"8" => $reg->iva
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
 			"iTotalDisplayRecords" => count($data),
-			/*Total de registros a viualizar*/
 			"aaData" => $data
 		);
 		echo json_encode($results);
@@ -64,20 +65,19 @@ switch ($_GET["op"]){
 	case 'consultaCompra' : 
 		$rspta = $compra->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = Array(
-				/*$reg->idcompra*/
-				"0" => $reg->idcompra,
-				"2" => $reg->empresa,
-				"3" => $reg->fecha,
-				"4" => $reg->nombre,
-				"5" => $reg->apellidoPaterno,
-				"6" => $reg->apellidoMaterno,
-				"7" => $reg->monto,
-				"8" => $reg->iva
-			);
-
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = Array(
+					"0" => $reg->idcompra,
+					"2" => $reg->empresa,
+					"3" => $reg->fecha,
+					"4" => $reg->nombre,
+					"5" => $reg->apellidoPaterno,
+					"6" => $reg->apellidoMaterno,
+					"7" => $reg->monto,
+					"8" => $reg->iva
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

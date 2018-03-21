@@ -8,14 +8,14 @@ Class Sucursal{
 
 	}
 
-	public function insertar($nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
-		$sql = "INSERT INTO sucursal (nombre, idFranquicia, movil, estado, delegacion, colonia, calle, numExt, numInt, isActive) VALUES 
-		('$nombre', '$idFranquicia', '$movil', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt', '1')";
+	public function insertar($idFranquicia, $nombre, $isMobile, $telefono){
+		$sql = "INSERT INTO sucursal (idFranquicia, idUbicacion, nombre, isMobile, telefono, isActive) VALUES 
+		('$nombre', '$idFranquicia', '$isMobile', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt', '1')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idsucursal, $nombre, $idFranquicia, $movil, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
-		$sql = "UPDATE sucursal SET nombre='$nombre', idFranquicia='$idFranquicia', movil='$movil', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idsucursal='$idsucursal'";
+	public function editar($idsucursal, $nombre, $idFranquicia, $isMobile, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
+		$sql = "UPDATE sucursal SET nombre='$nombre', idFranquicia='$idFranquicia', isMobile='$isMobile', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idsucursal='$idsucursal'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -35,7 +35,7 @@ Class Sucursal{
 	}
 
 	public function listar(){
-		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.movil, sucursal.estado, sucursal.delegacion, sucursal.colonia, sucursal.calle, sucursal.numExt, sucursal.numInt, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
+		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.isMobile, sucursal.estado, sucursal.delegacion, sucursal.colonia, sucursal.calle, sucursal.numExt, sucursal.numInt, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
 		return ejecutarConsulta($sql);
 	}
 

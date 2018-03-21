@@ -67,19 +67,20 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $venta->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>' ,
-				"1" => $reg->fecha,
-				"2" => $reg->nombreEmpleado,
-				"3" => ($reg->nombreCliente)? $reg->nombreCliente : '-',
-				"4" => $reg->montoTotal,
-				"5" => $reg->descuentoActual,
-				"6" => $reg->iva,
-				"7" => ($reg->pagoTarjeta=='0') ? "Efectivo" : "Tarjeta",
-				"8" => ($reg->status=='Entregado') ? '<span class="label bg-green">Entregado<span>':'<span class="label bg-red">Devuelto<span>' 
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>' ,
+					"1" => $reg->fecha,
+					"2" => $reg->nombreEmpleado,
+					"3" => ($reg->nombreCliente)? $reg->nombreCliente : '-',
+					"4" => $reg->montoTotal,
+					"5" => $reg->descuentoActual,
+					"6" => $reg->iva,
+					"7" => ($reg->pagoTarjeta=='0') ? "Efectivo" : "Tarjeta",
+					"8" => ($reg->status=='Entregado') ? '<span class="label bg-green">Entregado<span>':'<span class="label bg-red">Devuelto<span>' 
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

@@ -39,9 +39,9 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $sucursal->listar();
 		$data = Array();
+		if($rspta != false)
 		while($reg = $rspta->fetch_object()){
 			$data[] = Array(
-				/*$reg->idsucursal*/
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idsucursal.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idsucursal.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idsucursal.')"><i class="fa fa-check"></i></button>',
 				"1" => '<a href="menu.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Menú</button></a>',
 				"2" => '<a href="ies.php?op=list&SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Inventario</button></a>',

@@ -39,23 +39,24 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $cliente->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idcliente.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idcliente.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idcliente.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idcliente.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->nombre,
-				"2" => $reg->apellidoPaterno,
-				"3" => $reg->apellidoMaterno,
-				"4" => $reg->fechaNacimiento,
-				"5" => $reg->fechaRegistro,
-				"6" => $reg->nivel,
-				"7" => $reg->cuentaFB,
-				"8" => $reg->cuentaInstagram,
-				"9" => $reg->cuentaTwitter,
-				"10" => $reg->correoElectronico,
-				"11" => $reg->telefono,
-				"12" => $reg->isActive ?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idcliente.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idcliente.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idcliente.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idcliente.')"><i class="fa fa-check"></i></button>',
+					"1" => $reg->nombre,
+					"2" => $reg->apellidoPaterno,
+					"3" => $reg->apellidoMaterno,
+					"4" => $reg->fechaNacimiento,
+					"5" => $reg->fechaRegistro,
+					"6" => $reg->nivel,
+					"7" => $reg->cuentaFB,
+					"8" => $reg->cuentaInstagram,
+					"9" => $reg->cuentaTwitter,
+					"10" => $reg->correoElectronico,
+					"11" => $reg->telefono,
+					"12" => $reg->isActive ?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

@@ -32,14 +32,14 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $franquicia->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				/* $reg->idFranquicia */
-				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idFranquicia.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idFranquicia.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idFranquicia.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idFranquicia.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->nombre,
-				"2" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idFranquicia.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idFranquicia.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idFranquicia.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idFranquicia.')"><i class="fa fa-check"></i></button>',
+					"1" => $reg->nombre,
+					"2" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

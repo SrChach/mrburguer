@@ -39,21 +39,22 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $proveedor->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idproveedor.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idproveedor.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idproveedor.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idproveedor.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->nombreEmpresa,
-				"2" => $reg->correoElectronico,
-				"3" => $reg->telefono,
-				"4" => $reg->estado,
-				"5" => $reg->delegacion,
-				"6" => $reg->colonia,
-				"7" => $reg->calle,
-				"8" => $reg->numExt,
-				"9" => $reg->numInt,
-				"10" => $reg->isActive?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idproveedor.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idproveedor.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idproveedor.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idproveedor.')"><i class="fa fa-check"></i></button>',
+					"1" => $reg->nombreEmpresa,
+					"2" => $reg->correoElectronico,
+					"3" => $reg->telefono,
+					"4" => $reg->estado,
+					"5" => $reg->delegacion,
+					"6" => $reg->colonia,
+					"7" => $reg->calle,
+					"8" => $reg->numExt,
+					"9" => $reg->numInt,
+					"10" => $reg->isActive?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

@@ -54,19 +54,21 @@ switch ($_GET["op"]){
 	case 'list':
 		$rspta = $empleado->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = Array(
-				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idEmpleado.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idEmpleado.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->username,
-				"2" => $reg->nomPila,
-				"3" => $reg->apPaterno,
-				"4" => $reg->apMaterno,
-				"5" => $reg->fechaIngreso,
-				"6" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
-				"7" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>',
-				"8" => $reg->sucursal
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$temp = ($reg->isActive)?'&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idEmpleado.')"><i class="fa fa-close"></i></button>' : '&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idEmpleado.')"><i class="fa fa-check"></i></button>';
+				$data[] = Array(
+					"0" => ($reg->idEmpleado == 1)? '<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : '<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>'.$temp,
+					"1" => $reg->username,
+					"2" => $reg->nomPila,
+					"3" => $reg->apPaterno,
+					"4" => $reg->apMaterno,
+					"5" => $reg->fechaIngreso,
+					"6" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
+					"7" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>',
+					"8" => $reg->sucursal
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
@@ -88,7 +90,6 @@ switch ($_GET["op"]){
 		$permiso = new Permiso();
 		$rspta = $permiso->listar();
 
-		//Obtenemos los permisos asignados al usuario
 		$id = $_GET["uid"];
 		$marcados = $empleado->listarMarcados($id);
 		$permisosAsignados = array();
@@ -140,7 +141,6 @@ switch ($_GET["op"]){
 		break;
 
 	case 'exit':
-		/*Limpiamos las variables*/
 		session_unset();
 		session_destroy();
 		header("location: ../index.php");
@@ -149,26 +149,27 @@ switch ($_GET["op"]){
 	case 'consultaEmpleado':
 		$rspta = $empleado->listar();
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = Array(
-				"0" => $reg->sucursal,
-				"1" => $reg->nombre,
-				"2" => $reg->apellidoPaterno,
-				"3" => $reg->apellidoMaterno,
-				"4" => $reg->fechaIngreso,
-				"5" => $reg->telefono,
-				"6" => $reg->correoElectronico,
-				"7" => $reg->puesto,
-				"8" => $reg->estado,
-				"9" => $reg->delegacion,
-				"10" => $reg->colonia,
-				"11" => $reg->calle,
-				"12" => $reg->numExt,
-				"13" => $reg->numInt,
-				"14" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
-				"15" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = Array(
+					"0" => $reg->sucursal,
+					"1" => $reg->nombre,
+					"2" => $reg->apellidoPaterno,
+					"3" => $reg->apellidoMaterno,
+					"4" => $reg->fechaIngreso,
+					"5" => $reg->telefono,
+					"6" => $reg->correoElectronico,
+					"7" => $reg->puesto,
+					"8" => $reg->estado,
+					"9" => $reg->delegacion,
+					"10" => $reg->colonia,
+					"11" => $reg->calle,
+					"12" => $reg->numExt,
+					"13" => $reg->numInt,
+					"14" => "<img src='../files/empleados/".$reg->imagen."' height='50px' width='50px'/>",
+					"15" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				);
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
