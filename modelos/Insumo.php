@@ -8,13 +8,13 @@ Class Insumo {
 
 	}
 
-	public function insertar($nombre, $marca, $existencias, $piezasContiene, $precioPromedio){
-		$sql =  "INSERT INTO insumo (nombre, marca, existencias, piezasContiene, precioPromedio, isActive) VALUES ('$nombre', '$marca', '$existencias', '$piezasContiene', '$precioPromedio', '1')";
+	public function insertar($nombre, $existencias, $precioPromedio){
+		$sql =  "INSERT INTO insumo (nombre, existencias, precioPromedio, isActive) VALUES ('$nombre', '$existencias', '$precioPromedio', '1')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idinsumo, $nombre, $marca, $existencias, $piezasContiene, $precioPromedio){
-		$sql = "UPDATE insumo SET nombre='$nombre', marca='$marca', existencias='$existencias', piezasContiene='$piezasContiene', precioPromedio='$precioPromedio' WHERE idinsumo='$idinsumo'";
+	public function editar($idinsumo, $nombre, $existencias, $precioPromedio){
+		$sql = "UPDATE insumo SET nombre='$nombre', existencias='$existencias', precioPromedio='$precioPromedio' WHERE idinsumo='$idinsumo'";
 		return ejecutarConsulta($sql);
 	}
 

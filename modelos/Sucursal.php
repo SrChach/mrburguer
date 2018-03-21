@@ -10,12 +10,12 @@ Class Sucursal{
 
 	public function insertar($idFranquicia, $nombre, $isMobile, $telefono){
 		$sql = "INSERT INTO sucursal (idFranquicia, idUbicacion, nombre, isMobile, telefono, isActive) VALUES 
-		('$nombre', '$idFranquicia', '$isMobile', '$estado', '$delegacion', '$colonia', '$calle', '$numExt', '$numInt', '1')";
+		('$idFranquicia', null, '$nombre', '$isMobile', '$telefono', '1')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function editar($idsucursal, $nombre, $idFranquicia, $isMobile, $estado, $delegacion, $colonia, $calle, $numExt, $numInt){
-		$sql = "UPDATE sucursal SET nombre='$nombre', idFranquicia='$idFranquicia', isMobile='$isMobile', estado='$estado', delegacion='$delegacion', colonia='$colonia', calle='$calle', numExt='$numExt', numInt='$numInt' WHERE idsucursal='$idsucursal'";
+	public function editar($idsucursal, $idFranquicia, $nombre, $isMobile, $telefono){
+		$sql = "UPDATE sucursal SET idFranquicia='$idFranquicia', nombre='$nombre', isMobile='$isMobile', telefono='$telefono' WHERE idsucursal='$idsucursal'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -30,12 +30,12 @@ Class Sucursal{
 	}
 
 	public function mostrar($idsucursal){
-		$sql = "SELECT * FROM sucursal WHERE idsucursal='$idsucursal'";
+		$sql = "SELECT idsucursal, idFranquicia, nombre, isMobile, telefono FROM sucursal WHERE idsucursal='$idsucursal'";
 		return consultarFila($sql);
 	}
 
 	public function listar(){
-		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.isMobile, sucursal.estado, sucursal.delegacion, sucursal.colonia, sucursal.calle, sucursal.numExt, sucursal.numInt, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
+		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.isMobile, sucursal.telefono, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
 		return ejecutarConsulta($sql);
 	}
 

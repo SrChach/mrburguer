@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idsucursal", "#nombre", "#idFranquicia", "#movil", "#estado", "#delegacion", "#colonia", "#calle", "#numExt", "#numInt"],
-		showOne: ["idsucursal", "nombre", "idFranquicia", "movil", "estado", "delegacion", "colonia", "calle", "numExt", "numInt"],
+		limpiar: ["#idsucursal", "#nombre", "#idFranquicia", "#isMobile", "#telefono"],
+		showOne: ["idsucursal", "nombre", "idFranquicia", "isMobile" "telefono"],
 		parametro: "idsucursal"
 	}
 
@@ -36,5 +36,5 @@ function mostrarform(flag){
 
 function showOneSucursal(){
 	$("#idFranquicia").selectpicker("refresh");
-	$("#movil").selectpicker("refresh");
+	$("#isMobile").selectpicker("refresh");
 }

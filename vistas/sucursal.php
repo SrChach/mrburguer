@@ -25,12 +25,7 @@
 												<th>Inventario</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
-												<th>Estado</th>
-												<th>Delegacion</th>
-												<th>Colonia</th>
-												<th>Calle</th>
-												<th>numExt</th>
-												<th>numInt</th>
+												<th>telefono</th>
 												<th>Status</th>
 											</thead>
 											<tbody>
@@ -42,12 +37,7 @@
 												<th>Inventario</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
-												<th>Estado</th>
-												<th>Delegacion</th>
-												<th>Colonia</th>
-												<th>Calle</th>
-												<th>numExt</th>
-												<th>numInt</th>
+												<th>telefono</th>
 												<th>Status</th>
 											</tfoot>
 										</table>
@@ -65,34 +55,14 @@
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>Tipo de sucursal(*)</label>
-												<select class="form-control selectpicker" name="movil" id="movil" required>
+												<select class="form-control selectpicker" name="isMobile" id="isMobile" required>
 													<option value="0">Fija</option>
 													<option value="1">Movil</option>
 												</select>
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Estado donde se ubica(*)</label>
-												<input class="form-control" type="text" name="estado" id="estado" maxlength="45" placeholder="Inserte Estado" required/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Delegación:</label>
-												<input class="form-control" type="text" name="delegacion" id="delegacion" maxlength="45" placeholder="Inserte delegacion"/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Colonia(*)</label>
-												<input class="form-control" type="text" name="colonia" id="colonia" maxlength="45" placeholder="Inserte colonia" required/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Calle(*)</label>
-												<input class="form-control" type="text" name="calle" id="calle" maxlength="45" placeholder="Inserte calle" required/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Número Exterior(*)</label>
-												<input class="form-control" type="text" name="numExt" id="numExt" maxlength="15" placeholder="Inserte Número Exterior" required/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Número Interior:</label>
-												<input class="form-control" type="text" name="numInt" id="numInt" maxlength="15" placeholder="Inserte Número Interior"/>
+												<label>Telefono(*)</label>
+												<input class="form-control" type="text" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono"/>
 											</div>
 											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 												<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>

@@ -1,11 +1,16 @@
-Compra/select mal
-Modificar Compra/insumoComprado. una sola vista
 
-Añadido campo idEmpleado a Compra
+Cambiar contraseña a usuario, permitido.
 
-Cambiar contraseña a usuario, permitido. Campo extra en contra
+Empleado
+	(-) permisos innecesarios
+	(+) Corregir problema (no se pueden mandar permisos vacíos)
 
-CONFLICT (content): Merge conflict in vistas/venta.php
-CONFLICT (modify/delete): vistas/scripts/venta.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/venta.js left in tree.
-CONFLICT (modify/delete): vistas/scripts/producto.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/producto.js left in tree.
-CONFLICT (modify/delete): vistas/scripts/acceso.js deleted in fjs-experimental and modified in HEAD. Version HEAD of vistas/scripts/acceso.js left in tree.
+Header
+	(-) Proveedores
+	(-) Compras
+	(-) Social Media
+	(+)Corregir vinculo index2.html[logo]
+
+-- Cambiar todos los sitios donde diga misterburguer por... no sé, administración general? :'v
+
+Nota: Al editar la sucursal, no se carga el teléfono en el formulario. Resolver
