@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idEmpleado", "#idSucursal", "#userName", "#password", "#nomPila", "#apPaterno", "#apMaterno", "#fechaIngreso", "#mostrarimagen", "#imagen", "#estado"],
-		showOne: ["idEmpleado", "idSucursal", "userName", "nomPila", "apPaterno", "apMaterno", "fechaIngreso", "estado"],
+		limpiar: ["#idEmpleado", "#idSucursal", "#username", "#password", "#nomPila", "#apPaterno", "#apMaterno", "#fechaIngreso", "#mostrarimagen", "#imagen", "#estado"],
+		showOne: ["idEmpleado", "idSucursal", "username", "nomPila", "apPaterno", "apMaterno", "fechaIngreso", "estado"],
 		parametro: "idEmpleado"
 	}
 
@@ -28,6 +28,10 @@ function mostrarform(flag){
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
 		$("#titulo").html("Registrar empleado:");
+		$.post("../ajax/empleado.php?op=listPermiso&uid=blablabla", function(r){
+			console.log("")
+			$("#permisos").html(r);
+		});
 	} else {
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
@@ -50,6 +54,8 @@ function borrar(idEmpleado){
 function showOneEmpleado(idEmpleado){
 	$("#idSucursal").selectpicker("refresh");
 	$("#mostrarimagen").show();
+
+	console.log("Hue"+idEmpleado);
 
 	$.post("../ajax/empleado.php?op=listPermiso&uid="+idEmpleado, function(r){
 		$("#permisos").html(r);

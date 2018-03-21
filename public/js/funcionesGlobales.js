@@ -54,15 +54,13 @@ function showOne(id){
 			}
 			if(vista === "empleado"){
 				$("#mostrarimagen").attr("src", "../files/empleados/"+data.imagen);
+				showOneEmpleado(id);
 			}
 			datos.getElementos("showOne").forEach(e => $("#"+e).val(data[e]));
 	});
 
 	//Casos particulares
 	switch(vista){
-		case "empleado":
-			showOneEmpleado(id);
-			break;
 		case "sucursal":
 			showOneSucursal();
 			break;

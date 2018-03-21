@@ -6,7 +6,7 @@ $empleado = new Empleado();
 
 $idEmpleado = isset($_POST["idEmpleado"])? limpiarCadena($_POST["idEmpleado"]) : "";
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
-$userName = isset($_POST["userName"])? limpiarCadena($_POST["userName"]) : "";
+$username = isset($_POST["username"])? limpiarCadena($_POST["username"]) : "";
 $password = isset($_POST["password"])? limpiarCadena($_POST["password"]) : "";
 $nomPila = isset($_POST["nomPila"])? limpiarCadena($_POST["nomPila"]) : "";
 $apPaterno = isset($_POST["apPaterno"])? limpiarCadena($_POST["apPaterno"]) : "";
@@ -28,10 +28,10 @@ switch ($_GET["op"]){
 		$hashpass = hash("SHA256", $password);	
 
 		if(empty($idEmpleado)){
-			$rspta = $empleado->insertar($idSucursal, $userName, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
+			$rspta = $empleado->insertar($idSucursal, $username, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
 			echo $rspta ? "empleado guardado" : "no se pudieron registrar todos los datos del empleado";
 		} else {
-			$rspta = $empleado->editar($idEmpleado, $idSucursal, $userName, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
+			$rspta = $empleado->editar($idEmpleado, $idSucursal, $username, $hashpass, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $_POST["permiso"]);
 			echo $rspta ? "empleado editado" : "empleado no se pudo editar";
 		}
 		break;
@@ -57,7 +57,7 @@ switch ($_GET["op"]){
 		while($reg = $rspta->fetch_object()){
 			$data[] = Array(
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idEmpleado.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idEmpleado.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idEmpleado.')"><i class="fa fa-check"></i></button>',
-				"1" => $reg->userName,
+				"1" => $reg->username,
 				"2" => $reg->nomPila,
 				"3" => $reg->apPaterno,
 				"4" => $reg->apMaterno,
@@ -113,7 +113,7 @@ switch ($_GET["op"]){
 		}
 		if(isset($oa)){
 			$_SESSION["idEmpleado"]=$oa->idEmpleado;
-			$_SESSION["username"] = $oa->userName;
+			$_SESSION["username"] = $oa->username;
 			$_SESSION["nomPila"]=$oa->nomPila;
 			$_SESSION["imagen"]=$oa->imagen;
 			$_SESSION["idSucursal"]=$oa->idSucursal;

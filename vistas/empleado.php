@@ -63,8 +63,8 @@
 															<input class="form-control" type="text" name="apMaterno" id="apMaterno" maxlength="20" required/>
 														</div>
 														<div class="form-group">
-															<label for="userName">Nombre de usuario</label>
-															<input class="form-control" type="text" name="userName" id="userName" maxlength="25" required/>
+															<label for="username">Nombre de usuario</label>
+															<input class="form-control" type="text" name="username" id="username" maxlength="25" required/>
 														</div>
 														<div class="form-group">
 															<label for="password">Contraseña</label>
