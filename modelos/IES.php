@@ -13,18 +13,18 @@ Class IES{
 		return ejecutarConsulta($sql);
 	}
 
-	public function desactivar($idinsumoEnSucursal){
-		$sql = "UPDATE insumoEnSucursal SET isActive='0' WHERE idinsumoEnSucursal='$idinsumoEnSucursal'";
+	public function desactivar($idInsumoEnSucursal){
+		$sql = "UPDATE insumoEnSucursal SET isActive='0' WHERE idInsumoEnSucursal='$idInsumoEnSucursal'";
 		return ejecutarConsulta($sql);
 	}
 
-	public function activar($idinsumoEnSucursal){
-		$sql = "UPDATE insumoEnSucursal SET isActive='1' WHERE idinsumoEnSucursal='$idinsumoEnSucursal'";
+	public function activar($idInsumoEnSucursal){
+		$sql = "UPDATE insumoEnSucursal SET isActive='1' WHERE idInsumoEnSucursal='$idInsumoEnSucursal'";
 		return ejecutarConsulta($sql);
 	}
 
 	public function listar($idSucursal){
-		$sql = "SELECT insumo.nombre, insumo.precioPromedio, IES.cantidad, IES.isActive, '$idSucursal' as idSucursal, insumo.idInsumo, IES.idinsumoEnSucursal FROM insumo left join (SELECT * from insumoEnSucursal where idSucursal='$idSucursal') IES on insumo.idInsumo=IES.idInsumo";
+		$sql = "SELECT insumo.nombre, insumo.precioPromedio, IES.cantidad, IES.isActive, '$idSucursal' as idSucursal, insumo.idInsumo, IES.idInsumoEnSucursal FROM insumo left join (SELECT * from insumoEnSucursal where idSucursal='$idSucursal') IES on insumo.idInsumo=IES.idInsumo";
 			return ejecutarConsulta($sql);
 	}
 

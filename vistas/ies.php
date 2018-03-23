@@ -17,7 +17,6 @@
 												<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 																<thead>
 																	<th>Nombre</th>
-																	<th>Marca</th>
 																	<th>Precio Promedio</th>
 																	<th>Cantidad (en piezas)</th>
 																	<th>Accion</th>
@@ -26,7 +25,6 @@
 																</tbody>
 																<tfoot>
 																	<th>Nombre</th>
-																	<th>Marca</th>
 																	<th>Precio Promedio</th>
 																	<th>Cantidad (en piezas)</th>
 																	<th>Accion</th>

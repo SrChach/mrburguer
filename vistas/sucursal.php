@@ -19,10 +19,10 @@
 								<div class="panel-body table-responsive" id="listadoregistros">
 										<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 											<thead>
-												<th>Acciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+												<th>Acciones</th>
 												<th>Menú</th>
-												<th>Nombre</th>
 												<th>Inventario</th>
+												<th>Nombre</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
 												<th>telefono</th>
@@ -31,10 +31,10 @@
 											<tbody>
 											</tbody>
 											<tfoot>
-												<th>Acciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+												<th>Acciones</th>
 												<th>Menú</th>
-												<th>Nombre</th>
 												<th>Inventario</th>
+												<th>Nombre</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
 												<th>telefono</th>

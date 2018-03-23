@@ -57,10 +57,10 @@ function saveEdit(idInsumo, idSucursal, selector){
 	}
 }
 
-function unactivate(idinsumoEnSucursal){
+function unactivate(idInsumoEnSucursal){
 	bootbox.confirm("¿Desea desactivar el insumo?", function(result){
 		if(result){
-			$.post("../ajax/ies.php?op=unactivate",{idinsumoEnSucursal : idinsumoEnSucursal}, function(e){
+			$.post("../ajax/ies.php?op=unactivate",{idInsumoEnSucursal : idInsumoEnSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -68,10 +68,10 @@ function unactivate(idinsumoEnSucursal){
 	});
 }
 
-function activate(idinsumoEnSucursal){
+function activate(idInsumoEnSucursal){
 	bootbox.confirm("¿Desea activar el insumo?", function(result){
 		if(result){
-			$.post("../ajax/ies.php?op=activate",{idinsumoEnSucursal : idinsumoEnSucursal}, function(e){
+			$.post("../ajax/ies.php?op=activate",{idInsumoEnSucursal : idInsumoEnSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
