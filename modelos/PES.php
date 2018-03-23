@@ -13,24 +13,26 @@ Class PES{
 		return ejecutarConsulta($sql);
 	}
 
-	public function desactivar($idproductoEnSucursal){
-		$sql = "UPDATE productoEnSucursal SET isActive='0' WHERE idproductoEnSucursal='$idproductoEnSucursal'";
+	public function desactivar($idProducto, $idSucursal){
+		$sql = "UPDATE productoEnSucursal SET isActive='0' WHERE (idProducto='$idProducto') and (idSucursal='$idSucursal')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function activar($idproductoEnSucursal){
-		$sql = "UPDATE productoEnSucursal SET isActive='1' WHERE idproductoEnSucursal='$idproductoEnSucursal'";
+	public function activar($idProducto, $idSucursal){
+		$sql = "UPDATE productoEnSucursal SET isActive='1' WHERE (idProducto='$idProducto') and (idSucursal='$idSucursal')";
 		return ejecutarConsulta($sql);
 	}
 
+	/*idProductoEnSucursal es el que dice si es o no nulo*/
 	public function listar($idSucursal){
-		$sql = "SELECT PROD.nombre, PROD.precioActual, PES.idproductoEnSucursal, PES.isActive, '$idSucursal' as idSucursal, PROD.idProducto FROM producto PROD left join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where PROD.isActive=1";
+		$sql = "SELECT PROD.nombre, PROD.precioActual, PES.idProducto as idProductoEnSucursal, PES.isActive, '$idSucursal' as idSucursal, PROD.idProducto FROM producto PROD left join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where PROD.isActive=1";
 		return ejecutarConsulta($sql);
+
 		/*
 			resultado:
 				nombre
 				precioActual
-				idproductoEnSucursal->posible nulo
+				idProductoEnSucursal->posible nulo
 				isActive
 				idSucursal
 				idProducto
@@ -38,7 +40,7 @@ Class PES{
 	}
 
 	public function check($idSucursal){
-		$sql = "SELECT COUNT(idSucursal) as exist FROM sucursal WHERE idsucursal='$idSucursal'";
+		$sql = "SELECT COUNT(idsucursal) as exist FROM sucursal WHERE idsucursal='$idSucursal'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -48,7 +50,7 @@ Class PES{
 	}
 
 	public function listarPES($idSucursal){
-		$sql = "SELECT PROD.nombre, PROD.precioActual, PROD.imagen, PES.idproductoEnSucursal FROM producto PROD join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where (PROD.isActive=1) and (PES.isActive=1)";
+		$sql = "SELECT PROD.nombre, PROD.precioActual, PROD.imagen, '$idSucursal' as idSucursal, PES.idProducto FROM producto PROD join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where (PROD.isActive=1) and (PES.isActive=1)";
 		return ejecutarConsulta($sql);
 	}
 

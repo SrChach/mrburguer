@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idinsumo", "#nombre", "#marca", "#existencias", "#piezasContiene", "#precioPromedio"],
-		showOne: ["nombre", "marca", "existencias", "idinsumo", "piezasContiene", "precioPromedio"],
+		limpiar: ["#idinsumo", "#nombre", "#existencias", "#precioPromedio"],
+		showOne: ["nombre", "existencias", "idinsumo", "precioPromedio"],
 		parametro: "idinsumo"
 	}
 

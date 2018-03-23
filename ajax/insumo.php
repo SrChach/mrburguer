@@ -5,18 +5,16 @@ $insumo = new Insumo();
 
 $idinsumo = isset($_POST["idinsumo"])? limpiarCadena($_POST["idinsumo"]) : "";
 $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
-$marca = isset($_POST["marca"])? limpiarCadena($_POST["marca"]) : "";
 $existencias = isset($_POST["existencias"])? limpiarCadena($_POST["existencias"]) : "";
-$piezasContiene = isset($_POST["piezasContiene"])? limpiarCadena($_POST["piezasContiene"]) : "";
 $precioPromedio = isset($_POST["precioPromedio"])? limpiarCadena($_POST["precioPromedio"]) : "";
 
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idinsumo)){
-			$rspta = $insumo->insertar($nombre, $marca, $existencias, $piezasContiene, $precioPromedio);
+			$rspta = $insumo->insertar($nombre, $existencias, $precioPromedio);
 			echo $rspta ? "Insumo guardado" : "Insumo no se pudo guardar";
 		} else {
-			$rspta = $insumo->editar($idinsumo, $nombre, $marca, $existencias, $piezasContiene, $precioPromedio);
+			$rspta = $insumo->editar($idinsumo, $nombre, $existencias, $precioPromedio);
 			echo $rspta ? "Insumo editado" : "Insumo no se pudo editar";
 		}
 		break;
@@ -39,18 +37,15 @@ switch ($_GET["op"]){
 			$data[] = array(
 				"0" => ($reg->isActive)?'<button class="btn btn-primary" onclick="showOne('.$reg->idinsumo.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="unactivate('.$reg->idinsumo.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idinsumo.')"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" onclick="activate('.$reg->idinsumo.')"><i class="fa fa-check"></i></button>',
 				"1" => $reg->nombre,
-				"2" => $reg->marca,
-				"3" => $reg->existencias,
-				"4" => $reg->piezasContiene,
-				"5" => $reg->precioPromedio,
-				"6" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
+				"2" => $reg->existencias,
+				"3" => $reg->precioPromedio,
+				"4" => ($reg->isActive)?'<span class="label bg-green">Activo<span>':'<span class="label bg-red">Desactivado<span>'
 			);
 		}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
 			"iTotalDisplayRecords" => count($data),
-			/*Total de registros a viualizar*/
 			"aaData" => $data
 		);
 		echo json_encode($results);
