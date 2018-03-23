@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
 		limpiar: ["#idsucursal", "#nombre", "#idFranquicia", "#isMobile", "#telefono"],
-		showOne: ["idsucursal", "nombre", "idFranquicia", "isMobile" "telefono"],
+		showOne: ["idsucursal", "nombre", "idFranquicia", "isMobile", "telefono"],
 		parametro: "idsucursal"
 	}
 
