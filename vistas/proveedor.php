@@ -24,10 +24,10 @@
 												<thead>
 													<th>idproveedor</th>
 													<th>Nombre de la empresa</th>
-													<th>Correo Electronico</th>
-													<th>Telefono</th>
+													<th>Correo Electrónico</th>
+													<th>Teléfono</th>
 													<th>Estado</th>
-													<th>Delegacion</th>
+													<th>Delegación</th>
 													<th>Colonia</th>
 													<th>Calle</th>
 													<th>numExt</th>
@@ -39,10 +39,10 @@
 												<tfoot>
 													<th>idproveedor</th>
 													<th>Nombre de la empresa</th>
-													<th>Correo Electronico</th>
-													<th>Telefono</th>
+													<th>Correo Electrónico</th>
+													<th>Teléfono</th>
 													<th>Estado</th>
-													<th>Delegacion</th>
+													<th>Delegación</th>
 													<th>Colonia</th>
 													<th>Calle</th>
 													<th>numExt</th>
@@ -61,11 +61,11 @@
 												</div>
 
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-													<label>Telefono de contato:</label>
+													<label>Teléfono de contato:</label>
 													<input class="form-control" type="number" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono" required/>
 												</div>
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-													<label>Correo Electronico:</label>
+													<label>Correo Electrónico:</label>
 													<input class="form-control" type="email" name="correoElectronico" id="correoElectronico" placeholder="Inserte Correo Electronico" required/>
 												</div>
 												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">

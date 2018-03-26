@@ -53,7 +53,7 @@
 												<input class="form-control" type="text" name="tipo" id="tipo" maxlength="45" placeholder="Inserte el tipo de evento" required/>
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Plataforma en donde se publico el evento:</label>
+												<label>Plataforma en donde se publicó el evento:</label>
 												<input class="form-control" type="text" name="plataforma" id="plataforma" maxlenght="15" required/>
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">

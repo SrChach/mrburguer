@@ -104,7 +104,7 @@
 						<li class="header"></li>
 						
 						<li>
-							<a href="#">
+							<a href="inicio.php">
 								<i class="fa fa-tasks"></i> <span>Escritorio</span>
 							</a>
 						</li>   
@@ -119,10 +119,7 @@
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
-											<li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Proveedores</a></li>
-											<li><a href="compra.php"><i class="fa fa-circle-o"></i>*Compras</a></li>
 											<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
-											<li><a href="enviaInsumo.php"><i class="fa fa-circle-o"></i>*Enviar Insumos a Sucursal</a></li>
 										</ul>
 									</li>';
 							}
@@ -139,7 +136,6 @@
 										<ul class="treeview-menu">
 											<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
 											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
-											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>*Recibir insumos</a></li>
 										</ul>
 									</li>
 								';
@@ -172,7 +168,6 @@
 										</a>
 										<ul class="treeview-menu">
 											<li><a href="venta.php"><i class="fa fa-circle-o"></i>Ventas</a></li>
-											<li><a href="cliente.php"><i class="fa fa-circle-o"></i>Cliente</a></li>
 										</ul>
 									</li>';
 							}
@@ -188,24 +183,6 @@
 										</a>
 										<ul class="treeview-menu">
 											<li><a href="producto.php"><i class="fa fa-circle-o"></i>Productos</a></li>
-											<li><a href="consultaventas.php"><i class="fa fa-circle-o"></i>Insumos Consumidos</a></li>
-										</ul>
-									</li>';
-							}
-						?>
-
-						<?php
-							if($_SESSION["socialMedia"]==1){
-								echo '
-									<li class="treeview">
-										<a href="#">
-											<i class="fa fa-users"></i> <span>Social Media</span>
-											<i class="fa fa-angle-left pull-right"></i>
-										</a>
-										<ul class="treeview-menu">
-											<li><a href="cliente.php"><i class="fa fa-circle-o"></i>*Consulta de clientes</a></li>
-											<li><a href="interaccion.php"><i class="fa fa-circle-o"></i>Interacciones</a></li>
-											<li><a href="evento.php"><i class="fa fa-circle-o"></i>Eventos</a></li>
 										</ul>
 									</li>';
 							}

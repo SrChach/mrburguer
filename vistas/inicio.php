@@ -10,7 +10,7 @@
 ?>
 <link rel="stylesheet" type="text/css" href="../public/css/inicio.css">
 <div class="content-wrapper">
-	<h1 class="text-center">Bienvenido <?php echo $_SESSION["nomPila"] ?></h1>
+	<h1 class="text-center">Bienvenido <?php echo $_SESSION["nomPila"]; ?></h1>
 	<div class="col-xs-12 col-sm-6 borde">
 		<h3 class="text-center" >Ventas recientes</h3>
 	</div>

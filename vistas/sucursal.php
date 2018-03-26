@@ -25,7 +25,7 @@
 												<th>Nombre</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
-												<th>telefono</th>
+												<th>Teléfono</th>
 												<th>Status</th>
 											</thead>
 											<tbody>
@@ -37,7 +37,7 @@
 												<th>Nombre</th>
 												<th>Franquicia</th>
 												<th>Tipo</th>
-												<th>telefono</th>
+												<th>Teléfono</th>
 												<th>Status</th>
 											</tfoot>
 										</table>
@@ -57,11 +57,11 @@
 												<label>Tipo de sucursal(*)</label>
 												<select class="form-control selectpicker" name="isMobile" id="isMobile" required>
 													<option value="0">Fija</option>
-													<option value="1">Movil</option>
+													<option value="1">Móvil</option>
 												</select>
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Telefono(*)</label>
+												<label>Teléfono(*)</label>
 												<input class="form-control" type="text" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono"/>
 											</div>
 											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -19,7 +19,7 @@
 																	<th>Nombre</th>
 																	<th>Precio Promedio</th>
 																	<th>Cantidad (en piezas)</th>
-																	<th>Accion</th>
+																	<th>Acción</th>
 																</thead>
 																<tbody>
 																</tbody>
@@ -27,7 +27,7 @@
 																	<th>Nombre</th>
 																	<th>Precio Promedio</th>
 																	<th>Cantidad (en piezas)</th>
-																	<th>Accion</th>
+																	<th>Acción</th>
 																</tfoot>
 															</table>
 										</div>

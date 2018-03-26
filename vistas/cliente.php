@@ -30,8 +30,8 @@
 												<th>Cuenta Facebook</th>
 												<th>Cuenta Instagram</th>
 												<th>Cuenta Twitter</th>
-												<th>Correo Electronico</th>
-												<th>Telefono</th>
+												<th>Correo Electrónico</th>
+												<th>Teléfono</th>
 												<th>Status</th>
 											</thead>
 											<tbody>
@@ -47,8 +47,8 @@
 												<th>Cuenta Facebook</th>
 												<th>Cuenta Instagram</th>
 												<th>Cuenta Twitter</th>
-												<th>Correo Electronico</th>
-												<th>Telefono</th>
+												<th>Correo Electrónico</th>
+												<th>Teléfono</th>
 												<th>Status</th>
 											</tfoot>
 										</table>
@@ -89,7 +89,7 @@
 												<input class="form-control" type="email" name="correoElectronico" id="correoElectronico" maxlength="45" placeholder="Inserte correo Electrónico"/>
 											</div>
 											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Telefono:</label>
+												<label>Teléfono:</label>
 												<input class="form-control" type="number" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono" required/>
 											</div>
 											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
