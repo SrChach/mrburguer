@@ -11,7 +11,7 @@ $(document).ready(() => {
 					bootbox.alert("Usuario y/o contraseña incorrectos");
 					$(".form-group").addClass("has-error");
 				} else {
-					window.location.replace("producto.php")
+					window.location.replace("inicio.php")
 				}
 			}
 		);
