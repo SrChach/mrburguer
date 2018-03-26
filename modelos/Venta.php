@@ -63,8 +63,8 @@ Class Venta{
 		return ejecutarConsulta($sql);
 	}
 
-	public function listar(){
-		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', V.fecha, V.montoTotal, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) ORDER BY V.idVenta desc";
+	public function listar($idEmpleado){
+		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', V.fecha, V.montoTotal, V.descuentoActual, V.status, V.pagoTarjeta FROM venta V join empleado E on E.idEmpleado=V.idEmpleado WHERE V.idEmpleado='$idEmpleado' ORDER BY V.idVenta desc";
 		return ejecutarConsulta($sql);
 	}
 

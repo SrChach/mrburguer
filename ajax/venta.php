@@ -62,7 +62,7 @@ switch ($_GET["op"]){
 				</tfoot>';
 		break;
 	case 'list':
-		$rspta = $venta->listar();
+		$rspta = $venta->listar($idEmpleado);
 		$data = Array();
 		if($rspta != false)
 			while($reg = $rspta->fetch_object()){
