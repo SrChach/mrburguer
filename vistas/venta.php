@@ -23,11 +23,9 @@
 											<thead>
 												<th>Acciones</th>
 												<th>Fecha y hora</th>
-												<th>nombreEmpleado</th>
-												<th>nombreCliente</th>
+												<th>Nombre del empleado</th>
 												<th>Monto total</th>
 												<th>Descuento</th>
-												<th>IVA</th>
 												<th>Forma de pago</th>
 												<th>Status</th>
 											</thead>
@@ -36,11 +34,9 @@
 											<tfoot>
 												<th>Acciones</th>
 												<th>Fecha y hora</th>
-												<th>nombreEmpleado</th>
-												<th>nombreCliente</th>
+												<th>Nombre del empleado</th>
 												<th>Monto total</th>
 												<th>Descuento</th>
-												<th>IVA</th>
 												<th>Forma de pago</th>
 												<th>Status</th>
 											</tfoot>
@@ -50,13 +46,7 @@
 									<div class="panel-body" style="height: 400px;" id="formularioregistros">
 										<form name="formulario" id="formulario" method="POST">
 
-											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-6">
-												<label>id del Cliente:</label>
-												<input type="hidden" name="idventa" id="idventa"/>
-												<input class="form-control" type="number" name="idCliente" id="idCliente" />
-											</div>
-
-											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-6">
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
 												<label>Pago con:</label>
 												<select class="form-control selectpicker" name="pagoTarjeta" id="pagoTarjeta" required>
 													<option value="1">Tarjeta</option>
@@ -70,9 +60,9 @@
 												</a>
 											</div>
 
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
 												<table id="productos" class="table table-stripped table-bordered table-condensed table-hover">
-													<thead style="background-color: #A9D0F5">
+													<thead style="background-color: #A9D0F5;">
 														<th>Opciones</th>
 														<th>Producto</th>
 														<th>Cantidad</th>

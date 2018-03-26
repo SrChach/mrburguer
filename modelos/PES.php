@@ -25,18 +25,8 @@ Class PES{
 
 	/*idProductoEnSucursal es el que dice si es o no nulo*/
 	public function listar($idSucursal){
-		$sql = "SELECT PROD.nombre, PROD.precioActual, PES.idProducto as idProductoEnSucursal, PES.isActive, '$idSucursal' as idSucursal, PROD.idProducto FROM producto PROD left join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where PROD.isActive=1";
+		$sql = "SELECT PROD.nombre, PROD.precioActual, PES.idProducto as idProductoEnSucursal, PROD.imagen, PES.isActive, '$idSucursal' as idSucursal, PROD.idProducto FROM producto PROD left join (SELECT * from productoEnSucursal where idSucursal='$idSucursal') PES on PROD.idProducto=PES.idProducto where PROD.isActive=1";
 		return ejecutarConsulta($sql);
-
-		/*
-			resultado:
-				nombre
-				precioActual
-				idProductoEnSucursal->posible nulo
-				isActive
-				idSucursal
-				idProducto
-		*/
 	}
 
 	public function check($idSucursal){

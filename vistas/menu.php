@@ -24,6 +24,7 @@
 															<thead>
 																<th>Producto</th>
 																<th>Precio Actual</th>
+																<th>Imagen</th>
 																<th>Accion</th>
 															</thead>
 															<tbody>
@@ -31,6 +32,7 @@
 															<tfoot>
 																<th>Producto</th>
 																<th>Precio Actual</th>
+																<th>Imagen</th>
 																<th>Accion</th>
 															</tfoot>
 														</table>

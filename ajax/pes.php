@@ -3,7 +3,6 @@ require_once "../modelos/PES.php";
 
 $pes = new PES();
 
-$idproductoEnSucursal = isset($_POST["idproductoEnSucursal"])? limpiarCadena($_POST["idproductoEnSucursal"]) : "";
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
 $idProducto = isset($_POST["idProducto"])? limpiarCadena($_POST["idProducto"]) : "";
 
@@ -13,11 +12,11 @@ switch ($_GET["op"]){
 		echo $rspta ? "Registrado en el menú" : "No se pudo registrar en el menú";
 		break;
 	case 'unactivate':
-		$rspta = $pes->desactivar($idproductoEnSucursal);
+		$rspta = $pes->desactivar($idProducto, $idSucursal);
 		echo $rspta ? "Retirado del Menú" : "No se pudo retirar del menú";
 		break;
 	case 'activate':
-		$rspta = $pes->activar($idproductoEnSucursal);
+		$rspta = $pes->activar($idProducto, $idSucursal);
 		echo $rspta ? "Añadido al Menú" : "No se pudo añadir al menú";
 		break;
 	case 'list':
@@ -31,19 +30,20 @@ switch ($_GET["op"]){
 			$data = Array();
 			if($rspta != false)
 				while($reg = $rspta->fetch_object()){
-					if(is_null($reg->idproductoEnSucursal)){
+					if(is_null($reg->idProductoEnSucursal)){
 						$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idProducto.','.$reg->idSucursal.')">Añadir al menú</button>';
 					} else {
 						if($reg->isActive==1){
-							$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idproductoEnSucursal.')">Quitar del menú</button>';
+							$temp = '<button class="btn btn-warning" onclick="unactivate('.$reg->idProducto.', '.$reg->idSucursal.')">Quitar del menú</button>';
 						} else {
-							$temp = '<button class="btn btn-success" onclick="activate('.$reg->idproductoEnSucursal.')">Añadir al menú</button>';
+							$temp = '<button class="btn btn-success" onclick="activate('.$reg->idProducto.', '.$reg->idSucursal.')">Añadir al menú</button>';
 						}
 					}
 					$data[] = array(
 						"0" => $reg->nombre,
 						"1" => $reg->precioActual,
-						"2" => $temp
+						"2" => "<img src='../files/productos/".$reg->imagen."' height='65px' width='65px'/>",
+						"3" => $temp
 					);
 				}
 			$results = array(
@@ -64,36 +64,6 @@ switch ($_GET["op"]){
 			echo json_encode($rspta);
 		}
 		break;
-	case 'consultaMenu':
-		if(isset($_GET["SUC"])){
-			$xst = ($pes->check($_GET["SUC"]))->fetch_object();
-			if($xst->exist==0){
-				echo "Sucursal inválida";
-				break;
-			}
-			$rspta = $pes->listar($_GET["SUC"]);
-			$data = Array();
-			while($reg = $rspta->fetch_object()){
-				$data[] = array(
-					"0" => $reg->nombre,
-					"1" => $reg->precioActual,
-				);
-			}
-			$results = array(
-				"sEcho" => 1,
-				"iTotalRecords" => count($data),
-				"iTotalDisplayRecords" => count($data),
-				"aaData" => $data
-			);
-			
-			echo json_encode($results);
-		} else {
-			echo "No es posible listar, faltan parámetros";
-		}
-		break;
-
-
-
 
 }
 

@@ -8,34 +8,28 @@ Class Venta{
 
 	}
 
-	public function insertar($idCliente, $idEmpleado, $pagoTarjeta, $idProductoEnSucursal, $cantidad){
-		if($idCliente != ""){
-			$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
-			($idCliente, '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
-		} else  {
-			$sql = "INSERT INTO venta (idCliente, idEmpleado, fecha, montoTotal, iva, descuentoActual, status, pagoTarjeta) VALUES 
-			(null, '$idEmpleado', current_timestamp, '0', '0', '0', 'Entregado', '$pagoTarjeta')";
-		}
+	public function insertar($idEmpleado, $pagoTarjeta, $idSucursal, $idProducto, $cantidad){
+		$sql = "INSERT INTO venta (idEmpleado, fecha, montoTotal, descuentoActual, status, pagoTarjeta) VALUES 
+			('$idEmpleado', current_timestamp, '0', '0', 'Entregado', '$pagoTarjeta')";
 		
 		$idNuevaVenta = ejecutarConsultaRetornarID($sql);
 		$elementoActual = 0;
 		$sinErrores = true;
 		$montoTotal = 0;
-		$impuesto = 0;
 
-		while($elementoActual < count($idProductoEnSucursal)){
-			$obtenPrecioActual = "SELECT P.nombre, P.precioActual FROM (SELECT idProducto FROM productoEnSucursal WHERE idProductoEnSucursal='$idProductoEnSucursal[$elementoActual]') as PES join producto P on PES.idProducto = P.idProducto";
+		
+		while($elementoActual < count($idProducto)){
+			$obtenPrecioActual = "SELECT nombre, precioActual FROM producto WHERE idproducto='$idProducto[$elementoActual]'";
 			($naw = consultarFila($obtenPrecioActual)['precioActual']) or $sinErrores = false;
 
-			$subconsulta = "INSERT INTO productoVendido (idventa, idProductoEnSucursal, precioVendido, cantidad, status) VALUES ('$idNuevaVenta', '$idProductoEnSucursal[$elementoActual]', '$naw', '$cantidad[$elementoActual]', 'Entregado')";
+			$subconsulta = "INSERT INTO productoVendido (idSucursal, idVenta, idProducto, precioVendido, cantidad, status) VALUES ('$idSucursal','$idNuevaVenta', '$idProducto[$elementoActual]', '$naw', '$cantidad[$elementoActual]', 'Entregado')";
 			ejecutarConsulta($subconsulta) or $sinErrores = false;
 			$pa = $naw * $cantidad[$elementoActual];
 			$montoTotal+=$pa;
-			$impuesto+=($pa*4)/29;
 			$elementoActual++;
 		}
 
-		$actualizarMonto = "UPDATE venta SET montoTotal='$montoTotal', iva='$impuesto' where idventa='$idNuevaVenta'";
+		$actualizarMonto = "UPDATE venta SET montoTotal='$montoTotal' WHERE idVenta='$idNuevaVenta'";
 		ejecutarConsulta($actualizarMonto) or $sinErrores = false;
 
 		return $sinErrores;
@@ -49,28 +43,28 @@ Class Venta{
 	}
 
 
-	public function devolver($idventa){
-		$sql = "UPDATE venta SET status='Devuelto' where idventa='$idventa'";
+	public function devolver($idVenta){
+		$sql = "UPDATE venta SET status='Devuelto' where idVenta='$idVenta'";
 		return ejecutarConsulta($sql);
 	}
 
-	/*public function mostrar($idventa){
-		$sql = "SELECT V.idventa, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente WHERE V.idventa='$idventa'";
+	/*public function mostrar($idVenta){
+		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente WHERE V.idVenta='$idVenta'";
 		return consultarFila($sql);
 	}*/
 
-	public function mostrar($idventa){
-		$sql = "SELECT idCliente, pagoTarjeta FROM venta WHERE idventa='$idventa'";
+	public function mostrar($idVenta){
+		$sql = "SELECT pagoTarjeta FROM venta WHERE idVenta='$idVenta'";
 		return consultarFila($sql);
 	}
 
-	public function listarProductos($idventa){
-		$sql = "SELECT DV.idventa, DV.precioVendido, DV.cantidad, DV.status, producto.nombre FROM (SELECT PV.idventa, PV.precioVendido, PV.cantidad, PV.status, PES.idProducto FROM productoVendido PV join productoEnSucursal PES on PV.idProductoEnSucursal=PES.idProductoEnSucursal WHERE PV.idventa='$idventa') DV join producto on DV.idProducto=producto.idProducto";
+	public function listarProductos($idVenta){
+		$sql = "SELECT DV.idVenta, DV.precioVendido, DV.cantidad, DV.status, producto.nombre FROM (SELECT * FROM productoVendido WHERE idVenta='$idVenta') DV join producto on DV.idProducto=producto.idProducto";
 		return ejecutarConsulta($sql);
 	}
 
 	public function listar(){
-		$sql = "SELECT V.idventa, concat(E.nombre, ' ', E.apellidoPaterno, ' ', E.apellidoMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente ORDER BY V.idventa desc";
+		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', V.fecha, V.montoTotal, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) ORDER BY V.idVenta desc";
 		return ejecutarConsulta($sql);
 	}
 

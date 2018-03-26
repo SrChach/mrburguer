@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idCliente","#pagoTarjeta"],
-		showOne: ["idCliente", "pagoTarjeta"],
+		limpiar: ["#pagoTarjeta"],
+		showOne: ["pagoTarjeta"],
 		parametro: "idventa"
 	}
 
@@ -19,7 +19,13 @@ var productos = 0;
 
 function mostrarform(flag){
 	limpiar();
+	$("#pagoTarjeta").selectpicker('refresh');
+	$("#total").text("$ 0.00");
+	$(".filas").remove();
+	i=0;
+	productos=0;
 	if(flag){
+		$("#btnGuardar").prop("disabled", false);
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").hide();
@@ -68,14 +74,14 @@ function listarPES(){
 	}).DataTable();
 }
 
-function agregarProducto(idProductoEnSucursal, producto, idPrecio){
+function agregarProducto(idProducto, producto, idPrecio){
 	var cantidad = 1;
 	var precioUnitario = $('#'+idPrecio.id).text(); 
 	var subtotal = precioUnitario * cantidad;
-	if(idProductoEnSucursal != ""){
+	if(idProducto != ""){
 		var fila='<tr class="filas" id="fila'+i+'">'+
 			'<td><button type="button" class="btn btn-danger" onclick="eliminarProducto('+i+')">X</button></td>'+
-			'<td><input type="hidden" name="idProductoEnSucursal[]" value="'+idProductoEnSucursal+'">'+producto+'</td>'+
+			'<td><input type="hidden" name="idProducto[]" value="'+idProducto+'">'+producto+'</td>'+
 			'<td><input type="number" min="0" name="cantidad[]" onchange="modificarSubtotales()" value="'+cantidad+'"></td>'+
 			'<td><input type="hidden" name="pu[]" value="'+precioUnitario+'">'+precioUnitario+'</td>'+
 			'<td><span name="subtotal[]" id="subtotal'+i+'">'+subtotal+'</span></td>'+

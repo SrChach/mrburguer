@@ -41,10 +41,10 @@ function listar(idSucursal){
 	}).DataTable();
 }
 
-function unactivate(idproductoEnSucursal){
+function unactivate(idProducto, idSucursal){
 	bootbox.confirm("¿Retirar producto del menú?", function(result){
 		if(result){
-			$.post("../ajax/pes.php?op=unactivate",{idproductoEnSucursal : idproductoEnSucursal}, function(e){
+			$.post("../ajax/pes.php?op=unactivate",{idProducto : idProducto, idSucursal : idSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -52,10 +52,10 @@ function unactivate(idproductoEnSucursal){
 	});
 }
 
-function activate(idproductoEnSucursal){
+function activate(idProducto, idSucursal){
 	bootbox.confirm("¿Añadir producto al menú?", function(result){
 		if(result){
-			$.post("../ajax/pes.php?op=activate",{idproductoEnSucursal : idproductoEnSucursal}, function(e){
+			$.post("../ajax/pes.php?op=activate",{idProducto : idProducto, idSucursal : idSucursal}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});

@@ -8,9 +8,9 @@ $venta = new Venta();
 $idventa = isset($_POST["idventa"])? limpiarCadena($_POST["idventa"]) : "";
 $idCliente = isset($_POST["idCliente"])? limpiarCadena($_POST["idCliente"]) : "";
 $idEmpleado = $_SESSION["idEmpleado"];
+$idSucursal = $_SESSION["idSucursal"];
 $fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
 $montoTotal = isset($_POST["montoTotal"])? limpiarCadena($_POST["montoTotal"]) : "";
-$iva = isset($_POST["iva"])? limpiarCadena($_POST["iva"]) : "";
 $descuentoTotal = isset($_POST["descuentoTotal"])? limpiarCadena($_POST["descuentoTotal"]) : "";
 $status = isset($_POST["status"])? limpiarCadena($_POST["status"]) : "";
 $pagoTarjeta = isset($_POST["pagoTarjeta"])? limpiarCadena($_POST["pagoTarjeta"]) : "";
@@ -18,11 +18,8 @@ $idSucursal = $_SESSION["idSucursal"];
 
 switch ($_GET["op"]){
 	case 'saveEdit':
-		if(empty($idventa)){
-
-			$rspta = $venta->insertar($idCliente, $idEmpleado, $pagoTarjeta, $_POST["idProductoEnSucursal"], $_POST["cantidad"]);
-			echo $rspta ? "Venta guardada" : "No se pudieron registrar todos los datos de la venta";
-		} 
+		$rspta = $venta->insertar($idEmpleado, $pagoTarjeta, $idSucursal, $_POST["idProducto"], $_POST["cantidad"]);
+		echo $rspta ? "Venta guardada" : "No se pudieron registrar todos los datos de la venta";
 		break;
 	case 'giveBack':
 		$rspta = $venta->devolver($idventa);
@@ -70,15 +67,13 @@ switch ($_GET["op"]){
 		if($rspta != false)
 			while($reg = $rspta->fetch_object()){
 				$data[] = array(
-					"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idventa.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idventa.')"><i class="fa fa-eye"></i></button>' ,
+					"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idVenta.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idVenta.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idVenta.')"><i class="fa fa-eye"></i></button>' ,
 					"1" => $reg->fecha,
 					"2" => $reg->nombreEmpleado,
-					"3" => ($reg->nombreCliente)? $reg->nombreCliente : '-',
-					"4" => $reg->montoTotal,
-					"5" => $reg->descuentoActual,
-					"6" => $reg->iva,
-					"7" => ($reg->pagoTarjeta=='0') ? "Efectivo" : "Tarjeta",
-					"8" => ($reg->status=='Entregado') ? '<span class="label bg-green">Entregado<span>':'<span class="label bg-red">Devuelto<span>' 
+					"3" => $reg->montoTotal,
+					"4" => $reg->descuentoActual,
+					"5" => ($reg->pagoTarjeta=='0') ? "Efectivo" : "Tarjeta",
+					"6" => ($reg->status=='Entregado') ? '<span class="label bg-green">Entregado<span>':'<span class="label bg-red">Devuelto<span>' 
 				);
 			}
 		$results = array(
@@ -101,10 +96,10 @@ switch ($_GET["op"]){
 		$data = Array();
 		while($reg = $rspta->fetch_object()){
 			$data[] = array(
-				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idproductoEnSucursal.', \''.$reg->nombre.'\', precio'.$reg->idproductoEnSucursal.')"><span class="fa fa-plus"></span></button>',
+				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idProducto.', \''.$reg->nombre.'\', precio'.$reg->idProducto.')"><span class="fa fa-plus"></span></button>',
 				"1" => $reg->nombre,
 				"2" => "<img src='../files/productos/".$reg->imagen."' height='70px' width='70px'/>",
-				"3" => '<span id="precio'.$reg->idproductoEnSucursal.'">'.$reg->precioActual.'</span>'
+				"3" => '<span id="precio'.$reg->idProducto.'">'.$reg->precioActual.'</span>'
 			);
 		}
 		$results = array(
