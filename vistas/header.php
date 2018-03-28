@@ -34,10 +34,8 @@
 
 				<!-- Logo -->
 				<a href="inicio.php" class="logo">
-					<!-- mini logo for sidebar mini 50x50 pixels -->
-					<span class="logo-mini"><b>Mr</b>Burguer</span>
-					<!-- logo for regular state and mobile devices -->
-					<span class="logo-lg"><b>MrBurguer</b></span>
+					<span class="logo-mini"><b>A</b>.<b>D</b>.</span>
+					<span class="logo-lg"><b>Admon - D'atelier</b></span>
 				</a>
 
 				<!-- Header Navbar: style can be found in header.less -->
@@ -74,8 +72,8 @@
 											}
 										?>
 										<p>
-											MisterBurguer
-											<small>https://www.github.com/srchach</small>
+											<?php echo "Sesión iniciada como: " . $_SESSION['nomPila']; ?>
+											<small>D'atelier</small>
 										</p>
 									</li>
 									
