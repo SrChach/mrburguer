@@ -117,6 +117,7 @@ create table InsumoEnSucursal(
 );
 
 create table TransporteInsumo(
+	idTransporteInsumo int not null primary key,
 	idInsumoEnSucursal int not null,
 	idInsumo int not null,
 	fechaSolicitud datetime,
@@ -127,7 +128,6 @@ create table TransporteInsumo(
 	cantidadRecibida int,
 	observaciones varchar(50),
 	idEmpleado int not null,
-	primary key(idInsumoEnSucursal, idInsumo),
 	foreign key(idInsumoEnSucursal) references InsumoEnSucursal(idInsumoEnSucursal) on update cascade on delete cascade,
 	foreign key(idInsumo) references Insumo(idInsumo) on update cascade on delete cascade
 );
