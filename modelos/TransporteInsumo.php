@@ -61,18 +61,18 @@ Class TransporteInsumo{
 		return ejecutarConsulta($sql);
 	}
 
+	public function sucursalesNecesitadas(){
+		$sql = "SELECT IES.idSucursal, sucursal.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T join insumoEnSucursal IES join sucursal on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idSucursal=sucursal.idSucursal";
+		return ejecutarConsulta($sql);
+	}
+
 	public function mostrarSolicitudes($idSucursal){
-		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, T.nombre FROM (SELECT idTransporteInsumo, idInsumoEnSucursal FROM transporteInsumo WHERE fechaEnvío IS NULL) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
+		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, TI.cantidadPedida, T.nombre FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadPedida FROM transporteInsumo WHERE fechaEnvío IS NULL) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
 		return ejecutarConsulta($sql);
 	}
 
 	public function confirmarRecepcion($idSucursal){
 		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, T.nombre, TI.cantidadEnviada FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadEnviada FROM transporteInsumo WHERE (fechaEnvío IS NOT NULL) and (cantidadRecibida IS NULL)) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
-		return ejecutarConsulta($sql);
-	}
-
-	public function identificarPeticiones(){
-		$sql = "SELECT IES.idSucursal, insumo.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T join insumoEnSucursal IES join insumo  on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idInsumo=insumo.idinsumo";
 		return ejecutarConsulta($sql);
 	}
 

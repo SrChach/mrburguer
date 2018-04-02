@@ -57,6 +57,9 @@ function showOne(id){
 				$("#mostrarimagen").attr("src", "../files/empleados/"+data.imagen);
 				showOneEmpleado(id);
 			}
+			if(vista === "venta"){
+				$("#btnAgregarProducto").hide();
+			}
 			datos.getElementos("showOne").forEach(e => $("#"+e).val(data[e]));
 	});
 

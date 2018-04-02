@@ -5,15 +5,14 @@ require_once "../modelos/TransporteInsumo.php";
 
 $transporte = new TransporteInsumo();
 
-$idTransporteInsumo = isset($_POST["idTransporteInsumo"])? limpiarCadena($_POST["idTransporteInsumo"]) : "";
-$idInsumoEnSucursal = isset($_POST["idInsumoEnSucursal"])? limpiarCadena($_POST["idInsumoEnSucursal"]) : "";
 $idEmpleadoRecibe = $_SESSION["idEmpleado"];
 $miSucursal = $_SESSION["idSucursal"];
-$idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
-$cantidadPedida = isset($_POST["cantidadPedida"])? limpiarCadena($_POST["cantidadPedida"]) : "";
+$idSucursal = isset($_GET["SUC"])? limpiarCadena($_GET["SUC"]) : "";
+$idTransporteInsumo = isset($_POST["idTransporteInsumo"])? limpiarCadena($_POST["idTransporteInsumo"]) : "";
+$idInsumoEnSucursal = isset($_POST["idInsumoEnSucursal"])? limpiarCadena($_POST["idInsumoEnSucursal"]) : "";
 $cantidadEnviada = isset($_POST["cantidadEnviada"])? limpiarCadena($_POST["cantidadEnviada"]) : "";
 $cantidadRecibida = isset($_POST["cantidadRecibida"])? limpiarCadena($_POST["cantidadRecibida"]) : "";
-
+$observaciones = isset($_POST["observaciones"])? limpiarCadena($_POST["observaciones"]) : "";
 
 switch ($_GET["op"]){
 	case 'request':
@@ -21,31 +20,26 @@ switch ($_GET["op"]){
 		echo $rspta ? "Petición realizada" : "No se pudo hacer la petición";
 		break;
 	case 'send':
-		$rspta = $transporte->enviar($_POST['idTransporteInsumo'], $_POST['idInsumoEnSucursal'], $_POST['cantidadEnviada']);
+		$rspta = $transporte->enviar($idTransporteInsumo, $idInsumoEnSucursal, $cantidadEnviada);
 		echo $rspta ? "Elementos enviados" : "No se pudo enviar";
 		break;
 	case 'receive':
-		$rspta = $transporte->recibir($_POST['idTransporteInsumo'], $_POST['cantidadRecibida'], $idEmpleadoRecibe, $_POST['observaciones']);
+		$rspta = $transporte->recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones);
 		echo $rspta ? "Recepción confirmada" : "No se pudieron registrar los cambios";
 		break;
 
-	/*Hasta aqui Me quedé
+	
 	case 'listOptions':
-		$rspta = $transporte->paraPedir($idSucursal);
+		$i = 0;
+		$rspta = $transporte->paraPedir($miSucursal);
 		$data = Array();
 		if($rspta != false)
 			while($reg = $rspta->fetch_object()){
-				$temp = '<button class="btn btn-success" onclick="saveEdit('.$reg->idInsumoEnSucursal.','.$reg->idSucursal.',c'.$i.')">Registrar en Sucursal</button>';
-				$campo = '<input type="number" min="0" max="999999999.99" class="form-control" placeholder="Inserte cantidad inicial" id="c'.$i.'" step=".01">';
 				$data[] = array(
-					"0" => ($reg->status=='Entregado') ? '<button class="btn btn-primary" onclick="showOne('.$reg->idVenta.')"><i class="fa fa-eye"></i></button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="giveBack('.$reg->idVenta.')"><i class="fa fa-close"></i></button>' : '<button class="btn btn-primary" onclick="showOne('.$reg->idVenta.')"><i class="fa fa-eye"></i></button>' ,
-					"1" => $reg->fecha,
-					"2" => $reg->nombreEmpleado,
-					"3" => $reg->montoTotal,
-					"4" => $reg->descuentoActual,
-					"5" => ($reg->pagoTarjeta=='0') ? "Efectivo" : "Tarjeta",
-					"6" => ($reg->status=='Entregado') ? '<span class="label bg-green">Entregado<span>':'<span class="label bg-red">Devuelto<span>' 
+					"0" => '<button class="btn btn-warning" onclick="agregarInsumo('.$reg->idInsumoEnSucursal.', \''.$reg->nombre.'\', i'.$i.')"><span class="fa fa-plus"></span></button>',
+					"1" => $reg->nombre
 				);
+				$i++;
 			}
 		$results = array(
 			"sEcho" => 1,
@@ -54,36 +48,53 @@ switch ($_GET["op"]){
 			"aaData" => $data
 		);
 		echo json_encode($results);
-		break;*/
-	case 'listPES':
-		require_once "../modelos/PES.php";
-		$pes = new PES();
-		$xst = ($pes->check($idSucursal))->fetch_object();
-		if($xst->exist==0){
-			echo "Sucursal inválida";
-			break;
-		}
-		$rspta = $pes->listarPES($idSucursal);
+		break;
+	case 'listRequests':
+		$i = 0;
+		$rspta = $transporte->mostrarSolicitudes($idSucursal);
 		$data = Array();
-		while($reg = $rspta->fetch_object()){
-			$data[] = array(
-				"0" => '<button class="btn btn-warning" onclick="agregarProducto('.$reg->idProducto.', \''.$reg->nombre.'\', precio'.$reg->idProducto.')"><span class="fa fa-plus"></span></button>',
-				"1" => $reg->nombre,
-				"2" => "<img src='../files/productos/".$reg->imagen."' height='70px' width='70px'/>",
-				"3" => '<span id="precio'.$reg->idProducto.'">'.$reg->precioActual.'</span>'
-			);
-		}
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->cantidadPedida,
+					"2" => '<input type="number" min="0" max="999999999" class="form-control" placeholder="Inserte cantidad a enviar" id="i'.$i.'">',
+					"3" => '<button class="btn btn-success" onclick="enviarInsumo('.$reg->idTransporteInsumo.', '.$reg->idInsumoEnSucursal.', i'.$i.')">Enviar Insumo</button>'
+				);
+				$i++;
+			}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
 			"iTotalDisplayRecords" => count($data),
 			"aaData" => $data
 		);
-		
 		echo json_encode($results);
-		
 		break;
-
+	case 'listReceived':
+		$i = 0;
+		$rspta = $transporte->confirmarRecepcion($miSucursal);
+		$data = Array();
+		if($rspta != false)
+			$i = 0;
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->cantidadEnviada,
+					"2" => '<input type="number" min="0" max="999999999" class="form-control" placeholder="Inserte cantidad recibida" id="i'.$i.'">',
+					"3" => '<input type="text" maxlength="50" class="form-control" placeholder="Observaciones" id="o'.$i.'">',
+					"4" => '<button class="btn btn-success" onclick="recibirInsumo('.$reg->idTransporteInsumo.', '.$reg->idInsumoEnSucursal.', i'.$i.', o'.$i.')">Confirmar Recibido</button>'
+				);
+				$i++;
+			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

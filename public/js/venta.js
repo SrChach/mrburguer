@@ -132,7 +132,6 @@ function eliminarProducto(idFila){
 function showOneVenta(idventa) {
 	$("#pagoTarjeta").selectpicker('refresh');
 	$("#btnGuardar").hide();
-	$("#btnAgregarProducto").hide();
 
 	$.post("../ajax/venta.php?op=listElement&vt="+idventa, function(r){
 		$("#productos").html(r);
