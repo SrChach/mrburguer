@@ -16,7 +16,7 @@ $observaciones = isset($_POST["observaciones"])? limpiarCadena($_POST["observaci
 
 switch ($_GET["op"]){
 	case 'request':
-		$rspta = $transporte->pedir($_POST["idInsumoEnSucursal"], $_POST["cantidadPedida"]);
+		$rspta = $transporte->pedir($_POST["idIES"], $_POST["cantidadPedida"]);
 		echo $rspta ? "Petición realizada" : "No se pudo hacer la petición";
 		break;
 	case 'send':
@@ -36,7 +36,7 @@ switch ($_GET["op"]){
 		if($rspta != false)
 			while($reg = $rspta->fetch_object()){
 				$data[] = array(
-					"0" => '<button class="btn btn-warning" onclick="agregarInsumo('.$reg->idInsumoEnSucursal.', \''.$reg->nombre.'\', i'.$i.')"><span class="fa fa-plus"></span></button>',
+					"0" => '<button class="btn btn-warning" onclick="agregarInsumo('.$reg->idInsumoEnSucursal.', \''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
 					"1" => $reg->nombre
 				);
 				$i++;
@@ -62,6 +62,24 @@ switch ($_GET["op"]){
 					"3" => '<button class="btn btn-success" onclick="enviarInsumo('.$reg->idTransporteInsumo.', '.$reg->idInsumoEnSucursal.', i'.$i.')">Enviar Insumo</button>'
 				);
 				$i++;
+			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'myPetitions':
+		$rspta = $transporte->mostrarSolicitudes($miSucursal);
+		$data = Array();
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->cantidadPedida
+				);
 			}
 		$results = array(
 			"sEcho" => 1,

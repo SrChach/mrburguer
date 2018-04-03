@@ -51,4 +51,4 @@
 	require 'footer.php';
 ?>
 
-<script type="text/javascript" src="../public/js/recibeInsumo.js"></script>
+<script type="text/javascript" src="../public/js/recepcion.js"></script>

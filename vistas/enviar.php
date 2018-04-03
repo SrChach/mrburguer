@@ -49,4 +49,4 @@
 	require 'footer.php';
 ?>
 
-<script type="text/javascript" src="../public/js/enviaInsumo.js"></script>
+<script type="text/javascript" src="../public/js/enviar.js"></script>
