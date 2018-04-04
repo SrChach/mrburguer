@@ -52,7 +52,7 @@ Class TransporteInsumo{
 	}
 	
 	public function recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones){
-		$sql = "UPDATE transporteInsumo SET cantidadRecibida='$cantidadRecibida', fechaRecepcion=current_timestamp, idEmpleadoRecibe='$idEmpleadoRecibe', observaciones='$observaciones'";
+		$sql = "UPDATE transporteInsumo SET cantidadRecibida='$cantidadRecibida', fechaRecepcion=current_timestamp, idEmpleadoRecibe='$idEmpleadoRecibe', observaciones='$observaciones' WHERE idTransporteInsumo='$idTransporteInsumo'";
 		return ejecutarConsulta($sql);
 	}
 
