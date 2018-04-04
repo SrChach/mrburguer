@@ -34,6 +34,9 @@ function necesidades(){
 	$.post("../ajax/transporteInsumo.php?op=listNeeds",{}, function(data, status){
 		$("#necesidades").html(data);
  	});
+ 	$.post("../ajax/transporteInsumo.php?op=toConfirm",{}, function(data, status){
+		$("#notif").html(data);
+ 	});
 }
 
 necesidades();

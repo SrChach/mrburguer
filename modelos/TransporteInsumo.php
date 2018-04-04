@@ -29,7 +29,7 @@ Class TransporteInsumo{
 
 	public function enviar($idTransporteInsumo, $idInsumoEnSucursal, $cantidadEnviada){
 		$sinErrores = true;
-		$checar = "SELECT I.existencias, I.idInsumo FROM insumoEnSucursal IES join insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idInsumoEnSucursal='$idInsumoEnSucursal'";
+		$checar = "SELECT I.existencias, I.idInsumo FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idInsumoEnSucursal='$idInsumoEnSucursal'";
 		$insumo = consultarFila($checar);
 		$xst = $insumo['existencias'];
 		$idInsumo = $insumo['idInsumo'];
@@ -52,7 +52,7 @@ Class TransporteInsumo{
 	
 	public function recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones){
 		$sinErrores = true;
-		$checar = "SELECT IES.cantidad, IES.idInsumoEnSucursal FROM transporteInsumo T join insumoEnSucursal IES ON T.idInsumoEnSucursal=IES.idInsumoEnSucursal WHERE T.idTransporteInsumo='$idTransporteInsumo'";
+		$checar = "SELECT IES.cantidad, IES.idInsumoEnSucursal FROM transporteInsumo T JOIN insumoEnSucursal IES ON T.idInsumoEnSucursal=IES.idInsumoEnSucursal WHERE T.idTransporteInsumo='$idTransporteInsumo'";
 		$ies = consultarFila($checar);
 		$xst = $ies["cantidad"];
 		$idIES = $ies["idInsumoEnSucursal"];
@@ -79,7 +79,7 @@ Class TransporteInsumo{
 	}
 
 	public function sucursalesNecesitadas(){
-		$sql = "SELECT IES.idSucursal, sucursal.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T join insumoEnSucursal IES join sucursal on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idSucursal=sucursal.idSucursal GROUP BY IES.idSucursal";
+		$sql = "SELECT IES.idSucursal, sucursal.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T JOIN insumoEnSucursal IES JOIN sucursal on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idSucursal=sucursal.idSucursal GROUP BY IES.idSucursal";
 		return ejecutarConsulta($sql);
 	}
 
@@ -91,6 +91,11 @@ Class TransporteInsumo{
 	public function confirmarRecepcion($idSucursal){
 		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, T.nombre, TI.cantidadEnviada FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadEnviada FROM transporteInsumo WHERE (fechaEnvío IS NOT NULL) and (cantidadRecibida IS NULL)) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
 		return ejecutarConsulta($sql);
+	}
+
+	public function porConfirmar($idSucursal){
+		$sql = "SELECT count(T.idTransporteInsumo) as bandera FROM transporteInsumo T JOIN insumoEnSucursal IES ON T.idInsumoEnSucursal=IES.idInsumoEnSucursal WHERE (IES.idSucursal='$idSucursal') and (T.cantidadEnviada IS NOT NULL) and (T.cantidadRecibida IS NULL)";
+		return consultarFila($sql);
 	}
 
 }

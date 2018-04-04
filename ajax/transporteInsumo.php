@@ -123,6 +123,12 @@ switch ($_GET["op"]){
 			}
 		echo $cadena;
 		break;
+	case 'toConfirm':
+		$rspta = $transporte->porConfirmar($idEmpleadoRecibe);
+		if($rspta["bandera"] != 0){
+			echo '<a href="../vistas/recepcion.php">Han enviado insumos a tu sucursal. Confirma de recibido en cuanto lleguen</a><br>';
+		}
+		break;
 }
 
 ?>

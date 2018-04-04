@@ -22,6 +22,11 @@
 	</div>
 	<div class="col-xs-12 col-sm-6">
 		<h3 class="text-center borde">Últimos movimientos</h3><br/>
+		<?php 
+			if($_SESSION['empleado']==1){
+				echo '<div id="notif"></div>';	
+			}
+		?>
 	</div>
 </div>
 
