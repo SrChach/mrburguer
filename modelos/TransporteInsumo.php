@@ -28,26 +28,10 @@ Class TransporteInsumo{
 	}
 
 	public function enviar($idTransporteInsumo, $idInsumoEnSucursal, $cantidadEnviada){
-		$sinErrores = true;
-		$elementoActual = 0;
-
-		while($elementoActual < count($cantidadPedida)){
-			$idInsumo = 0;
-			$temp = "SELECT idInsumo FROM insumoEnSucursal WHERE idInsumoEnSucursal=$idInsumoEnSucursal[$elementoActual]";
-			$idInsumo = consultarFila($temp)['idInsumo'];
-			if($idTransporteInsumo[$elementoActual] == 0){	
-				if($idInsumo != 0){
-					$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaEnvio, cantidadEnviada) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadEnviada[$elementoActual])";
-					ejecutarConsulta($sql) or $sinErrores = false;	
-				} else {
-					$sinErrores = false;
-				}
-			} else {
-				$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada[$elementoActual]' WHERE idTransporteInsumo='$idTransporteInsumo[$elementoActual]'";
-				ejecutarConsulta($sql) or $sinErrores = false;
-			}
-			$elementoActual++;
-		}
+		
+		$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
+		return ejecutarConsulta($sql);
+	
 		return $sinErrores;
 	}
 	
