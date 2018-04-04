@@ -35,7 +35,7 @@ Class TransporteInsumo{
 		$idInsumo = $insumo['idInsumo'];
 
 		if(($xst >= $cantidadEnviada) && ($cantidadEnviada > 0) ){
-			$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
+			$sql = "UPDATE transporteInsumo SET fechaEnvío=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
 			ejecutarConsulta($sql) or $sinErrores=false;
 
 			if($sinErrores){
