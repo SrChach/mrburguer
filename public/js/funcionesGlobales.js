@@ -1,11 +1,11 @@
 "use strict";
 
 var tabla = null;
-const vista = (window.location.href).match(/\w+(?=\.php)/)[0];
+var vista = (window.location.href).match(/\w+(?=\.php)/)[0];
 
 function iniciar(){
 	mostrarform(false);
-	listar();
+	listar(arguments[0]);
 	$("#formulario").on("submit", function(e){
 		saveEdit(e);
 	});
@@ -74,7 +74,26 @@ function showOne(id){
 	}
 }
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 function listar(){
+	var url = "";
+	switch(vista){
+		case "enviar":
+			url = "../ajax/transporteInsumo.php?op=listRequests&SUC="+arguments[0];
+			break;
+		case "recepcion":
+			url = "../ajax/transporteInsumo.php?op=listReceived";
+			break;
+		default:
+			url = "../ajax/"+vista+".php?op=list";
+			break;
+	}
 	tabla = $("#tbllistado").dataTable({
 		"aProcessing" : true,
 		"aServerSide": true,
@@ -85,7 +104,7 @@ function listar(){
 			"pdf"
 		],
 		"ajax": {
-			url: "../ajax/"+vista+".php?op=list",
+			url: url,
 			type: "get",
 			dataType: "json",
 			error: function(e){
@@ -131,12 +150,24 @@ function activate(id){
 }
 
 function saveEdit(e){
+	var url = "";
+	switch(vista){
+		case "enviar":
+			url = "../ajax/transporteInsumo.php?op=send";
+			break;
+		case "recepcion":
+			url = "../ajax/transporteInsumo.php?op=receive";
+			break;
+		default:
+			url = "../ajax/"+vista+".php?op=saveEdit";
+			break;
+	}
 	e.preventDefault();
 	$("#btnGuardar").prop("disabled", true);
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/"+vista+".php?op=saveEdit",
+		url: url,
 		type: "POST",
 		data: formData,
 		contentType: false,
