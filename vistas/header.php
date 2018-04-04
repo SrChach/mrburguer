@@ -161,11 +161,13 @@
 								echo '
 									<li class="treeview">
 										<a href="#">
-											<i class="fa fa-credit-card"></i> <span>Ventas</span>
+											<i class="fa fa-male"></i> <span>Empleado</span>
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
-											<li><a href="venta.php"><i class="fa fa-circle-o"></i>Ventas</a></li>
+											<li><a href="venta.php"><i class="fa fa-credit-card"></i>Mis ventas</a></li>
+											<li><a href="peticion.php"><i class="fa fa-circle-o"></i>Peticiones a bodega</a></li><li>
+											<a href="recepcion.php"><i class="fa fa-circle-o"></i>Confirmar recepcion</a></li>
 										</ul>
 									</li>';
 							}

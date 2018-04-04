@@ -28,7 +28,6 @@ switch ($_GET["op"]){
 		echo $rspta ? "Recepción confirmada" : "No se pudieron registrar los cambios";
 		break;
 
-	
 	case 'listOptions':
 		$i = 0;
 		$rspta = $transporte->paraPedir($miSucursal);
@@ -93,7 +92,7 @@ switch ($_GET["op"]){
 		$i = 0;
 		$rspta = $transporte->confirmarRecepcion($miSucursal);
 		$data = Array();
-		if($rspta != false)
+		if($rspta != false){
 			$i = 0;
 			while($reg = $rspta->fetch_object()){
 				$data[] = array(
@@ -105,6 +104,7 @@ switch ($_GET["op"]){
 				);
 				$i++;
 			}
+		}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
@@ -113,7 +113,16 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
-
+	case 'listNeeds':
+		$rspta = $transporte->sucursalesNecesitadas();
+		$cadena = "";
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				if($reg->idSucursal != "")
+				$cadena = $cadena.'<a href="../vistas/enviar.php?SUC='.$reg->idSucursal.'">La sucursal '.$reg->nombre.' solicita insumos</a><br>';
+			}
+		echo $cadena;
+		break;
 }
 
 ?>

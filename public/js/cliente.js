@@ -29,3 +29,11 @@ function mostrarform(flag){
 		$("#titulo").html("Clientes");
 	}
 }
+
+function necesidades(){
+	$.post("../ajax/transporteInsumo.php?op=listNeeds",{}, function(data, status){
+		$("#necesidades").html(data);
+ 	});
+}
+
+necesidades();

@@ -34,7 +34,7 @@ Class TransporteInsumo{
 		$xst = $insumo['existencias'];
 		$idInsumo = $insumo['idInsumo'];
 
-		if(($xst >= $cantidadEnviada) && ($cantidadEnviada > 0) ){
+		if(($xst >= $cantidadEnviada) && ($cantidadEnviada >=0) ){
 			$sql = "UPDATE transporteInsumo SET fechaEnvío=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
 			ejecutarConsulta($sql) or $sinErrores=false;
 
@@ -48,12 +48,29 @@ Class TransporteInsumo{
 		}
 
 		return $sinErrores;
-		
 	}
 	
 	public function recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones){
-		$sql = "UPDATE transporteInsumo SET cantidadRecibida='$cantidadRecibida', fechaRecepcion=current_timestamp, idEmpleadoRecibe='$idEmpleadoRecibe', observaciones='$observaciones' WHERE idTransporteInsumo='$idTransporteInsumo'";
-		return ejecutarConsulta($sql);
+		$sinErrores = true;
+		$checar = "SELECT IES.cantidad, IES.idInsumoEnSucursal FROM transporteInsumo T join insumoEnSucursal IES ON T.idInsumoEnSucursal=IES.idInsumoEnSucursal WHERE T.idTransporteInsumo='$idTransporteInsumo'";
+		$ies = consultarFila($checar);
+		$xst = $ies["cantidad"];
+		$idIES = $ies["idInsumoEnSucursal"];
+
+		if($cantidadRecibida >= 0){
+			$sql = "UPDATE transporteInsumo SET cantidadRecibida='$cantidadRecibida', fechaRecepcion=current_timestamp, idEmpleadoRecibe='$idEmpleadoRecibe', observaciones='$observaciones' WHERE idTransporteInsumo='$idTransporteInsumo'";
+			ejecutarConsulta($sql) or $sinErrores=false;
+			if($sinErrores){
+				$cantidad = $xst + $cantidadRecibida;
+				$agregar = "UPDATE insumoEnSucursal SET cantidad=$cantidad WHERE idInsumoEnSucursal='$idIES'";
+				ejecutarConsulta($agregar) or $sinErrores = false;
+			}
+
+		} else  {
+			$sinErrores = false;
+		}
+
+		return $sinErrores;
 	}
 
 	public function paraPedir($idSucursal){
@@ -62,7 +79,7 @@ Class TransporteInsumo{
 	}
 
 	public function sucursalesNecesitadas(){
-		$sql = "SELECT IES.idSucursal, sucursal.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T join insumoEnSucursal IES join sucursal on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idSucursal=sucursal.idSucursal";
+		$sql = "SELECT IES.idSucursal, sucursal.nombre, count(IES.idSucursal) as contador FROM (SELECT idInsumoEnSucursal FROM transporteInsumo WHERE cantidadEnviada IS NULL) T join insumoEnSucursal IES join sucursal on IES.idInsumoEnSucursal=T.idInsumoEnSucursal and IES.idSucursal=sucursal.idSucursal GROUP BY IES.idSucursal";
 		return ejecutarConsulta($sql);
 	}
 

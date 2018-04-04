@@ -6,16 +6,22 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-		if($_SESSION['empleado']==1){
+		if(isset($_SESSION['idEmpleado'])){
 ?>
 <link rel="stylesheet" type="text/css" href="../public/css/inicio.css">
 <div class="content-wrapper">
 	<h1 class="text-center">Bienvenido <?php echo $_SESSION["nomPila"]; ?></h1>
-	<div class="col-xs-12 col-sm-6 borde">
-		<h3 class="text-center" >Ventas recientes</h3>
+	<div class="col-xs-12 col-sm-6">
+		<h3 class="text-center borde" >Ventas recientes</h3><br/>
+		<?php 
+			if($_SESSION['inventarioCentral']==1){
+				echo '<div id="necesidades"></div>';
+			}
+
+		?>
 	</div>
-	<div class="col-xs-12 col-sm-6 borde">
-		<h3 class="text-center">Últimos movimientos</h3>
+	<div class="col-xs-12 col-sm-6">
+		<h3 class="text-center borde">Últimos movimientos</h3><br/>
 	</div>
 </div>
 
