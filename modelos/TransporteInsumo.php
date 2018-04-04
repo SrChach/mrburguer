@@ -28,11 +28,27 @@ Class TransporteInsumo{
 	}
 
 	public function enviar($idTransporteInsumo, $idInsumoEnSucursal, $cantidadEnviada){
-		
-		$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
-		return ejecutarConsulta($sql);
-	
+		$sinErrores = true;
+		$checar = "SELECT I.existencias, I.idInsumo FROM insumoEnSucursal IES join insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idInsumoEnSucursal='$idInsumoEnSucursal'";
+		$insumo = consultarFila($checar);
+		$xst = $insumo['existencias'];
+		$idInsumo = $insumo['idInsumo'];
+
+		if(($xst >= $cantidadEnviada) && ($cantidadEnviada > 0) ){
+			$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
+			ejecutarConsulta($sql) or $sinErrores=false;
+
+			if($sinErrores){
+				$cantidad = $xst - $cantidadEnviada;
+				$descontar = "UPDATE insumo SET existencias=$cantidad WHERE idInsumo='$idInsumo'";
+				ejecutarConsulta($descontar) or $sinErrores = false;
+			}
+		} else {
+			$sinErrores = false;
+		}
+
 		return $sinErrores;
+		
 	}
 	
 	public function recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones){
