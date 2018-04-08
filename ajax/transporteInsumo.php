@@ -27,10 +27,53 @@ switch ($_GET["op"]){
 		$rspta = $transporte->recibir($idTransporteInsumo, $cantidadRecibida, $idEmpleadoRecibe, $observaciones);
 		echo $rspta ? "Recepción confirmada" : "No se pudieron registrar los cambios";
 		break;
-
+	case 'sendWithoutRequest':
+		$rspta = $transporte->enviarSinPeticion($_POST["idIES"], $_POST["CE"]);
+		echo $rspta ? "Enviado" : "No se pudo enviar";
+		break;
 	case 'listOptions':
 		$i = 0;
 		$rspta = $transporte->paraPedir($miSucursal);
+		$data = Array();
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => '<button class="btn btn-warning" onclick="agregarInsumo('.$reg->idInsumoEnSucursal.', \''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
+					"1" => $reg->nombre
+				);
+				$i++;
+			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+		case 'optionsToSend':
+		$i = 0;
+		$rspta = $transporte->paraPedir($idSucursal);
+		$data = Array();
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => '<button class="btn btn-warning" onclick="agregarInsumo('.$reg->idInsumoEnSucursal.', \''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
+					"1" => $reg->nombre
+				);
+				$i++;
+			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'listToSend':
+		$i = 0;
+		$rspta = $transporte->paraPedir($idSucursal);
 		$data = Array();
 		if($rspta != false)
 			while($reg = $rspta->fetch_object()){
@@ -62,6 +105,28 @@ switch ($_GET["op"]){
 				);
 				$i++;
 			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'listSent':
+		$i = 0;
+		$rspta = $transporte->confirmarRecepcion($idSucursal);
+		$data = Array();
+		if($rspta != false){
+			$i = 0;
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->cantidadEnviada
+				);
+				$i++;
+			}
+		}
 		$results = array(
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),

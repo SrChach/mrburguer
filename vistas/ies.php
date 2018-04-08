@@ -1,5 +1,12 @@
 <?php
-	require 'header.php';
+	ob_start();
+	session_start();
+
+	if(!isset($_SESSION["username"])){
+		header("location: index.html");
+	} else {
+		require 'header.php';
+		if($_SESSION['sucursales']==1){
 ?>
 
 <!--Contenido-->
@@ -46,7 +53,15 @@
 	<!--Fin-Contenido-->
 
 <?php
-	require 'footer.php';
+		} else {
+			require 'acceso_denegado.php';
+		}
+		require 'footer.php';
 ?>
 
 <script type="text/javascript" src="../public/js/ies.js"></script>
+
+<?php 
+	}
+	ob_end_flush();
+?>

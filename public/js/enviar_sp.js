@@ -7,7 +7,13 @@ function init(){
 	$("#formulario").on("submit",function(e){
 		saveEdit(e);	
 	});
+}
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 function limpiar(){
@@ -17,17 +23,20 @@ function limpiar(){
 function mostrarform(flag){
 	limpiar();
 	if (flag){
-		$("#cabecera").html("Nueva Peticion");
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
 		$("#btnAgregar").hide();
 		listarInsumos();
+		$("#cabecera").text("Nuevo Envío");
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		insumos=0;
 		$("#btnAgregarInsumo").show();
 	} else {
-		$("#cabecera").html("Peticiones realizadas");
+		$.post("../ajax/pes.php?op=gname&SUC="+getParameterByName("SUC"), function(r){
+			data = JSON.parse(r);
+			$("#cabecera").text("Envios hechos a - \""+data.nom+"\" ");
+		});
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnAgregar").show();
@@ -50,7 +59,7 @@ function listar(){
 			'pdf'
 		],
 		"ajax": {
-			url: '../ajax/transporteInsumo.php?op=myPetitions',
+			url: '../ajax/transporteInsumo.php?op=listSent&SUC='+getParameterByName("SUC"),
 			type : "get",
 			dataType : "json",
 			error: function(e){
@@ -70,7 +79,7 @@ function listarInsumos(){
 		dom: 'Bfrtip',
 		buttons: [],
 		"ajax":{
-			url: '../ajax/transporteInsumo.php?op=listOptions',
+			url: '../ajax/transporteInsumo.php?op=optionsToSend&SUC='+getParameterByName("SUC"),
 			type : "get",
 			dataType : "json",
 			error: function(e){
@@ -88,7 +97,7 @@ function saveEdit(e){
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/transporteInsumo.php?op=request",
+		url: "../ajax/transporteInsumo.php?op=sendWithoutRequest",
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -108,13 +117,13 @@ var insumos=0;
 $("#btnGuardar").hide();
 
 function agregarInsumo(idIES, nombre){
-	var cantidadPedida=1;
+	var CE=1;
 	if (idIES!=""){
-		var subtotal=cantidadPedida;
+		var subtotal=CE;
 		var fila='<tr class="filas" id="fila'+i+'">'+
 		'<td><button type="button" class="btn btn-danger" onclick="eliminarInsumo('+i+')">X</button></td>'+
 		'<td><input type="hidden" name="idIES[]" value="'+idIES+'">'+nombre+'</td>'+
-		'<td><input type="number" name="cantidadPedida[]" id="cantidadPedida[]" value="'+cantidadPedida+'" required></td>'+
+		'<td><input type="number" name="CE[]" id="CE[]" value="'+CE+'" required></td>'+
 		'</tr>';
 		i++;
 		insumos=insumos+1;

@@ -63,6 +63,25 @@ switch ($_GET["op"]){
 			echo '<option value='.$reg->idFranquicia.'>'. $reg->nombre.'</option>';
 		}
 		break;
+	case 'listActives':
+		$rspta = $sucursal->listarActivas();
+		$data = Array();
+		if($rspta != false)
+			while($reg = $rspta->fetch_object()){
+				$data[] = Array(
+					"0" => $reg->nombre,
+					"1" => $reg->franquicia,
+					"2" => '<a href="enviar_sp.php?SUC='.$reg->idsucursal.'"><button class="btn btn-primary">Enviar nuevo cargamento</button></a>'
+				);
+			}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 
 }
 

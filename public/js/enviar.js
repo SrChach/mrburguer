@@ -1,7 +1,7 @@
 const datos = (function(){
 	const elementos = {
-		limpiar: ["#idTransporteInsumo", "#idInsumoEnSucursal", "#cantidadEnviada"],
-		showOne: ["idTransporteInsumo", "idInsumoEnSucursal", "cantidadEnviada"],
+		limpiar: [],
+		showOne: [],
 		parametro: "idTransporteInsumo"
 	}
 
@@ -22,13 +22,7 @@ $.post("../ajax/ies.php?op=gname&SUC="+param, function(r){
 
 function mostrarform(flag){
 	limpiar();
-	if(flag){
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-		$("#titulo").html("Recibir insumo:");
-	} else {
+	if(!flag){
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnagregar").show();

@@ -118,6 +118,7 @@
 										</a>
 										<ul class="treeview-menu">
 											<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
+											<li><a href="envioSuc.php"><i class="fa fa-circle-o"></i>Enviar Insumos</a></li>
 										</ul>
 									</li>';
 							}

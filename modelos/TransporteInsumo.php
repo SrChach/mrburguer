@@ -27,6 +27,25 @@ Class TransporteInsumo{
 		return $sinErrores;
 	}
 
+	public function enviarSinPeticion($idInsumoEnSucursal, $cantidadEnviada){
+		$sinErrores = true;
+		$elementoActual=0;
+
+		while($elementoActual < count($cantidadEnviada)){
+			$idInsumo = 0;
+			$temp = "SELECT idInsumo FROM insumoEnSucursal WHERE idInsumoEnSucursal=$idInsumoEnSucursal[$elementoActual]";
+			$idInsumo = consultarFila($temp)['idInsumo'];
+			if($idInsumo != 0){
+				$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaEnvío, cantidadEnviada) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadEnviada[$elementoActual])";
+				ejecutarConsulta($sql) or $sinErrores = false;	
+			} else {
+				$sinErrores = false;
+			}
+			$elementoActual++;
+		}
+		return $sinErrores;
+	}
+
 	public function enviar($idTransporteInsumo, $idInsumoEnSucursal, $cantidadEnviada){
 		$sinErrores = true;
 		$checar = "SELECT I.existencias, I.idInsumo FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idInsumoEnSucursal='$idInsumoEnSucursal'";
@@ -74,7 +93,7 @@ Class TransporteInsumo{
 	}
 
 	public function paraPedir($idSucursal){
-		$sql = "SELECT IES.idInsumoEnSucursal, IES.idInsumo, insumo.nombre FROM (SELECT idInsumoEnSucursal, idInsumo FROM insumoEnSucursal WHERE idSucursal='$idSucursal') IES JOIN insumo ON IES.idInsumo = insumo.idInsumo";
+		$sql = "SELECT IES.idInsumoEnSucursal, IES.idInsumo, insumo.nombre FROM (SELECT idInsumoEnSucursal, idInsumo FROM insumoEnSucursal WHERE idSucursal='$idSucursal' and isActive='1') IES JOIN insumo ON IES.idInsumo = insumo.idInsumo";
 		return ejecutarConsulta($sql);
 	}
 

@@ -38,6 +38,11 @@ Class Sucursal{
 		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia', sucursal.isMobile, sucursal.telefono, sucursal.isActive FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia";
 		return ejecutarConsulta($sql);
 	}
+	
+	public function listarActivas(){
+		$sql = "SELECT sucursal.idsucursal, sucursal.nombre, franquicia.nombre as 'franquicia' FROM sucursal JOIN franquicia ON sucursal.idFranquicia=franquicia.idFranquicia WHERE sucursal.isActive='1'";
+		return ejecutarConsulta($sql);
+	}
 
 	public function select(){
 		$sql = "SELECT sucursal.idSucursal, sucursal.nombre, franquicia.nombre as franquicia FROM sucursal join franquicia on sucursal.idFranquicia=franquicia.idFranquicia WHERE (franquicia.isActive=1)";

@@ -6,7 +6,7 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-		if($_SESSION['empleado']==1){
+		if($_SESSION['inventarioCentral']==1){
 ?>
 
 			<!-- Content Wrapper. Contains page content -->
@@ -17,18 +17,18 @@
 						<div class="col-md-12">
 							<div class="box">
 								<div class="box-header with-border">
-									<h1 class="box-title"><span id="cabecera"></span> <button class="btn btn-success" id="btnAgregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Añadir peticiones</button></h1>
+									<h1 class="box-title"><span id="cabecera"></span>&nbsp; <button class="btn btn-success" id="btnAgregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Nuevo Envio</button></h1>
 									<div class="panel-body table-responsive" id="listadoregistros">
 										<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 											<thead>
 												<th>Nombre Insumo</th>
-												<th>Cantidad Pedida</th>
+												<th>Cantidad Enviada</th>
 											</thead>
 											<tbody>
 											</tbody>
 											<tfoot>
 												<th>Nombre Insumo</th>
-												<th>Cantidad Pedida</th>
+												<th>Cantidad Enviada</th>
 											</tfoot>
 										</table>
 									</div>
@@ -52,7 +52,7 @@
 													<tfoot>
 														<th>Opciones</th>
 														<th>Insumo</th>
-														<th><button type="button" onclick="modificarSubtotales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></th>
+														<th>Cantidad</th>
 													</tfoot>
 													<tbody>
 														
@@ -114,9 +114,10 @@
 		require 'footer.php';
 ?>
 
-<script type="text/javascript" src="../public/js/peticion.js"></script>
+		<script type="text/javascript" src="../public/js/enviar_sp.js"></script>
 
 <?php 
 	}
 	ob_end_flush();
 ?>
+

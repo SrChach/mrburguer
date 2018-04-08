@@ -28,7 +28,7 @@ Class Empleado{
 	public function editar($idEmpleado, $idSucursal, $username, $password, $nomPila, $apPaterno, $apMaterno, $fechaIngreso, $imagen, $permisos){
 		$sql = "UPDATE empleado SET idSucursal='$idSucursal', username='$username', password='$password', nomPila='$nomPila', apPaterno='$apPaterno', apMaterno='$apMaterno', fechaIngreso='$fechaIngreso', imagen='$imagen' WHERE idEmpleado='$idEmpleado'";
 		ejecutarConsulta($sql);
-		
+
 		//Eliminamos todos los permisos para volverlos a registrar
 		$sqldel = "DELETE FROM empleadoPermiso WHERE idEmpleado='$idEmpleado'";
 		ejecutarConsulta($sqldel);

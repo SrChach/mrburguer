@@ -6,7 +6,7 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-		if($_SESSION['sucursales']==1){
+		if($_SESSION['inventarioCentral']==1){
 ?>
 
 		<!-- Content Wrapper. Contains page content -->
@@ -18,21 +18,19 @@
 								<div class="box">
 									<!-- /.box-header -->
 									<div class="box-header with-border">
-												<h1 class="box-title" id="box-title">Menú - "<span id="nombresucursal"></span>"</h1>
+												<h1 class="box-title" id="box-title">Seleccionar sucursal para envio de Insumos</h1>
 												<div class="panel-body table-responsive" id="listadoregistros">
 														<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 															<thead>
-																<th>Producto</th>
-																<th>Precio Actual</th>
-																<th>Imagen</th>
+																<th>Sucursal</th>
+																<th>Franquicia</th>
 																<th>Acción</th>
 															</thead>
 															<tbody>
 															</tbody>
 															<tfoot>
-																<th>Producto</th>
-																<th>Precio Actual</th>
-																<th>Imagen</th>
+																<th>Sucursal</th>
+																<th>Franquicia</th>
 																<th>Acción</th>
 															</tfoot>
 														</table>
@@ -54,8 +52,7 @@
 		require 'footer.php';
 ?>
 
-		<script type="text/javascript" src="../public/js/menu.js"></script>
-
+		<script type="text/javascript" src="../public/js/envioSuc.js"></script>
 
 <?php 
 	}

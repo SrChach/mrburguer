@@ -15,22 +15,6 @@ const datos = (function(){
 iniciar();
 $("#nombresucursal").html("Confirmar recepcion de Insumos");
 
-function mostrarform(flag){
-	limpiar();
-	if(flag){
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-		$("#titulo").html("Recibir insumo:");
-	} else {
-		$("#listadoregistros").show();
-		$("#formularioregistros").hide();
-		$("#btnagregar").show();
-		$("#titulo").html("Insumos");
-	}
-}
-
 function recibirInsumo(idTransporteInsumo, idInsumoEnSucursal, idCantidadRecibida, idObservacion){
 	if($('#'+idCantidadRecibida.id).val() == ""){
 		bootbox.alert("Antes de proceder, llena el campo \"Cantidad Recibida\"");
