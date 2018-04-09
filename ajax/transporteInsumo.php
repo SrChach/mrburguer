@@ -180,18 +180,21 @@ switch ($_GET["op"]){
 		break;
 	case 'listNeeds':
 		$rspta = $transporte->sucursalesNecesitadas();
-		$cadena = "";
-		if($rspta != false)
+		$cadena = '';
+		if($rspta != false){
 			while($reg = $rspta->fetch_object()){
-				if($reg->idSucursal != "")
-				$cadena = $cadena.'<a href="../vistas/enviar.php?SUC='.$reg->idSucursal.'">La sucursal '.$reg->nombre.' solicita insumos</a><br>';
+				if($reg->idSucursal != ""){
+					$cadena = $cadena.'<div class="col-sm-12 col-md-12 notificacion"></div>';
+					$cadena = $cadena.'<h5><a href="../vistas/enviar.php?SUC='.$reg->idSucursal.'">La sucursal '.$reg->nombre.' solicita insumos</a></h5>';	
+				}
 			}
+		}
 		echo $cadena;
 		break;
 	case 'toConfirm':
 		$rspta = $transporte->porConfirmar($idEmpleadoRecibe);
 		if($rspta["bandera"] != 0){
-			echo '<a href="../vistas/recepcion.php">Han enviado insumos a tu sucursal. Confirma de recibido en cuanto lleguen</a><br>';
+			echo '<div class="col-sm-12 col-md-12 notificacion advertencia"><a href="../vistas/recepcion.php">Han enviado insumos a tu sucursal. Confirma de recibido en cuanto lleguen</a></div>';
 		}
 		break;
 }

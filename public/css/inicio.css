@@ -1,3 +1,14 @@
 .borde{
 	border-bottom: 2px solid #3C8DBC !important;
 }
+.notificacion{
+	background-color: white;
+	box-shadow: 0px 5px 3px #3C8DBC;
+	margin-bottom: 10px;
+}
+.advertencia{
+	box-shadow: 0px 5px 3px yellow;
+}
+.advertencia a{
+	color: #856404;
+}

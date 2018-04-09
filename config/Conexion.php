@@ -20,7 +20,7 @@ if(!function_exists('ejecutarConsulta')){
 
 	function consultarFila($sql){
 		global $conexion;
-		$query = $conexion->query($sql);
+		$query = $conexion->query($sql) or die($conexion->error);
 		$row = $query->fetch_assoc();
 		return $row;
 	}
