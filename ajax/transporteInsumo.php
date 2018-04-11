@@ -51,7 +51,7 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
-		case 'optionsToSend':
+	case 'optionsToSend':
 		$i = 0;
 		$rspta = $transporte->paraPedir($idSucursal);
 		$data = Array();

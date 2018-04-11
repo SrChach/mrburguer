@@ -4,8 +4,9 @@ var tabla = null;
 var vista = (window.location.href).match(/\w+(?=\.php)/)[0];
 
 function iniciar(){
-	if((vista !== "recepcion"))
+	if(vista !== "recepcion"){
 		mostrarform(false);
+	}
 	listar(arguments[0]);
 	$("#formulario").on("submit", function(e){
 		saveEdit(e);
