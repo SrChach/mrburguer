@@ -11,22 +11,24 @@
 <link rel="stylesheet" type="text/css" href="../public/css/inicio.css">
 <div class="content-wrapper">
 	<h1 class="text-center">Bienvenido <?php echo $_SESSION["nomPila"]; ?></h1>
-	<div class="col-xs-12 col-sm-6">
-		<h3 class="text-center borde" >Solicitudes de insumos</h3><br/>
-		<?php 
-			if($_SESSION['inventarioCentral']==1){
-				echo '<div id="necesidades"></div>';
-			}
+	<div class="row">
+		<div class="col-12 col-sm-6">
+			<h3 class="text-center borde" >Solicitudes de insumos</h3>
+			<?php 
+				if($_SESSION['inventarioCentral']==1){
+					echo '<div id="necesidades"></div>';
+				}
 
-		?>
-	</div>
-	<div class="col-xs-12 col-sm-6">
-		<h3 class="text-center borde">Últimos movimientos</h3><br/>
-		<?php 
-			if($_SESSION['empleado']==1){
-				echo '<div id="notif"></div>';	
-			}
-		?>
+			?>
+		</div>
+		<div class="col-12 col-sm-6">
+			<h3 class="text-center borde">Últimos movimientos</h3>
+			<?php 
+				if($_SESSION['empleado']==1){
+					echo '<div id="notif"></div>';	
+				}
+			?>
+		</div>
 	</div>
 </div>
 

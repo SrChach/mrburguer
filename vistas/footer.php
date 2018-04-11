@@ -4,9 +4,8 @@
         </div>
         <strong>Desarrolladores: <a href="https://github.com/srchach">Ignacio Martínez</a>, <a href="https://github.com/andreandyp">André Pozos</a></strong>
     </footer>    
-    <!-- jQuery -->
-    <script src="../public/lib/js/jquery-3.1.1.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
+    <script src="../public/lib/js/jquery-3.3.1.min.js"></script>
+    <script src="../public/lib/js/popper.min.js"></script>
     <script src="../public/lib/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../public/lib/js/app.min.js"></script>

@@ -47,7 +47,7 @@
 									<div class="panel-body" id="formularioregistros">
 											<form name="formulario" id="formulario" method="POST">
 												<div class="row">
-													<div class="col-xs-12 col-sm-6">
+													<div class="col-12 col-sm-6">
 														<h4 class="text-center">Información personal</h4>
 														<input type="hidden" name="idEmpleado" id="idEmpleado" readonly/>
 														<div class="form-group">
@@ -71,7 +71,7 @@
 															<input class="form-control" type="text" name="password" id="password" maxlength="25" required/>
 														</div>
 													</div>
-													<div class="col-xs-12 col-sm-6">
+													<div class="col-12 col-sm-6">
 														<h4 class="text-center">Información de la empresa</h4>
 														<div class="form-group">
 															<label for="imagenactual">Imagen:</label>
@@ -93,7 +93,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-12">
 													<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 													<button type="button" class="btn btn-danger" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
 												</div>

@@ -36,13 +36,13 @@
 									<div class="panel-body" style="height: 400px;" id="formularioregistros">
 										<form name="formulario" id="formulario" method="POST">
 
-											<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+											<div class="form-group col-lg-3 col-md-3 col-sm-6 col-12">
 												<a data-toggle="modal" href="#myModal">
 													<button id="btnAgregarInsumo" type="button" class="btn btn-primary"><span class="fa fa-plus"> Agregar Insumos</span></button>
 												</a>
 											</div>
 
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-12 table-responsive">
 												<table id="insumos" class="table table-stripped table-bordered table-condensed table-hover">
 													<thead style="background-color: #A9D0F5;">
 														<th>Opciones</th>
@@ -60,7 +60,7 @@
 												</table>
 											</div>
 
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-12">
 												<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 												<button type="button" class="btn btn-danger" id="btnCancelar" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
 											</div>
@@ -84,8 +84,8 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Seleccione un Insumo</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
 							<table id="tblInsumos" class="table table-striped table-bordered table-condensed table-hover">

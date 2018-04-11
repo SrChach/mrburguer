@@ -43,8 +43,8 @@
 										</table>
 								</div>
 								<div class="panel-body" id="formularioregistros">
-										<form name="formulario" id="formulario" method="POST">
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<form name="formulario" id="formulario" method="POST" class="row">
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-12">
 												<label>Nombre(*)</label>
 												<input type="hidden" name="idsucursal" id="idsucursal"/>
 												<input class="form-control" type="text" name="nombre" id="nombre" maxlength="45" placeholder="Nombre" required/>

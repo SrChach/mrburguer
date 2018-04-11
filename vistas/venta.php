@@ -45,50 +45,51 @@
 
 									<div class="panel-body" style="height: 400px;" id="formularioregistros">
 										<form name="formulario" id="formulario" method="POST">
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-6">
+													<label>Pago con:</label>
+													<select class="form-control selectpicker" name="pagoTarjeta" id="pagoTarjeta" required>
+														<option value="1">Tarjeta</option>
+														<option value="0">Efectivo</option>
+													</select>
+												</div>
 
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-												<label>Pago con:</label>
-												<select class="form-control selectpicker" name="pagoTarjeta" id="pagoTarjeta" required>
-													<option value="1">Tarjeta</option>
-													<option value="0">Efectivo</option>
-												</select>
+												<div class="form-group col-lg-3 col-md-3 col-sm-6 col-12">
+													<a data-toggle="modal" href="#myModal">
+														<button id="btnAgregarProducto" type="button" class="btn btn-primary"><span class="fa fa-plus">Agregar artículos</span></button>
+													</a>
+												</div>
 											</div>
+											<div class="row">
+												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-12 table-responsive">
+													<table id="productos" class="table table-stripped table-bordered table-condensed table-hover">
+														<thead style="background-color: #A9D0F5;">
+															<th>Opciones</th>
+															<th>Producto</th>
+															<th>Cantidad</th>
+															<th>Precio Unitario</th>
+															<th>Subtotal</th>
+															<th></th>
+														</thead>
+														<tfoot>
+															<th>TOTAL</th>
+															<th></th>
+															<th></th>
+															<th></th>
+															<th></th>
+															<th><h4 id="total">$ 0.00</h4></th>
+														</tfoot>
+														<tbody>
+															
+														</tbody>
+													</table>
+												</div>
 
-											<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-												<a data-toggle="modal" href="#myModal">
-													<button id="btnAgregarProducto" type="button" class="btn btn-primary"><span class="fa fa-plus">Agregar artículos</span></button>
-												</a>
+												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-12">
+													<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+													<button type="button" class="btn btn-danger" id="btnCancelar" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+												</div>
 											</div>
-
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
-												<table id="productos" class="table table-stripped table-bordered table-condensed table-hover">
-													<thead style="background-color: #A9D0F5;">
-														<th>Opciones</th>
-														<th>Producto</th>
-														<th>Cantidad</th>
-														<th>Precio Unitario</th>
-														<th>Subtotal</th>
-														<th></th>
-													</thead>
-													<tfoot>
-														<th>TOTAL</th>
-														<th></th>
-														<th></th>
-														<th></th>
-														<th></th>
-														<th><h4 id="total">$ 0.00</h4></th>
-													</tfoot>
-													<tbody>
-														
-													</tbody>
-												</table>
-											</div>
-
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
-												<button type="button" class="btn btn-danger" id="btnCancelar" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-											</div>
-
 										</form>
 									</div>
 									<div class="box-tools pull-right">
@@ -108,8 +109,8 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Seleccione un Producto</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
 							<table id="tblPES" class="table table-striped table-bordered table-condensed table-hover">
