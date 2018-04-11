@@ -197,6 +197,32 @@ switch ($_GET["op"]){
 			echo '<div class="col-sm-12 col-md-12 notificacion advertencia"><a href="../vistas/recepcion.php">Han enviado insumos a tu sucursal. Confirma de recibido en cuanto lleguen</a></div>';
 		}
 		break;
+	case 'listTransactions':
+		$rspta = $transporte->listar();
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nomPila,
+					"1" => $reg->sucursal,
+					"2" => $reg->insumo,
+					"3" => $reg->cantidadPedida,
+					"4" => $reg->fechaSolicitud,
+					"5" => $reg->cantidadEnviada,
+					"6" => $reg->fechaEnvío,
+					"7" => $reg->cantidadRecibida,
+					"8" => $reg->fechaRecepcion
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 }
 
 ?>

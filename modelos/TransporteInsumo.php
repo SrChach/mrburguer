@@ -117,6 +117,11 @@ Class TransporteInsumo{
 		return consultarFila($sql);
 	}
 
+	public function listar(){
+		$sql = "SELECT E.nomPila, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvío, T.cantidadRecibida, T.fechaRecepcion FROM transporteInsumo T JOIN insumo I JOIN empleado E JOIN (SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS ON (T.idInsumo = I.idInsumo) and (T.idEmpleadoRecibe = E.idEmpleado) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) order by T.fechaSolicitud desc";
+		return ejecutarConsulta($sql);
+	}
+
 }
 
 ?>
