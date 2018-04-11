@@ -202,16 +202,25 @@ switch ($_GET["op"]){
 		$data = Array();
 		if($rspta != false){
 			while($reg = $rspta->fetch_object()){
+				if($reg->fechaEnvio && !$reg->fechaRecepcion){
+					$cadena = '<span class="label bg-yellow">En_Camino<span>';
+				} else if($reg->fechaRecepcion){
+					$cadena = '<span class="label bg-green">Confirmado<span>';
+				} else {
+					$cadena = '<span class="label bg-red">Pedido<span>';
+				}
 				$data[] = array(
-					"0" => $reg->nomPila,
+					"0" => $cadena,
 					"1" => $reg->sucursal,
 					"2" => $reg->insumo,
-					"3" => $reg->cantidadPedida,
-					"4" => $reg->fechaSolicitud,
+					"3" => $reg->cantidadPedida ? $reg->cantidadPedida : "n/a",
+					"4" => $reg->fechaSolicitud ? $reg->fechaSolicitud : "n/a",
 					"5" => $reg->cantidadEnviada,
-					"6" => $reg->fechaEnvío,
-					"7" => $reg->cantidadRecibida,
-					"8" => $reg->fechaRecepcion
+					"6" => $reg->fechaEnvio,
+					"7" => $reg->nomPila,
+					"8" => $reg->cantidadRecibida,
+					"9" => $reg->fechaRecepcion,
+					"10" => $reg->observaciones
 				);
 			}
 		}

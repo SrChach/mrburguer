@@ -144,12 +144,13 @@
 								echo '
 									<li class="treeview">
 										<a href="#">
-											<i class="fa fa-folder"></i> <span>Control de Empleados</span>
+											<i class="fa fa-folder"></i> <span>Control</span>
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
 											<li><a href="empleado.php"><i class="fa fa-circle-o"></i>Empleados</a></li> 
 											<li><a href="permiso.php"><i class="fa fa-circle-o"></i>Permisos</a></li>
+											<li><a href="consultaTransporte.php"><i class="fa fa-circle-o"></i>Consultar Transporte</a></li>
 										</ul>
 									</li>';
 							}

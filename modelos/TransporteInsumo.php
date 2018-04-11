@@ -36,7 +36,7 @@ Class TransporteInsumo{
 			$temp = "SELECT idInsumo FROM insumoEnSucursal WHERE idInsumoEnSucursal=$idInsumoEnSucursal[$elementoActual]";
 			$idInsumo = consultarFila($temp)['idInsumo'];
 			if($idInsumo != 0){
-				$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaEnvío, cantidadEnviada) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadEnviada[$elementoActual])";
+				$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaEnvio, cantidadEnviada) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadEnviada[$elementoActual])";
 				ejecutarConsulta($sql) or $sinErrores = false;	
 			} else {
 				$sinErrores = false;
@@ -54,7 +54,7 @@ Class TransporteInsumo{
 		$idInsumo = $insumo['idInsumo'];
 
 		if(($xst >= $cantidadEnviada) && ($cantidadEnviada >=0) ){
-			$sql = "UPDATE transporteInsumo SET fechaEnvío=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
+			$sql = "UPDATE transporteInsumo SET fechaEnvio=current_timestamp, cantidadEnviada='$cantidadEnviada' WHERE idTransporteInsumo='$idTransporteInsumo'";
 			ejecutarConsulta($sql) or $sinErrores=false;
 
 			if($sinErrores){
@@ -103,12 +103,12 @@ Class TransporteInsumo{
 	}
 
 	public function mostrarSolicitudes($idSucursal){
-		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, TI.cantidadPedida, T.nombre FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadPedida FROM transporteInsumo WHERE fechaEnvío IS NULL) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
+		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, TI.cantidadPedida, T.nombre FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadPedida FROM transporteInsumo WHERE fechaEnvio IS NULL) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
 		return ejecutarConsulta($sql);
 	}
 
 	public function confirmarRecepcion($idSucursal){
-		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, T.nombre, TI.cantidadEnviada FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadEnviada FROM transporteInsumo WHERE (fechaEnvío IS NOT NULL) and (cantidadRecibida IS NULL)) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
+		$sql = "SELECT TI.idTransporteInsumo, TI.idInsumoEnSucursal, T.nombre, TI.cantidadEnviada FROM (SELECT idTransporteInsumo, idInsumoEnSucursal, cantidadEnviada FROM transporteInsumo WHERE (fechaEnvio IS NOT NULL) and (cantidadRecibida IS NULL)) TI JOIN (SELECT IES.idInsumoEnSucursal, I.nombre FROM insumoEnSucursal IES JOIN insumo I ON IES.idInsumo=I.idInsumo WHERE IES.idSucursal='$idSucursal') T on TI.idInsumoEnSucursal=T.idInsumoEnSucursal";
 		return ejecutarConsulta($sql);
 	}
 
@@ -118,10 +118,9 @@ Class TransporteInsumo{
 	}
 
 	public function listar(){
-		$sql = "SELECT E.nomPila, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvío, T.cantidadRecibida, T.fechaRecepcion FROM transporteInsumo T JOIN insumo I JOIN empleado E JOIN (SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS ON (T.idInsumo = I.idInsumo) and (T.idEmpleadoRecibe = E.idEmpleado) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) order by T.fechaSolicitud desc";
+		$sql = "SELECT E.nomPila, CT.idEmpleadoRecibe, CT.sucursal, CT.insumo, CT.cantidadPedida, CT.fechaSolicitud, CT.cantidadEnviada, CT.fechaEnvio, CT.cantidadRecibida, CT.fechaRecepcion, CT.observaciones FROM (SELECT T.idEmpleadoRecibe, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvio, T.cantidadRecibida, T.fechaRecepcion, T.observaciones FROM transporteInsumo T JOIN insumo I JOIN (SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS ON (T.idInsumo = I.idInsumo) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) order by T.fechaSolicitud desc) CT LEFT JOIN empleado E ON E.idEmpleado = CT.idEmpleadoRecibe";
 		return ejecutarConsulta($sql);
 	}
-
 }
 
 ?>

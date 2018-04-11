@@ -92,6 +92,9 @@ function listar(){
 		case "recepcion":
 			url = "../ajax/transporteInsumo.php?op=listReceived";
 			break;
+		case "consultaTransporte":
+			url = "../ajax/transporteInsumo.php?op=listTransactions";
+		break;
 		default:
 			url = "../ajax/"+vista+".php?op=list";
 			break;
