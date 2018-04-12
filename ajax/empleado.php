@@ -113,11 +113,12 @@ switch ($_GET["op"]){
 			$oa = $rspta->fetch_object();
 		}
 		if(isset($oa)){
-			$_SESSION["idEmpleado"]=$oa->idEmpleado;
-			$_SESSION["username"] = $oa->username;
-			$_SESSION["nomPila"]=$oa->nomPila;
-			$_SESSION["imagen"]=$oa->imagen;
-			$_SESSION["idSucursal"]=$oa->idSucursal;
+			$_SESSION["idEmpleado"] = $oa->idEmpleado;
+			$_SESSION["username"]  =  $oa->username;
+			$_SESSION["nomPila"] = $oa->nomPila;
+			$_SESSION["imagen"] = $oa->imagen;
+			$_SESSION["idSucursal"] = $oa->idSucursal;
+			$_SESSION["nombreSucursal"] = $oa->nombreSucursal;
 
 			$ptemp = $empleado->listarMarcados($oa->idEmpleado);
 			
@@ -177,7 +178,11 @@ switch ($_GET["op"]){
 			"aaData" => $data
 		);
 		echo json_encode($results);
-		break;	
+		break;
+	case "getSucursal":
+		$nmms = $_SESSION["nombreSucursal"];
+		echo $nmms;
+		break;
 }
 
 ?>

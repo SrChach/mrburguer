@@ -93,7 +93,7 @@ function listar(){
 			url = "../ajax/transporteInsumo.php?op=listReceived";
 			break;
 		case "consultaTransporte":
-			url = "../ajax/transporteInsumo.php?op=listTransactions";
+			url = "../ajax/transporteInsumo.php?op=listTransactions&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
 		break;
 		default:
 			url = "../ajax/"+vista+".php?op=list";

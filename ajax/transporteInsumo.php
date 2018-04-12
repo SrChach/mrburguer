@@ -198,7 +198,9 @@ switch ($_GET["op"]){
 		}
 		break;
 	case 'listTransactions':
-		$rspta = $transporte->listar();
+		$fechaIni = $_GET["fechaIni"];
+		$fechaFin = $_GET["fechaFin"];
+		$rspta = $transporte->listar($fechaIni, $fechaFin);
 		$data = Array();
 		if($rspta != false){
 			while($reg = $rspta->fetch_object()){

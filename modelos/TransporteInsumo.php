@@ -117,8 +117,14 @@ Class TransporteInsumo{
 		return consultarFila($sql);
 	}
 
-	public function listar(){
-		$sql = "SELECT E.nomPila, CT.idEmpleadoRecibe, CT.sucursal, CT.insumo, CT.cantidadPedida, CT.fechaSolicitud, CT.cantidadEnviada, CT.fechaEnvio, CT.cantidadRecibida, CT.fechaRecepcion, CT.observaciones FROM (SELECT T.idEmpleadoRecibe, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvio, T.cantidadRecibida, T.fechaRecepcion, T.observaciones FROM transporteInsumo T JOIN insumo I JOIN (SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS ON (T.idInsumo = I.idInsumo) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) order by T.fechaSolicitud desc) CT LEFT JOIN empleado E ON E.idEmpleado = CT.idEmpleadoRecibe";
+	public function listar($fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT E.nomPila, CT.idEmpleadoRecibe, CT.sucursal, CT.insumo, CT.cantidadPedida, CT.fechaSolicitud, CT.cantidadEnviada, CT.fechaEnvio, CT.cantidadRecibida, CT.fechaRecepcion, CT.observaciones FROM 
+				(SELECT T.idEmpleadoRecibe, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvio, T.cantidadRecibida, T.fechaRecepcion, T.observaciones FROM transporteInsumo T JOIN insumo I JOIN 
+					(SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS 
+				ON (T.idInsumo = I.idInsumo) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) WHERE (T.fechaSolicitud BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaEnvio BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaRecepcion BETWEEN '$fechaIni' AND '$fechaFin') order by T.fechaSolicitud desc) CT 
+				LEFT JOIN empleado E ON E.idEmpleado = CT.idEmpleadoRecibe";
 		return ejecutarConsulta($sql);
 	}
 }

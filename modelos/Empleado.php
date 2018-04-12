@@ -77,7 +77,7 @@ Class Empleado{
 	}
 
 	public function verificar($username, $password){
-		$sql = "SELECT idEmpleado, username, nomPila, apPaterno, apMaterno, fechaIngreso, imagen, idSucursal FROM empleado WHERE (username = '$username') AND (password = '$password') AND isActive = '1'";
+		$sql = "SELECT E.idEmpleado, E.username, E.nomPila, E.apPaterno, E.apMaterno, E.fechaIngreso, E.imagen, E.idSucursal, S.nombre as nombreSucursal FROM empleado E JOIN sucursal S ON E.idSucursal = S.idSucursal WHERE (E.username = '$username') AND (E.password = '$password') AND E.isActive = '1'";
 		return ejecutarConsulta($sql);
 	}
 
