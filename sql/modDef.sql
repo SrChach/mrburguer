@@ -79,29 +79,21 @@ ENGINE = InnoDB;
 -- Table `mrburguer`.`transporteInsumo`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mrburguer`.`transporteInsumo` (
-  `idInsumoEnSucursal` INT NOT NULL AUTO_INCREMENT ,
-  `idInsumo` INT NOT NULL ,
-  `fechaSolicitud` DATETIME NULL ,
-  `cantidadPedida` INT NULL ,
-  `fechaEnvío` DATETIME NULL ,
-  `cantidadEnviada` INT NULL ,
-  `fechaRecepcion` DATETIME NULL ,
-  `cantidadRecibida` INT NULL ,
-  `observaciones` VARCHAR(50) NULL ,
-  `idEmpleadoRecibe` INT NULL ,
-  INDEX `fk_transporteInsumo_insumo_idx` (`idInsumo` ASC) ,
-  INDEX `fk_transporteInsumo_insumoEnSucursal_idx` (`idInsumoEnSucursal` ASC) ,
-  CONSTRAINT `fk_transporteInsumo_insumo`
-    FOREIGN KEY (`idInsumo` )
-    REFERENCES `mrburguer`.`insumo` (`idinsumo` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_transporteInsumo_insumoEnSucursal`
-    FOREIGN KEY (`idInsumoEnSucursal` )
-    REFERENCES `mrburguer`.`insumoEnSucursal` (`idInsumoEnSucursal` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+	idTransporteInsumo int not null primary key auto_increment,
+	idInsumoEnSucursal int not null,
+	idInsumo int not null,
+	fechaSolicitud datetime,
+	cantidadPedida int,
+	fechaEnvio datetime,
+	cantidadEnviada int,
+	fechaRecepcion datetime,
+	cantidadRecibida int,
+	observaciones varchar(50),
+	idEmpleadoRecibe int,
+	idEmpleadoPide int,
+	foreign key(idInsumoEnSucursal) references InsumoEnSucursal(idInsumoEnSucursal) on update cascade on delete cascade,
+	foreign key(idInsumo) references Insumo(idInsumo) on update cascade on delete cascade
+);
 
 
 -- -----------------------------------------------------

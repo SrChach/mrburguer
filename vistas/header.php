@@ -23,6 +23,7 @@
 		<link href="../public/lib/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
 		<link rel="stylesheet" type="text/css" href="../public/lib/css/bootstrap-select.min.css">
+		<link rel="stylesheet" type="text/css" href="../public/lib/css/truco-bootstrap-select.css">
 
 	</head>
 	<body class="hold-transition skin-blue-light sidebar-mini">
