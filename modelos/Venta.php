@@ -42,16 +42,10 @@ Class Venta{
 		}*/
 	}
 
-
 	public function devolver($idVenta){
 		$sql = "UPDATE venta SET status='Devuelto' where idVenta='$idVenta'";
 		return ejecutarConsulta($sql);
 	}
-
-	/*public function mostrar($idVenta){
-		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', concat(C.nombre, ' ', C.apellidoPaterno, ' ', C.apellidoMaterno) as 'nombreCliente', V.fecha, V.montoTotal, V.iva, V.descuentoActual, V.status, V.pagoTarjeta FROM (venta V join empleado E on E.idEmpleado=V.idEmpleado) left join cliente C on C.idCliente=V.idCliente WHERE V.idVenta='$idVenta'";
-		return consultarFila($sql);
-	}*/
 
 	public function mostrar($idVenta){
 		$sql = "SELECT pagoTarjeta FROM venta WHERE idVenta='$idVenta'";
@@ -66,6 +60,26 @@ Class Venta{
 	public function listar($idEmpleado){
 		$sql = "SELECT V.idVenta, concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) as 'nombreEmpleado', V.fecha, V.montoTotal, V.descuentoActual, V.status, V.pagoTarjeta FROM venta V join empleado E on E.idEmpleado=V.idEmpleado WHERE V.idEmpleado='$idEmpleado' and ( DATE_FORMAT(current_timestamp, '%m %d %Y') = DATE_FORMAT(V.fecha, '%m %d %Y')  ) ORDER BY V.idVenta desc";
 		return ejecutarConsulta($sql);
+	}
+
+	/*PRODUCTIVIDAD*/
+
+	public function prodEmpleadoEnSucursal($idSucursal){
+		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado WHERE E.idSucursal = '$idSucursal' GROUP BY V.idEmpleado ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
+	public function prodEmpleadoEnFranquicia($idFranquicia){
+		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido, S.nombre as sucursal FROM venta V JOIN empleado E JOIN sucursal S ON (V.idEmpleado = E.idEmpleado) and (E.idSucursal = S.idSucursal) WHERE S.idFranquicia = '$idFranquicia' GROUP BY V.idEmpleado ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
+	public function prodEmpleadoGeneral(){
+		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado GROUP BY E.idEmpleado ORDER BY totalVendido desc";
+	}
+
+	public function prodSucursalEnFranquicia($idFranquicia){
+
 	}
 
 }
