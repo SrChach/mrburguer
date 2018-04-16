@@ -24,6 +24,7 @@
 
 		<link rel="stylesheet" type="text/css" href="../public/lib/css/bootstrap-select.min.css">
 		<link rel="stylesheet" type="text/css" href="../public/lib/css/truco-bootstrap-select.css">
+		<link rel="stylesheet" type="text/css" href="../public/css/fuente.css">
 
 	</head>
 	<body class="hold-transition skin-blue-light sidebar-mini">
