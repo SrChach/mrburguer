@@ -104,7 +104,24 @@
 							<a href="inicio.php">
 								<i class="fa fa-tasks"></i> <span>Escritorio</span>
 							</a>
-						</li>   
+						</li>
+
+						<?php
+							if($_SESSION['main']==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-circle-o"></i>
+											<span>Estadísticas</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="consultaFranquicia.php"><i class="fa fa-circle-o"></i>Ventas por franquicia</a></li>
+											<li><a href="productividadGeneral.php"><i class="fa fa-circle-o"></i>Ranking Empleados</a></li>
+										</ul>
+									</li>';
+							}
+						?>
 
 						<?php
 							if($_SESSION['inventarioCentral']==1){

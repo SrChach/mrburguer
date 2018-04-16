@@ -14,7 +14,6 @@ $montoTotal = isset($_POST["montoTotal"])? limpiarCadena($_POST["montoTotal"]) :
 $descuentoTotal = isset($_POST["descuentoTotal"])? limpiarCadena($_POST["descuentoTotal"]) : "";
 $status = isset($_POST["status"])? limpiarCadena($_POST["status"]) : "";
 $pagoTarjeta = isset($_POST["pagoTarjeta"])? limpiarCadena($_POST["pagoTarjeta"]) : "";
-$idSucursal = $_SESSION["idSucursal"];
 
 switch ($_GET["op"]){
 	case 'saveEdit':
@@ -110,10 +109,111 @@ switch ($_GET["op"]){
 		);
 		
 		echo json_encode($results);
-		
 		break;
-
-
+	case 'productivityEmployeeInBranch':
+		$rspta = $venta->prodEmpleadoEnSucursal($_GET["SUC"], $_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->ventasRealizadas,
+					"2" => $reg->totalVendido
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'productivityEmployeeInFranchise':/**/
+		$rspta = $venta->prodEmpleadoEnFranquicia($_GET["FR"], $_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->sucursal,
+					"2" => $reg->ventasRealizadas,
+					"3" => $reg->totalVendido
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'productivityAllEmployees':
+		$rspta = $venta->prodEmpleadoGeneral($_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->ventasRealizadas,
+					"2" => $reg->totalVendido
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'productivityBranchInFranchise':/**/
+		$rspta = $venta->prodSucursalEnFranquicia($_GET["FR"], $_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombreSucursal,
+					"1" => $reg->ventasRealizadas,
+					"2" => $reg->totalVendido,
+					"3" => '<a href="productividadEES.php?SUC='.$reg->idSucursal.'&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ventas por Empleado</button></a>'
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'productivityAllFranchises':/**/
+		$rspta = $venta->prodFranquiciaGeneral($_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombreFranquicia,
+					"1" => $reg->ventasRealizadas,
+					"2" => $reg->totalVendido,
+					"3" => '<a href="productividadEEF.php?FR='.$reg->idFranquicia.'&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>',
+					"4" => '<a href="productividadSEF.php?FR=' . $reg->idFranquicia . '&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>'
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
 }
 
 ?>

@@ -94,7 +94,22 @@ function listar(){
 			break;
 		case "consultaTransporte":
 			url = "../ajax/transporteInsumo.php?op=listTransactions&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
-		break;
+			break;
+		case "consultaFranquicia":
+			url = "../ajax/venta.php?op=productivityAllFranchises&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
+		case "productividadEES":
+			url = "../ajax/venta.php?op=productivityEmployeeInBranch&SUC=" + getParameterByName("SUC") + "&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
+		case "productividadEEF":
+			url = "../ajax/venta.php?op=productivityEmployeeInFranchise&FR=" + getParameterByName("FR") + "&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
+		case "productividadSEF":
+			url = "../ajax/venta.php?op=productivityBranchInFranchise&FR=" + getParameterByName("FR") + "&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
+		case "productividadGeneral":
+			url = "../ajax/venta.php?op=productivityAllEmployees&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
 		default:
 			url = "../ajax/"+vista+".php?op=list";
 			break;

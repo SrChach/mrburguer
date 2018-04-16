@@ -64,22 +64,44 @@ Class Venta{
 
 	/*PRODUCTIVIDAD*/
 
-	public function prodEmpleadoEnSucursal($idSucursal){
-		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado WHERE E.idSucursal = '$idSucursal' GROUP BY V.idEmpleado ORDER BY totalVendido desc";
+	/*Empleados más productivos en una sucursal*/
+	public function prodEmpleadoEnSucursal($idSucursal, $fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT count(V.idVenta) AS ventasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado WHERE (E.idSucursal = '$idSucursal') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY V.idEmpleado ORDER BY totalVendido desc";
 		return ejecutarConsulta($sql);
 	}
 
-	public function prodEmpleadoEnFranquicia($idFranquicia){
-		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido, S.nombre as sucursal FROM venta V JOIN empleado E JOIN sucursal S ON (V.idEmpleado = E.idEmpleado) and (E.idSucursal = S.idSucursal) WHERE S.idFranquicia = '$idFranquicia' GROUP BY V.idEmpleado ORDER BY totalVendido desc";
+	/*Empleados más productivos en una franquicia*/
+	public function prodEmpleadoEnFranquicia($idFranquicia, $fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT count(V.idVenta) AS ventasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido, S.nombre as sucursal FROM venta V JOIN empleado E JOIN sucursal S ON (V.idEmpleado = E.idEmpleado) and (E.idSucursal = S.idSucursal) WHERE (S.idFranquicia = '$idFranquicia') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY V.idEmpleado ORDER BY totalVendido desc";
 		return ejecutarConsulta($sql);
 	}
 
-	public function prodEmpleadoGeneral(){
-		$sql = "SELECT count(V.idVenta) AS VentasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado GROUP BY E.idEmpleado ORDER BY totalVendido desc";
+	/*Empleados más productivos globalmente*/
+	public function prodEmpleadoGeneral($fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT count(V.idVenta) AS ventasRealizadas, concat(E.nomPila,' ',E.apPaterno,' ',E.apMaterno) as nombre, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E ON V.idEmpleado = E.idEmpleado WHERE V.fecha BETWEEN '$fechaIni' AND '$fechaFin' GROUP BY E.idEmpleado ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
 	}
 
-	public function prodSucursalEnFranquicia($idFranquicia){
+	/*Sucursal más productiva por franquicia*/
+	public function prodSucursalEnFranquicia($idFranquicia, $fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT S.idSucursal, S.nombre as nombreSucursal, count(V.idVenta) AS ventasRealizadas, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S ON (S.idSucursal=E.idSucursal) AND (V.idEmpleado = E.idEmpleado) WHERE (S.idFranquicia = '$idFranquicia') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY S.idSucursal ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
 
+	/*Franquicia más productiva*/
+	public function prodFranquiciaGeneral($fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT F.idFranquicia, F.nombre as nombreFranquicia, count(V.idVenta) AS ventasRealizadas, sum(V.montoTotal) as totalVendido FROM (venta V JOIN empleado E JOIN sucursal S) RIGHT JOIN franquicia F ON (S.idFranquicia = F.idFranquicia) AND (S.idSucursal=E.idSucursal) AND (V.idEmpleado = E.idEmpleado) AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY F.idFranquicia ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
 	}
 
 }
