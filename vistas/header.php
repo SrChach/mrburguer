@@ -103,7 +103,7 @@
 						
 						<li>
 							<a href="inicio.php">
-								<i class="fa fa-tasks"></i> <span>Escritorio</span>
+								<i class="fa fa-chevron-circle-right"></i> <span>Escritorio</span>
 							</a>
 						</li>
 
@@ -112,49 +112,15 @@
 								echo '
 									<li class="treeview">
 										<a href="#">
-											<i class="fa fa-circle-o"></i>
+											<i class="fa fa-area-chart"></i>
 											<span>Estadísticas</span>
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
 											<li><a href="consultaFranquicia.php"><i class="fa fa-circle-o"></i>Ventas por franquicia</a></li>
-											<li><a href="productividadGeneral.php"><i class="fa fa-circle-o"></i>Ranking Empleados</a></li>
+											<li><a href="productividadGeneral.php"><i class="fa fa-line-chart"></i>Ranking Empleados</a></li>
 										</ul>
 									</li>';
-							}
-						?>
-
-						<?php
-							if($_SESSION['inventarioCentral']==1){
-								echo '
-									<li class="treeview">
-										<a href="#">
-											<i class="fa fa-truck"></i>
-											<span>Inventario Central</span>
-											<i class="fa fa-angle-left pull-right"></i>
-										</a>
-										<ul class="treeview-menu">
-											<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
-											<li><a href="envioSuc.php"><i class="fa fa-circle-o"></i>Enviar Insumos</a></li>
-										</ul>
-									</li>';
-							}
-						?>
-
-						<?php
-							if($_SESSION["sucursales"]==1){
-								echo '
-									<li class="treeview">
-										<a href="#">
-											<i class="fa fa-home"></i> <span>Sucursales</span>
-											<i class="fa fa-angle-left pull-right"></i>
-										</a>
-										<ul class="treeview-menu">
-											<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
-											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
-										</ul>
-									</li>
-								';
 							}
 						?>
 						
@@ -176,11 +142,45 @@
 						?>
 
 						<?php
+							if($_SESSION["sucursales"]==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-building"></i> <span>Sucursales</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="franquicia.php"><i class="fa fa-circle-o"></i>Control de franquicias</a></li>
+											<li><a href="sucursal.php"><i class="fa fa-circle-o"></i>Sucursal</a></li>
+										</ul>
+									</li>
+								';
+							}
+						?>
+
+						<?php
+							if($_SESSION['inventarioCentral']==1){
+								echo '
+									<li class="treeview">
+										<a href="#">
+											<i class="fa fa-truck"></i>
+											<span>Inventario Central</span>
+											<i class="fa fa-angle-left pull-right"></i>
+										</a>
+										<ul class="treeview-menu">
+											<li><a href="insumo.php"><i class="fa fa-circle-o"></i>Insumo</a></li>
+											<li><a href="envioSuc.php"><i class="fa fa-circle-o"></i>Enviar Insumos</a></li>
+										</ul>
+									</li>';
+							}
+						?>
+
+						<?php
 							if($_SESSION["empleado"]==1){
 								echo '
 									<li class="treeview">
 										<a href="#">
-											<i class="fa fa-male"></i> <span>Empleado</span>
+											<i class="fa fa-user"></i> <span>Empleado</span>
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">

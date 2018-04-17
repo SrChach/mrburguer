@@ -76,6 +76,13 @@ function showOne(id){
 	}
 }
 
+function inicializarEstadisticas(){
+	var today = new Date();
+	$("#fechaIni").val(today.getFullYear() + '-' + ('0' + (today.getMonth())).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+	$("#fechaFin").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+	listar();
+}
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -106,6 +113,9 @@ function listar(){
 			break;
 		case "productividadSEF":
 			url = "../ajax/venta.php?op=productivityBranchInFranchise&FR=" + getParameterByName("FR") + "&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
+			break;
+		case "masVendidos":
+			url = "../ajax/venta.php?op=bestSeller&FR=" + getParameterByName("FR") + "&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
 			break;
 		case "productividadGeneral":
 			url = "../ajax/venta.php?op=productivityAllEmployees&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();

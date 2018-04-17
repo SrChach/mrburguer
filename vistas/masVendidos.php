@@ -15,10 +15,7 @@
 						<div class="col-md-12">
 								<div class="box">
 									<div class="box-header with-border">
-										<h1 class="box-title">Status general - Empleados más productivos</h1><br><br>
-										<div class="box-tools pull-right">
-										</div>
-									
+										<h1 class="box-title">Productos vendidos - Franquicia "<span id="nombreFranquicia"></span>"</h1><br><br>
 										<form class="row" id="formulario">
 											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 												<label for="fechaIni">Ventas desde esta fecha(a las 00:00 hrs)</label>
@@ -36,15 +33,13 @@
 										<div class="panel-body table-responsive" id="listadoregistros">
 												<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
 													<thead>
-														<th>Nombre del empleado</th>
-														<th>Ventas Realizadas</th>
+														<th>Nombre del producto</th>
 														<th>Total Vendido</th>
 													</thead>
 													<tbody>
 													</tbody>
 													<tfoot>
-														<th>Nombre del empleado</th>
-														<th>Ventas Realizadas</th>
+														<th>Nombre del producto</th>
 														<th>Total Vendido</th>
 													</tfoot>
 												</table>
@@ -65,13 +60,17 @@
 ?>
 		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
 		<script type="text/javascript">
-			inicializarEstadisticas();
+			$("#fechaIni").val(getParameterByName("fechaIni"));
+			$("#fechaFin").val(getParameterByName("fechaFin"));
+			listar();
+			$.get("../ajax/franquicia.php?op=franchiseName&FR="+getParameterByName("FR"), function(r){
+				$("#nombreFranquicia").html(r);
+			});
 			$("#formulario").on("submit",function(e){
 				e.preventDefault();
 				listar();
 			});
 		</script>
-
 <?php 
 	}
 	ob_end_flush();

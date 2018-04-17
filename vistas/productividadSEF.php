@@ -6,7 +6,7 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-		if($_SESSION['sucursales']==1){
+		if($_SESSION['main']==1){
 ?>
 
 			<div class="content-wrapper">				
@@ -15,7 +15,7 @@
 						<div class="col-md-12">
 								<div class="box">
 									<div class="box-header with-border">
-										<h1 class="box-title">Productividad de las sucursales de la fraquicia ""</h1>
+										<h1 class="box-title">Productividad - Sucursales de la fraquicia "<span id="nombreFranquicia"></span>"</h1><br><br>
 										<form class="row" id="formulario">
 											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 												<label for="fechaIni">Ventas desde esta fecha(a las 00:00 hrs)</label>
@@ -67,6 +67,9 @@
 			$("#fechaIni").val(getParameterByName("fechaIni"));			
 			$("#fechaFin").val(getParameterByName("fechaFin"));			
 			listar();
+			$.get("../ajax/franquicia.php?op=franchiseName&FR="+getParameterByName("FR"), function(r){
+				$("#nombreFranquicia").html(r);
+			});
 			$("#formulario").on("submit",function(e){
 				e.preventDefault();
 				listar();

@@ -171,7 +171,7 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
-	case 'productivityBranchInFranchise':/**/
+	case 'productivityBranchInFranchise':
 		$rspta = $venta->prodSucursalEnFranquicia($_GET["FR"], $_GET["fechaIni"], $_GET["fechaFin"]);
 		$data = Array();
 		if($rspta != false){
@@ -192,7 +192,7 @@ switch ($_GET["op"]){
 		);
 		echo json_encode($results);
 		break;
-	case 'productivityAllFranchises':/**/
+	case 'productivityAllFranchises':
 		$rspta = $venta->prodFranquiciaGeneral($_GET["fechaIni"], $_GET["fechaFin"]);
 		$data = Array();
 		if($rspta != false){
@@ -201,8 +201,28 @@ switch ($_GET["op"]){
 					"0" => $reg->nombreFranquicia,
 					"1" => $reg->ventasRealizadas,
 					"2" => $reg->totalVendido,
-					"3" => '<a href="productividadEEF.php?FR='.$reg->idFranquicia.'&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>',
-					"4" => '<a href="productividadSEF.php?FR=' . $reg->idFranquicia . '&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>'
+					"3" => '<a href="masVendidos.php?FR='.$reg->idFranquicia.'&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Más Vendidos</button></a>',
+					"4" => '<a href="productividadEEF.php?FR='.$reg->idFranquicia.'&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>',
+					"5" => '<a href="productividadSEF.php?FR=' . $reg->idFranquicia . '&fechaIni='.$_GET["fechaIni"].'&fechaFin='.$_GET["fechaFin"].'"><button class="btn btn-primary">Ver productividad</button></a>'
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'bestSeller':
+		$rspta = $venta->productosMasVendidos($_GET["FR"], $_GET["fechaIni"], $_GET["fechaFin"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->nombre,
+					"1" => $reg->totalVendido
 				);
 			}
 		}

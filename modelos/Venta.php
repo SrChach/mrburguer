@@ -33,13 +33,6 @@ Class Venta{
 		ejecutarConsulta($actualizarMonto) or $sinErrores = false;
 
 		return $sinErrores;
-		/*
-		while($elementoActual < count($idProductoEnSucursal)){
-			$subconsulta = "SELECT P.nombre, P.precioActual FROM (SELECT idProducto FROM productoEnSucursal WHERE idProductoEnSucursal='$idProductoEnSucursal[$elementoActual]') as PES join producto P on PES.idProducto = P.idProducto";
-			$naw = consultarFila($subconsulta);
-			$pdts = $naw['nombre']." ".$naw['precioActual']."<br>".$pdts;
-			$elementoActual++;
-		}*/
 	}
 
 	public function devolver($idVenta){
@@ -92,7 +85,7 @@ Class Venta{
 	public function prodSucursalEnFranquicia($idFranquicia, $fechaIni, $fechaFin){
 		$fechaIni = $fechaIni . " 00:00:00";
 		$fechaFin = $fechaFin . " 23:59:59";
-		$sql = "SELECT S.idSucursal, S.nombre as nombreSucursal, count(V.idVenta) AS ventasRealizadas, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S ON (S.idSucursal=E.idSucursal) AND (V.idEmpleado = E.idEmpleado) WHERE (S.idFranquicia = '$idFranquicia') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY S.idSucursal ORDER BY totalVendido desc";
+		$sql = "SELECT S.idSucursal, S.nombre as nombreSucursal, count(V.idVenta) AS ventasRealizadas, sum(V.montoTotal) as totalVendido FROM venta V JOIN empleado E RIGHT JOIN sucursal S ON (S.idSucursal=E.idSucursal) AND (V.idEmpleado = E.idEmpleado) WHERE (S.idFranquicia = '$idFranquicia') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY S.idSucursal ORDER BY totalVendido desc";
 		return ejecutarConsulta($sql);
 	}
 
@@ -101,6 +94,13 @@ Class Venta{
 		$fechaIni = $fechaIni . " 00:00:00";
 		$fechaFin = $fechaFin . " 23:59:59";
 		$sql = "SELECT F.idFranquicia, F.nombre as nombreFranquicia, count(V.idVenta) AS ventasRealizadas, sum(V.montoTotal) as totalVendido FROM (venta V JOIN empleado E JOIN sucursal S) RIGHT JOIN franquicia F ON (S.idFranquicia = F.idFranquicia) AND (S.idSucursal=E.idSucursal) AND (V.idEmpleado = E.idEmpleado) AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY F.idFranquicia ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
+	public function productosMasVendidos($idFranquicia, $fechaIni, $fechaFin){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$sql = "SELECT P.nombre, LP.totalVendido FROM (SELECT PV.idProducto, SUM(PV.cantidad) as totalVendido FROM productoVendido PV JOIN sucursal S JOIN venta V ON (PV.idSucursal = S.idSucursal) AND (PV.idVenta = V.idVenta)  WHERE (S.idFranquicia = '$idFranquicia') AND (V.fecha BETWEEN '$fechaIni' AND '$fechaFin') GROUP BY PV.idProducto) LP JOIN producto P ON LP.idProducto = P.idProducto ORDER BY totalVendido desc";
 		return ejecutarConsulta($sql);
 	}
 

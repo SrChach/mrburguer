@@ -64,12 +64,14 @@ switch ($_GET["op"]){
 			"sEcho" => 1,
 			"iTotalRecords" => count($data),
 			"iTotalDisplayRecords" => count($data),
-			/*Total de registros a viualizar*/
 			"aaData" => $data
 		);
 		echo json_encode($results);
 		break;
-
+	case 'franchiseName':
+		$rspta = $franquicia->mostrar($_GET["FR"]);
+		echo $rspta["nombre"];
+		break;
 }
 
 ?>

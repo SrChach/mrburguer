@@ -37,7 +37,7 @@ function mostrarform(flag){
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnAgregar").show();
-		$("#cabecera").text("Ventas realizadas");
+		$("#cabecera").text("Mis ventas del día");
 	}
 }
 

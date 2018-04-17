@@ -6,7 +6,7 @@
 		header("location: index.html");
 	} else {
 		require 'header.php';
-		if($_SESSION['sucursales']==1){
+		if($_SESSION['main']==1){
 ?>
 
 			<div class="content-wrapper">				
@@ -15,7 +15,7 @@
 						<div class="col-md-12">
 								<div class="box">
 									<div class="box-header with-border">
-										<h1 class="box-title">Franquicias - Estadísticas</h1>
+										<h1 class="box-title">Todas las Franquicias - Estadísticas de Venta</h1><br><br>
 										<div class="box-tools pull-right">
 										</div>
 									
@@ -39,6 +39,7 @@
 														<th>Franquicia</th>
 														<th>Ventas Realizadas</th>
 														<th>Total Vendido</th>
+														<th>Productos</th>
 														<th>Empleados de la Franquicia</th>
 														<th>Sucursales de la Franquicia</th>
 													</thead>
@@ -48,6 +49,7 @@
 														<th>Franquicia</th>
 														<th>Ventas Realizadas</th>
 														<th>Total Vendido</th>
+														<th>Productos</th>
 														<th>Empleados de la Franquicia</th>
 														<th>Sucursales de la Franquicia</th>
 													</tfoot>
@@ -69,10 +71,9 @@
 ?>
 		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
 		<script type="text/javascript">
-			$("#tbllistado").hide();
+			inicializarEstadisticas();
 			$("#formulario").on("submit",function(e){
 				e.preventDefault();
-				$("#tbllistado").show();
 				listar();
 			});
 		</script>
