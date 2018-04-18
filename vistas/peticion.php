@@ -52,7 +52,7 @@
 													<tfoot>
 														<th>Opciones</th>
 														<th>Insumo</th>
-														<th><button type="button" onclick="modificarSubtotales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></th>
+														<th>Cantidad</th>
 													</tfoot>
 													<tbody>
 														

@@ -102,6 +102,9 @@ function listar(){
 		case "consultaTransporte":
 			url = "../ajax/transporteInsumo.php?op=listTransactions&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
 			break;
+		case "consultaAnomalias":
+			url = "../ajax/transporteInsumo.php?op=outliers&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val() + "&b=" + $("#b").val();
+			break;
 		case "consultaFranquicia":
 			url = "../ajax/venta.php?op=productivityAllFranchises&fechaIni=" + $("#fechaIni").val() + "&fechaFin=" + $("#fechaFin").val();
 			break;

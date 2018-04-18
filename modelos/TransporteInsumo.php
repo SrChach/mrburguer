@@ -8,7 +8,7 @@ Class TransporteInsumo{
 
 	}
 
-	public function pedir($idInsumoEnSucursal, $cantidadPedida){
+	public function pedir($idInsumoEnSucursal, $cantidadPedida, $idEmpleadoPide){
 		$sinErrores = true;
 		$elementoActual=0;
 
@@ -17,7 +17,7 @@ Class TransporteInsumo{
 			$temp = "SELECT idInsumo FROM insumoEnSucursal WHERE idInsumoEnSucursal=$idInsumoEnSucursal[$elementoActual]";
 			$idInsumo = consultarFila($temp)['idInsumo'];
 			if($idInsumo != 0){
-				$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaSolicitud, cantidadPedida) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadPedida[$elementoActual])";
+				$sql = "INSERT INTO transporteInsumo (idInsumoEnSucursal, idInsumo, fechaSolicitud, cantidadPedida, idEmpleadoPide) VALUES ($idInsumoEnSucursal[$elementoActual], $idInsumo, current_timestamp, $cantidadPedida[$elementoActual], $idEmpleadoPide)";
 				ejecutarConsulta($sql) or $sinErrores = false;	
 			} else {
 				$sinErrores = false;
@@ -123,9 +123,34 @@ Class TransporteInsumo{
 		$sql = "SELECT E.nomPila, CT.idEmpleadoRecibe, CT.sucursal, CT.insumo, CT.cantidadPedida, CT.fechaSolicitud, CT.cantidadEnviada, CT.fechaEnvio, CT.cantidadRecibida, CT.fechaRecepcion, CT.observaciones FROM 
 				(SELECT T.idEmpleadoRecibe, NS.nombre as sucursal, I.nombre as insumo, T.cantidadPedida, T.fechaSolicitud, T.cantidadEnviada, T.fechaEnvio, T.cantidadRecibida, T.fechaRecepcion, T.observaciones FROM transporteInsumo T JOIN insumo I JOIN 
 					(SELECT S.nombre, IES.idInsumoEnSucursal FROM insumoEnSucursal IES JOIN sucursal S ON IES.idSucursal = S.idSucursal) NS 
-				ON (T.idInsumo = I.idInsumo) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) WHERE (T.fechaSolicitud BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaEnvio BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaRecepcion BETWEEN '$fechaIni' AND '$fechaFin') order by T.fechaSolicitud desc) CT 
+				ON (T.idInsumo = I.idInsumo) and (NS.idInsumoEnSucursal = T.idInsumoEnSucursal) WHERE (T.fechaSolicitud BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaEnvio BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaRecepcion BETWEEN '$fechaIni' AND '$fechaFin') ORDER BY T.fechaSolicitud desc) CT 
 				LEFT JOIN empleado E ON E.idEmpleado = CT.idEmpleadoRecibe";
 		return ejecutarConsulta($sql);
+	}
+
+	public function mostrarAnomalias($fechaIni, $fechaFin, $b){
+		$fechaIni = $fechaIni . " 00:00:00";
+		$fechaFin = $fechaFin . " 23:59:59";
+		$condicion = "((T.fechaSolicitud BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaEnvio BETWEEN '$fechaIni' AND '$fechaFin') OR (T.fechaRecepcion BETWEEN '$fechaIni' AND '$fechaFin')) ";
+		if($b==0){
+			$condicion = $condicion . "AND (T.cantidadEnviada != T.cantidadRecibida)";//error en cantidades
+		} elseif ($b==1) {
+			$condicion = $condicion . "AND (T.observaciones != '')";//Con observaciones
+		} else {
+			return false;
+		}
+		$sql = "SELECT T1.empleadoPide, T2.empleadoRecibe, S.nombre as sucursal, T2.fechaEnvio, T2.fechaRecepcion, T2.insumo, T2.cantidadEnviada, T2.cantidadRecibida, T2.observaciones FROM (
+				SELECT T.idTransporteInsumo, concat(E.nomPila,' ',E.apPaterno) as empleadoPide FROM transporteInsumo T LEFT JOIN empleado E ON (T.idEmpleadoPide = E.idEmpleado) WHERE ". $condicion ." 
+			) T1 JOIN 
+			(
+				SELECT T.idTransporteInsumo, concat(E.nomPila,' ',E.apPaterno) as empleadoRecibe, IES.idSucursal, T.fechaEnvio, T.fechaRecepcion, I.nombre as insumo, T.cantidadEnviada, T.cantidadRecibida, T.observaciones FROM transporteInsumo T JOIN empleado E JOIN insumoEnSucursal IES JOIN insumo I ON (T.idEmpleadoRecibe = E.idEmpleado) AND (T.idInsumoEnSucursal = IES.idInsumoEnSucursal) AND (T.idInsumo = I.idInsumo) WHERE ". $condicion ." 
+			) T2 JOIN 
+			sucursal S ON (T2.idSucursal = S.idSucursal) AND (T1.idTransporteInsumo = T2.idTransporteInsumo)";
+		return ejecutarConsulta($sql);
+		/*USADO PARA CONSTRUIR LA CONSULTA ANTERIOR
+			"SELECT T.idTransporteInsumo, concat(E.nomPila,' ',E.apPaterno) as empleadoPide FROM transporteInsumo T LEFT JOIN empleado E ON (T.idEmpleadoPide = E.idEmpleado) WHERE T.cantidadEnviada > T.cantidadRecibida"
+			"SELECT T.idTransporteInsumo, concat(E.nomPila,' ',E.apPaterno) as empleadoRecibe, IES.idSucursal, T.fechaEnvio, T.fechaRecepcion, I.nombre as insumo, T.cantidadEnviada, T.cantidadRecibida, T.observaciones FROM transporteInsumo T JOIN empleado E JOIN insumoEnSucursal IES JOIN insumo I ON (T.idEmpleadoRecibe = E.idEmpleado) AND (T.idInsumoEnSucursal = IES.idInsumoEnSucursal) AND (T.idInsumo = I.idInsumo) WHERE T.cantidadEnviada > T.cantidadRecibida"
+		*/
 	}
 }
 

@@ -16,7 +16,7 @@ $observaciones = isset($_POST["observaciones"])? limpiarCadena($_POST["observaci
 
 switch ($_GET["op"]){
 	case 'request':
-		$rspta = $transporte->pedir($_POST["idIES"], $_POST["cantidadPedida"]);
+		$rspta = $transporte->pedir($_POST["idIES"], $_POST["cantidadPedida"], $idEmpleadoRecibe);
 		echo $rspta ? "Petición realizada" : "No se pudo hacer la petición";
 		break;
 	case 'send':
@@ -223,6 +223,34 @@ switch ($_GET["op"]){
 					"8" => $reg->cantidadRecibida,
 					"9" => $reg->fechaRecepcion,
 					"10" => $reg->observaciones
+				);
+			}
+		}
+		$results = array(
+			"sEcho" => 1,
+			"iTotalRecords" => count($data),
+			"iTotalDisplayRecords" => count($data),
+			"aaData" => $data
+		);
+		echo json_encode($results);
+		break;
+	case 'outliers':
+		if (!isset($_GET["b"]))
+			break;
+		$rspta = $transporte->mostrarAnomalias($_GET["fechaIni"], $_GET["fechaFin"], $_GET["b"]);
+		$data = Array();
+		if($rspta != false){
+			while($reg = $rspta->fetch_object()){
+				$data[] = array(
+					"0" => $reg->empleadoPide ? $reg->empleadoPide : "n/a",
+					"1" => $reg->empleadoRecibe,
+					"2" => $reg->sucursal,
+					"3" => $reg->fechaEnvio,
+					"4" => $reg->fechaRecepcion,
+					"5" => $reg->insumo,
+					"6" => $reg->cantidadEnviada,
+					"7" => $reg->cantidadRecibida,
+					"8" => $reg->observaciones
 				);
 			}
 		}

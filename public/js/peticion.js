@@ -27,7 +27,7 @@ function mostrarform(flag){
 		insumos=0;
 		$("#btnAgregarInsumo").show();
 	} else {
-		$("#cabecera").html("Peticiones realizadas");
+		$("#cabecera").html("Peticiones realizadas(Envío pendiente)");
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnAgregar").show();

@@ -117,7 +117,8 @@
 											<i class="fa fa-angle-left pull-right"></i>
 										</a>
 										<ul class="treeview-menu">
-											<li><a href="consultaFranquicia.php"><i class="fa fa-circle-o"></i>Ventas por franquicia</a></li>
+											<li><a href="consultaFranquicia.php"><i class="fa fa-circle-o"></i>Por franquicia</a></li>
+											<li><a href="consultaAnomalias.php"><i class="fa fa-circle-o"></i>Incidentes al enviar</a></li>
 											<li><a href="productividadGeneral.php"><i class="fa fa-line-chart"></i>Ranking Empleados</a></li>
 										</ul>
 									</li>';
