@@ -104,6 +104,12 @@ Class Venta{
 		return ejecutarConsulta($sql);
 	}
 
+	public function prodUltimoMes(){
+		//"SELECT F.nombre AS franquicia, S.nombre AS sucursal, concat(E.nomPila,' ', E.apPaterno) AS empleado, V.montoTotal, V.fecha FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), ' 00:00:00') AND current_timestamp";
+		$sql = "SELECT F.nombre AS franquicia, SUM(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), ' 00:00:00') AND current_timestamp GROUP BY franquicia ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
 }
 
 ?>

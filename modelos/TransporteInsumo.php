@@ -152,6 +152,7 @@ Class TransporteInsumo{
 			"SELECT T.idTransporteInsumo, concat(E.nomPila,' ',E.apPaterno) as empleadoRecibe, IES.idSucursal, T.fechaEnvio, T.fechaRecepcion, I.nombre as insumo, T.cantidadEnviada, T.cantidadRecibida, T.observaciones FROM transporteInsumo T JOIN empleado E JOIN insumoEnSucursal IES JOIN insumo I ON (T.idEmpleadoRecibe = E.idEmpleado) AND (T.idInsumoEnSucursal = IES.idInsumoEnSucursal) AND (T.idInsumo = I.idInsumo) WHERE T.cantidadEnviada > T.cantidadRecibida"
 		*/
 	}
+
 }
 
 ?>

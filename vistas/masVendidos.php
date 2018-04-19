@@ -18,7 +18,7 @@
 										<h1 class="box-title">Productos vendidos - Franquicia "<span id="nombreFranquicia"></span>"</h1><br><br>
 										<form class="row" id="formulario">
 											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-												<label for="fechaIni">Ventas desde esta fecha(a las 00:00 hrs)</label>
+												<label for="fechaIni">Productos más vendidos desde esta fecha(a las 00:00 hrs)</label>
 												<input class="form-control" type="date" id="fechaIni" name="fechaIni" required/>
 											</div>
 											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
