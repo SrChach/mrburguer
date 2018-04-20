@@ -104,9 +104,19 @@ Class Venta{
 		return ejecutarConsulta($sql);
 	}
 
-	public function prodUltimoMes(){
+	public function prodUltimosMeses($cantidadMeses){
 		//"SELECT F.nombre AS franquicia, S.nombre AS sucursal, concat(E.nomPila,' ', E.apPaterno) AS empleado, V.montoTotal, V.fecha FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), ' 00:00:00') AND current_timestamp";
-		$sql = "SELECT F.nombre AS franquicia, SUM(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL 1 MONTH), ' 00:00:00') AND current_timestamp GROUP BY franquicia ORDER BY totalVendido desc";
+		$sql = "SELECT F.nombre AS franquicia, SUM(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL $cantidadMeses MONTH), ' 00:00:00') AND current_timestamp GROUP BY franquicia ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
+	public function prodUltimosDias($cantidadDias){
+		$sql = "SELECT F.nombre AS franquicia, SUM(V.montoTotal) as totalVendido FROM venta V JOIN empleado E JOIN sucursal S JOIN franquicia F ON (V.idEmpleado = E.idEmpleado) AND (E.idSucursal = S.idSucursal) AND (F.idFranquicia = S.idFranquicia) WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL $cantidadDias DAY), ' 00:00:00') AND current_timestamp GROUP BY franquicia ORDER BY totalVendido desc";
+		return ejecutarConsulta($sql);
+	}
+
+	public function topN($cant){
+		$sql = "SELECT concat(E.nomPila, ' ', E.apPaterno) AS empleado, SUM(V.montoTotal) as total FROM empleado E JOIN venta V ON V.idEmpleado=E.idEmpleado GROUP BY empleado ORDER BY total DESC limit 0,$cant";
 		return ejecutarConsulta($sql);
 	}
 

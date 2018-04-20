@@ -8,14 +8,14 @@
 		require 'header.php';
 		if($_SESSION['main']==1){
 
-		//Datos para el gráficod e barras de las franquicias
+		//Datos para el gráfico de barras de las franquicias
 		require_once "../modelos/venta.php";
 		$consulta = new Venta();
-		$consultaUnMes = $consulta->prodUltimoMes();
-		$franquicias = '';
-		$totales = '';
-		$backgroundColor =''; 
-		$borderColor = '';
+		$consultaPorMes = $consulta->prodUltimosMeses(3);
+		$franquiciasPM = '';
+		$totalesPM = '';
+		$backgroundColorPM =''; 
+		$borderColorPM = '';
 		$cBase = Array(
 			'0' =>	'rgba(255, 99, 132,',
 			'1' =>	'rgba(54, 162, 235,',
@@ -25,23 +25,41 @@
 			'5' =>	'rgba(255, 159, 64,'
 		);
 		$cont = 0;
-		if($consultaUnMes != false)
-			while($actual = $consultaUnMes->fetch_object()){
+		if($consultaPorMes != false)
+			while($actual = $consultaPorMes->fetch_object()){
 				if($cont != 0){
-					$franquicias = $franquicias . ',';
-					$totales = $totales . ',';
-					$backgroundColor = $backgroundColor . ',';
-					$borderColor = $borderColor . ',';
+					$franquiciasPM = $franquiciasPM . ',';
+					$totalesPM = $totalesPM . ',';
+					$backgroundColorPM = $backgroundColorPM . ',';
+					$borderColorPM = $borderColorPM . ',';
 				}
-				$totales = $totales . '"' . $actual->totalVendido . '"';
-				$franquicias = $franquicias . '"' . $actual->franquicia . '"';
-				$backgroundColor = $backgroundColor . '"' . $cBase[$cont] . '0.2)"';
-				$borderColor = $borderColor . '"' . $cBase[$cont] . '1)"';
+				$totalesPM = $totalesPM . '"' . $actual->totalVendido . '"';
+				$franquiciasPM = $franquiciasPM . '"' . $actual->franquicia . '"';
+				$backgroundColorPM = $backgroundColorPM . '"' . $cBase[$cont%6] . '0.8)"';
+				$borderColorPM = $borderColorPM . '"' . $cBase[$cont] . '0.8)"';
 				$cont++;
 			}
-			//echo $totales;
-			//echo $franquicias;
-													
+		
+		$consultaPorDia = $consulta->prodUltimosDias(3);
+		$franquiciasPD = '';
+		$totalesPD = '';
+		$backgroundColorPD =''; 
+		$borderColorPD = '';
+		$cont = 0;
+		if($consultaPorDia != false)
+			while($reg = $consultaPorDia->fetch_object()){
+				if($cont != 0){
+					$franquiciasPD = $franquiciasPD . ',';
+					$totalesPD = $totalesPD . ',';
+					$backgroundColorPD = $backgroundColorPD . ',';
+					$borderColorPD = $borderColorPD . ',';
+				}
+				$totalesPD = $totalesPD . '"' . $reg->totalVendido . '"';
+				$franquiciasPD = $franquiciasPD . '"' . $reg->franquicia . '"';
+				$backgroundColorPD = $backgroundColorPD . '"' . $cBase[$cont%6] . '0.8)"';
+				$borderColorPD = $borderColorPD . '"' . $cBase[$cont] . '0.8)"';
+				$cont++;
+			}										
 ?>
 
 			<div class="content-wrapper">				
@@ -50,10 +68,37 @@
 						<div class="col-md-12">
 								<div class="box">
 									<div class="box-header with-border">
-										<h1 class="box-title">Todas las Franquicias - Estadísticas de Venta</h1><br><br>
+										
 										<div class="box-tools pull-right">
 										</div>
-									
+										<h1 class="box-title">Rendimiento :</h1><br><br>
+										<div class="panel-body">
+												<div class="row">
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<div class="box box-primary">
+														<div class="box-header with-border">
+															Ventas por franquicia de los últimos 3 meses(en pesos)
+														</div>
+														<div class="box-body">
+															<canvas id="fUltimoMes" width="400" height="300"></canvas>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<div class="box box-primary">
+														<div class="box-header with-border">
+															Ventas por franquicia en la última semana(en pesos)
+														</div>
+														<div class="box-body">
+															<canvas id="fUltimaSemana" width="400" height="300"></canvas>
+														</div>
+													</div>
+												</div>
+												</div>
+										</div>
+											
+										<hr/>
+										<h1 class="box-title">Todas las Franquicias - Estadísticas de Venta :</h1><p>(tabla de abajo)</p>
 										<form class="row" id="formulario">
 											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 												<label for="fechaIni">Desde esta fecha(a las 00:00 hrs)</label>
@@ -91,24 +136,7 @@
 												</table>
 										</div>
 									</div>
-									<div class="panel-body">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-											<div class="box box-primary">
-												<div class="box-header with-border">
-													Ventas por franquicia del último mes
-												</div>
-												<div class="box-body">
-													<?php 
-														echo $totales; 
-														echo $franquicias;
-														echo $backgroundColor;
-														echo $borderColor;
-													?>
-													<canvas id="compras" width="400" height="300"></canvas>
-												</div>
-											</div>
-										</div>
-									</div>
+									
 									<!--Fin centro -->
 								</div><!-- /.box -->
 						</div><!-- /.col -->
@@ -132,7 +160,53 @@
 				listar();
 			});
 
-			
+			var ctx = document.getElementById("fUltimoMes").getContext('2d');
+			var fUltimoMes = new Chart(ctx, {
+			    type: 'doughnut',
+			    data: {
+			        labels: [ <?php echo $franquiciasPM; ?> ],
+			        datasets: [{
+			            label: 'Cantidad vendida $',
+			            data: [ <?php echo $totalesPM; ?> ],
+			            backgroundColor: [
+			                <?php echo $backgroundColorPM; ?>
+			            ],
+			            borderColor: [
+			                <?php echo $borderColorPM; ?>
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            
+			        }
+			    }
+			});
+
+			var graph = document.getElementById("fUltimaSemana").getContext('2d');
+			var fUltimaSemana = new Chart(graph, {
+			    type: 'pie',
+			    data: {
+			        labels: [ <?php echo $franquiciasPD; ?> ],
+			        datasets: [{
+			            label: 'Cantidad vendida $',
+			            data: [ <?php echo $totalesPD; ?> ],
+			            backgroundColor: [
+			                <?php echo $backgroundColorPD; ?>
+			            ],
+			            borderColor: [
+			                <?php echo $borderColorPD; ?>
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+
+			        }
+			    }
+			});
 		</script>
 
 <?php 

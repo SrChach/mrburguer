@@ -7,6 +7,34 @@
 	} else {
 		require 'header.php';
 		if($_SESSION['main']==1){
+
+		require_once "../modelos/venta.php";
+		$venta = new Venta();
+		$top = $venta->topN(10);
+		$empleados = '';
+		$totales = '';
+		$backgroundColor ='';
+		$cBase = Array(
+			'0' =>	'rgba(255, 99, 132,',
+			'1' =>	'rgba(54, 162, 235,',
+			'2' =>	'rgba(255, 206, 86,',
+			'3' =>	'rgba(75, 192, 192,',
+			'4' =>	'rgba(153, 102, 255,',
+			'5' =>	'rgba(255, 159, 64,'
+		);
+		$cont = 0;
+		if($top != false)
+			while($reg = $top->fetch_object()){
+				if($cont != 0){
+					$empleados = $empleados . ',';
+					$totales = $totales . ',';
+					$backgroundColor = $backgroundColor . ',';
+				}
+				$empleados = $empleados . '"' . $reg->empleado . '"';
+				$totales = $totales . '"' . $reg->total . '"';
+				$backgroundColor = $backgroundColor . '"' . $cBase[$cont%6] . '0.8)"';
+				$cont++;
+			}
 ?>
 
 			<div class="content-wrapper">				
@@ -17,6 +45,30 @@
 									<div class="box-header with-border">
 										<h1 class="box-title">Status general - Empleados más productivos</h1><br><br>
 										<div class="box-tools pull-right">
+										</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<div class="box box-primary">
+														<div class="box-header with-border">
+															Top 10 empleados con más ventas
+														</div>
+														<div class="box-body">
+															<canvas id="topN" width="400" height="300"></canvas>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<div class="box box-primary">
+														<div class="box-header with-border">
+															poner aqui listado de empleados que no venden :v
+														</div>
+														<div class="box-body">
+															
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									
 										<form class="row" id="formulario">
@@ -64,11 +116,41 @@
 		require 'footer.php';
 ?>
 		<script type="text/javascript" src="../public/js/funcionesGlobales.js"></script>
+		<script type="text/javascript" src="../public/lib/js/Chart.min.js"></script>
+		<script type="text/javascript" src="../public/lib/js/Chart.bundle.min.js"></script>
 		<script type="text/javascript">
 			inicializarEstadisticas();
 			$("#formulario").on("submit",function(e){
 				e.preventDefault();
 				listar();
+			});
+
+			var graph = document.getElementById("topN").getContext('2d');
+			var fUltimaSemana = new Chart(graph, {
+			    type: 'bar',
+			    data: {
+			        labels: [ <?php echo $empleados; ?> ],
+			        datasets: [{
+			            label: 'Cantidad vendida $',
+			            data: [ <?php echo $totales; ?> ],
+			            backgroundColor: [
+			                <?php echo $backgroundColor; ?>
+			            ],
+			            borderColor: [
+			                <?php echo $backgroundColor; ?>
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+							yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+			        }
+			    }
 			});
 		</script>
 
