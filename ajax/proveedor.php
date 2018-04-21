@@ -14,6 +14,14 @@ $calle = isset($_POST["calle"])? limpiarCadena($_POST["calle"]) : "";
 $numExt = isset($_POST["numExt"])? limpiarCadena($_POST["numExt"]) : "";
 $numInt = isset($_POST["numInt"])? limpiarCadena($_POST["numInt"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idproveedor)){
