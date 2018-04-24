@@ -73,32 +73,37 @@
 										</div>
 										<h1 class="box-title">Rendimiento :</h1><br><br>
 										<div class="panel-body">
-												<div class="row">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 													<div class="box box-primary">
 														<div class="box-header with-border">
 															Ventas por franquicia de los últimos 3 meses(en pesos)
 														</div>
 														<div class="box-body">
-															<canvas id="fUltimoMes" width="400" height="300"></canvas>
+															<canvas id="fUltimoMes" width="300" height="245"></canvas>
 														</div>
 													</div>
 												</div>
-												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 													<div class="box box-primary">
 														<div class="box-header with-border">
 															Ventas por franquicia en la última semana(en pesos)
 														</div>
 														<div class="box-body">
-															<canvas id="fUltimaSemana" width="400" height="300"></canvas>
+															<canvas id="fUltimaSemana" width="300" height="245"></canvas>
 														</div>
 													</div>
 												</div>
-												</div>
+											</div>
 										</div>
 											
-										<hr/>
-										<h1 class="box-title">Todas las Franquicias - Estadísticas de Venta :</h1><p>(tabla de abajo)</p>
+										<br>
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="box box-primary"></div>
+											</div>
+										</div>
+										<h1 class="box-title">Todas las Franquicias - Estadísticas de Venta :</h1>
 										<form class="row" id="formulario">
 											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 												<label for="fechaIni">Desde esta fecha(a las 00:00 hrs)</label>

@@ -48,20 +48,20 @@
 										</div>
 										<div class="panel-body">
 											<div class="row">
-												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div class="box box-primary">
 														<div class="box-header with-border">
-															Top 10 empleados con más ventas
+															Top 10 empleados con más ventas en este mes
 														</div>
 														<div class="box-body">
-															<canvas id="topN" width="400" height="300"></canvas>
+															<canvas id="topN" width="650em" height="200em"></canvas>
 														</div>
 													</div>
 												</div>
-												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div class="box box-primary">
 														<div class="box-header with-border">
-															poner aqui listado de empleados que no venden :v
+															Empleados (activos & con permisos de venta) sin ventas en la última semana
 														</div>
 														<div class="box-body">
 															
@@ -70,37 +70,45 @@
 												</div>
 											</div>
 										</div>
-									
-										<form class="row" id="formulario">
-											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-												<label for="fechaIni">Ventas desde esta fecha(a las 00:00 hrs)</label>
-												<input class="form-control" type="date" id="fechaIni" name="fechaIni" required/>
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="box box-primary">
+													<br>
+													<form class="row" id="formulario">
+														<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+															<label for="fechaIni">Ventas desde esta fecha(a las 00:00 hrs)</label>
+															<input class="form-control" type="date" id="fechaIni" name="fechaIni" required/>
+														</div>
+														<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
+															<label for="fechaFin">Hasta esta fecha(a las 12:59 hrs)</label>
+															<input class="form-control" type="date" id="fechaFin" name="fechaFin" required/>
+														</div>
+														<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+															<br>
+															<button class="btn btn-success" type="submit">Ver</button>
+														</div>
+													</form>
+													<div class="panel-body table-responsive" id="listadoregistros">
+														<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+															<thead>
+																<th>Nombre del empleado</th>
+																<th>Ventas Realizadas</th>
+																<th>Total Vendido</th>
+															</thead>
+															<tbody>
+															</tbody>
+															<tfoot>
+																<th>Nombre del empleado</th>
+																<th>Ventas Realizadas</th>
+																<th>Total Vendido</th>
+															</tfoot>
+														</table>
+													</div>
+												</div>
 											</div>
-											<div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-12">
-												<label for="fechaFin">Hasta esta fecha(a las 12:59 hrs)</label>
-												<input class="form-control" type="date" id="fechaFin" name="fechaFin" required/>
-											</div>
-											<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
-												<br>
-												<button class="btn btn-success" type="submit">Ver</button>
-											</div>
-										</form>
-										<div class="panel-body table-responsive" id="listadoregistros">
-												<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
-													<thead>
-														<th>Nombre del empleado</th>
-														<th>Ventas Realizadas</th>
-														<th>Total Vendido</th>
-													</thead>
-													<tbody>
-													</tbody>
-													<tfoot>
-														<th>Nombre del empleado</th>
-														<th>Ventas Realizadas</th>
-														<th>Total Vendido</th>
-													</tfoot>
-												</table>
 										</div>
+										
+										
 									</div>
 									<!--Fin centro -->
 								</div><!-- /.box -->
