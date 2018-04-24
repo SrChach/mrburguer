@@ -8,6 +8,14 @@ $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $precioActual = isset($_POST["precioActual"])? limpiarCadena($_POST["precioActual"]) : "";
 $imagen = isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name'])) {

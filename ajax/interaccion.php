@@ -10,6 +10,14 @@ $plataforma = isset($_POST["plataforma"])? limpiarCadena($_POST["plataforma"]) :
 $accionRealizada = isset($_POST["accionRealizada"])? limpiarCadena($_POST["accionRealizada"]) : "";
 $fechaHoraInteraccion = isset($_POST["fechaHoraInteraccion"])? limpiarCadena($_POST["fechaHoraInteraccion"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idinteraccion)){

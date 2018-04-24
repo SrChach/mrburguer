@@ -9,6 +9,14 @@ $nombre = isset($_POST["nombre"])? limpiarcadena($_POST["nombre"]) : "";
 $isMobile = isset($_POST["isMobile"])? limpiarcadena($_POST["isMobile"]) : "";
 $telefono = isset($_POST["telefono"])? limpiarcadena($_POST["telefono"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["main"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idsucursal)){

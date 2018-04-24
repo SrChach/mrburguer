@@ -8,6 +8,14 @@ $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $existencias = isset($_POST["existencias"])? limpiarCadena($_POST["existencias"]) : "";
 $precioPromedio = isset($_POST["precioPromedio"])? limpiarCadena($_POST["precioPromedio"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idinsumo)){

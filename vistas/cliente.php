@@ -55,46 +55,58 @@
 									</div>
 									<div class="panel-body" style="height: 400px;" id="formularioregistros">
 										<form name="formulario" id="formulario" method="POST">
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Nombre:</label>
-												<input type="hidden" name="idcliente" id="idcliente"/>
-												<input class="form-control" type="text" name="nombre" id="nombre" maxlength="20" placeholder="Nombre" required/>
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Nombre:</label>
+													<input type="hidden" name="idcliente" id="idcliente"/>
+													<input class="form-control" type="text" name="nombre" id="nombre" maxlength="20" placeholder="Nombre" required/>
+												</div>
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Apellido Paterno:</label>
+													<input class="form-control" type="text" name="apellidoPaterno" id="apellidoPaterno" maxlength="20" placeholder="Inserte Apellido Paterno" required/>
+												</div>
 											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Apellido Paterno:</label>
-												<input class="form-control" type="text" name="apellidoPaterno" id="apellidoPaterno" maxlength="20" placeholder="Inserte Apellido Paterno" required/>
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Apellido Materno:</label>
+													<input class="form-control" type="text" name="apellidoMaterno" id="apellidoMaterno" maxlength="20" placeholder="Inserte Apellido Materno" required/>
+												</div>
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Fecha de Nacimiento:</label>
+													<input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento" required/>
+												</div>
 											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Apellido Materno:</label>
-												<input class="form-control" type="text" name="apellidoMaterno" id="apellidoMaterno" maxlength="20" placeholder="Inserte Apellido Materno" required/>
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Cuenta de Facebook:</label>
+													<input class="form-control" type="text" name="cuentaFB" id="cuentaFB" maxlength="45" placeholder="Inserte cuenta de Facebook" />
+												</div>
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Cuenta de Instagram:</label>
+													<input class="form-control" type="text" name="cuentaInstagram" id="cuentaInstagram" maxlength="45" placeholder="Inserte cuenta de Instagram" />
+												</div>
 											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Fecha de Nacimiento:</label>
-												<input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento" required/>
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Cuenta de Twitter:</label>
+													<input class="form-control" type="text" name="cuentaTwitter" id="cuentaTwitter" maxlength="45" placeholder="Inserte cuenta de Twitter" />
+												</div>
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Correo Electrónico:</label>
+													<input class="form-control" type="email" name="correoElectronico" id="correoElectronico" maxlength="45" placeholder="Inserte correo Electrónico"/>
+												</div>
 											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Cuenta de Facebook:</label>
-												<input class="form-control" type="text" name="cuentaFB" id="cuentaFB" maxlength="45" placeholder="Inserte cuenta de Facebook" />
+											<div class="row">
+												<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>Teléfono:</label>
+													<input class="form-control" type="number" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono" required/>
+												</div>
 											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Cuenta de Instagram:</label>
-												<input class="form-control" type="text" name="cuentaInstagram" id="cuentaInstagram" maxlength="45" placeholder="Inserte cuenta de Instagram" />
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Cuenta de Twitter:</label>
-												<input class="form-control" type="text" name="cuentaTwitter" id="cuentaTwitter" maxlength="45" placeholder="Inserte cuenta de Twitter" />
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Correo Electrónico:</label>
-												<input class="form-control" type="email" name="correoElectronico" id="correoElectronico" maxlength="45" placeholder="Inserte correo Electrónico"/>
-											</div>
-											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>Teléfono:</label>
-												<input class="form-control" type="number" name="telefono" id="telefono" maxlength="45" placeholder="Inserte telefono" required/>
-											</div>
-											<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
-												<button type="button" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+											<div class="row">
+												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<button type="submit" class="btn btn-primary" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+													<button type="button" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+												</div>
 											</div>
 										</form>
 									</div>

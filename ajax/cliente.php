@@ -14,6 +14,14 @@ $cuentaTwitter = isset($_POST["cuentaTwitter"])? limpiarCadena($_POST["cuentaTwi
 $correoElectronico = isset($_POST["correoElectronico"])? limpiarCadena($_POST["correoElectronico"]) : "";
 $telefono = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idcliente)){

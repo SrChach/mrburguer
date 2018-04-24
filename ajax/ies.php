@@ -8,6 +8,14 @@ $idInsumo = isset($_POST["idInsumo"])? limpiarCadena($_POST["idInsumo"]) : "";
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
 $cantidad = isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		$rspta =  $ies->insertar($idInsumo, $idSucursal, $cantidad);

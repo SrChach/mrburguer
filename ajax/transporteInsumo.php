@@ -14,6 +14,14 @@ $cantidadEnviada = isset($_POST["cantidadEnviada"])? limpiarCadena($_POST["canti
 $cantidadRecibida = isset($_POST["cantidadRecibida"])? limpiarCadena($_POST["cantidadRecibida"]) : "";
 $observaciones = isset($_POST["observaciones"])? limpiarCadena($_POST["observaciones"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'request':
 		$rspta = $transporte->pedir($_POST["idIES"], $_POST["cantidadPedida"], $idEmpleadoRecibe);

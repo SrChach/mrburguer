@@ -15,6 +15,14 @@ $descuentoTotal = isset($_POST["descuentoTotal"])? limpiarCadena($_POST["descuen
 $status = isset($_POST["status"])? limpiarCadena($_POST["status"]) : "";
 $pagoTarjeta = isset($_POST["pagoTarjeta"])? limpiarCadena($_POST["pagoTarjeta"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		$rspta = $venta->insertar($idEmpleado, $pagoTarjeta, $idSucursal, $_POST["idProducto"], $_POST["cantidad"]);

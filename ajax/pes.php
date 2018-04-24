@@ -6,6 +6,14 @@ $pes = new PES();
 $idSucursal = isset($_POST["idSucursal"])? limpiarCadena($_POST["idSucursal"]) : "";
 $idProducto = isset($_POST["idProducto"])? limpiarCadena($_POST["idProducto"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		$rspta =  $pes->insertar($idProducto, $idSucursal);

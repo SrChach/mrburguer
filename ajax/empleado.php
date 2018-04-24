@@ -14,6 +14,18 @@ $apMaterno = isset($_POST["apMaterno"])? limpiarCadena($_POST["apMaterno"]) : ""
 $fechaIngreso = isset($_POST["fechaIngreso"])? limpiarCadena($_POST["fechaIngreso"]) : "";
 $imagen = isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]) : "";
 
+/*
+Tenía que ser PHP 7n7
+Sí no esta establecido el atributo "username" en usuario O sí el parámetro GET "op" es diferente a "access", entonces return
+*/
+/*if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"]) or strcmp($_GET["op"], "access") !== 0){
+	echo "mal";
+	return;
+}*/
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name'])) {

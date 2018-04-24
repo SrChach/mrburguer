@@ -11,6 +11,14 @@ $recompensa = isset($_POST["recompensa"])? limpiarCadena($_POST["recompensa"]) :
 $fechaInicio = isset($_POST["fechaInicio"])? limpiarCadena($_POST["fechaInicio"]) : "";
 $fechaFin = isset($_POST["fechaFin"])? limpiarCadena($_POST["fechaFin"]) : "";
 
+if(session_id() == '') {
+	session_start();
+}
+if(!isset($_SESSION["username"])){
+	echo "No has iniciado sesión";
+	return;
+}
+
 switch ($_GET["op"]){
 	case 'saveEdit':
 		if(empty($idevento)){
