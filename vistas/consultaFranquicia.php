@@ -9,7 +9,7 @@
 		if($_SESSION['main']==1){
 
 		//Datos para el gráfico de barras de las franquicias
-		require_once "../modelos/venta.php";
+		require_once "../modelos/Venta.php";
 		$consulta = new Venta();
 		$consultaPorMes = $consulta->prodUltimosMeses(3);
 		$franquiciasPM = '';

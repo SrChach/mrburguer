@@ -8,7 +8,7 @@
 		require 'header.php';
 		if($_SESSION['main']==1){
 
-		require_once "../modelos/venta.php";
+		require_once "../modelos/Venta.php";
 		$venta = new Venta();
 		$top = $venta->topN(10);
 		$empleados = '';
