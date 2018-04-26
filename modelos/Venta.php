@@ -120,13 +120,13 @@ Class Venta{
 	}
 
 	public function noProductivos($cantidadDias){
-		$sql = "SELECT concat(E.nomPila, ' ', E.apPaterno) AS empleado FROM (
+		$sql = "SELECT concat(E.nomPila, ' ', E.apPaterno, ' ', E.apMaterno) AS empleado FROM (
 			SELECT count(V.idVenta) AS cantidadVentas, E1.idEmpleado FROM empleado E1 JOIN venta V ON V.idEmpleado=E1.idEmpleado WHERE V.fecha BETWEEN concat(DATE_SUB(CURDATE(), INTERVAL $cantidadDias DAY), ' 00:00:00') AND current_timestamp GROUP BY idEmpleado
 		) ET RIGHT JOIN 
 		(
-			SELECT E2.idEmpleado, E2.nomPila, E2.apPaterno FROM empleado E2 JOIN empleadoPermiso EP ON E2.idEmpleado = EP.idEmpleado WHERE (EP.idPermiso = 5) AND (E2.isActive = 1)
+			SELECT E2.idEmpleado, E2.nomPila, E2.apPaterno, E2.apMaterno FROM empleado E2 JOIN empleadoPermiso EP ON E2.idEmpleado = EP.idEmpleado WHERE (EP.idPermiso = 5) AND (E2.isActive = 1)
 		) E 
-		ON ET.idEmpleado = E.idEmpleado WHERE ET.idEmpleado IS NULL LIMIT 0,2";
+		ON ET.idEmpleado = E.idEmpleado WHERE ET.idEmpleado IS NULL LIMIT 0,30";
 		return ejecutarConsulta($sql);
 	}
 

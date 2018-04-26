@@ -35,6 +35,13 @@
 				$backgroundColor = $backgroundColor . '"' . $cBase[$cont%6] . '0.8)"';
 				$cont++;
 			}
+		$improductivos = $venta->noProductivos(7);
+		$ei = array();
+		if($improductivos != false)
+			while($ui = $improductivos->fetch_object()){
+				$ei[] = $ui->empleado;
+			}
+
 ?>
 
 			<div class="content-wrapper">				
@@ -61,10 +68,41 @@
 												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div class="box box-primary">
 														<div class="box-header with-border">
-															Empleados (activos & con permisos de venta) sin ventas en la última semana
+															Empleados activos y con permisos de venta sin ventas en la última semana. (Máximo 30)
 														</div>
 														<div class="box-body">
-															
+															<div class="row">
+																<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+																	<?php
+																		$first = 0;
+																		$base = 1;
+																		$limite = count($ei);
+																		if($improductivos != false)
+																			while($first < ($base * 1) && ($first < $limite)){
+																				echo $ei[$first] . '<br>';
+																				$first++;
+																			}
+																	?>
+																</div>
+																<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+																	<?php
+																		if($improductivos != false)
+																			while($first < ($base * 2) && ($first < $limite)){
+																				echo $ei[$first] . '<br>';
+																				$first++;
+																			}
+																	?>
+																</div>
+																<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+																	<?php
+																		if($improductivos != false)
+																			while($first < ($base * 3) && ($first < $limite)){
+																				echo $ei[$first] . '<br>';
+																				$first++;
+																			}
+																	?>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
